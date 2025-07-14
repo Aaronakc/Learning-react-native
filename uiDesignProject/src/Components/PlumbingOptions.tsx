@@ -41,9 +41,6 @@ const styles = StyleSheet.create({
     // height:"100%",
     // backgroundColor:"blue",
     
-
-
-
   },
   wrapper:{
     display:"flex",

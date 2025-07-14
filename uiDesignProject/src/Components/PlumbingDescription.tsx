@@ -10,7 +10,7 @@ const PlumbingDescription = () => {
       </View>
 
       <View style={styles.bgColor}>
-        <Text style={styles.font}>From leaky faucets to broken tiles, our professional repair team handles all types of bathroom issues ... <Text style={[styles.font,{color:"#f0750f",lineHeight:23}]}>Read More</Text></Text>
+        <Text style={styles.font}>From leaky faucets to broken tiles, our professional repair team handles all types of bathroom issues ... <Text style={[styles.font,{color:"#f0750f",lineHeight:22}]}>Read More</Text></Text>
       </View>
     </View>
   )
@@ -18,7 +18,7 @@ const PlumbingDescription = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 23,
+    marginTop: 15,
     marginLeft: 20,
     marginRight:10,
   },

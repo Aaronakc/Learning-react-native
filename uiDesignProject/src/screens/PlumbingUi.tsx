@@ -25,10 +25,8 @@ const PlumbingUi = () => {
 
           <PlumbingOptions icon={require('../../assets/paint-roller.png')} bgColor="#fdf5e2" text={"Painting"} />
           <PlumbingOptions icon={require('../../assets/thermometer.png')} bgColor='#dcffdb' text="Heating" />
-          <PlumbingOptions icon={require('../../assets/water-tap.png')} bgColor='#c4e6ff' text="Plumbing" />
+          <PlumbingOptions icon={require('../../assets/water-tap1.png')} bgColor='#c4e6ff' text="Plumbing" />
           <PlumbingOptions icon={require('../../assets/24.png')} text="More" />
-
-
 
 
         </View>
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 1,
     gap: 8,
-    marginTop: 15,
+    marginTop: 10,
     marginHorizontal: 19,
 
   },
