@@ -12,7 +12,7 @@ const PlumbingOptions = ({ icon, bgColor,text }: PlumbingOptionsProps) => {
       <View style={[styles.wrapper,{backgroundColor:bgColor}]}>
 
       <Image source={icon} style={styles.image } />
-      <Text style={{fontFamily:"serif",fontSize:8}}>{text}</Text>
+      <Text style={{fontFamily:"serif",fontSize:7.4,paddingLeft:3}}>{text}</Text>
       </View>
       
 
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   image: {
     width: 30,
     height: 30,
+    marginBottom:9,
   },
 
   container: {
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
 
   
    
-    width:"17%",
+    width:"18%",
     // height:"100%",
     // height:"100%",
     // backgroundColor:"blue",
@@ -46,11 +47,13 @@ const styles = StyleSheet.create({
   },
   wrapper:{
     display:"flex",
-    borderRadius:15,
-    paddingTop:12,
+    borderRadius:12,
+    paddingTop:7,
 
     paddingBottom:12,
-    paddingHorizontal:9,
+    // paddingHorizontal:9,
+    paddingLeft:3,
+    paddingRight: 20,
   
     // flex:1,
    justifyContent:"center",

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 20,
     marginLeft: 15,
-    marginTop: 19,
+    marginTop: 15,
     marginBottom: 15,
   },
   icon: {
@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     position: "relative",
+    
+  
 
   }
 })

@@ -9,7 +9,7 @@ import PlumbingProfile from '../Components/PlumbingProfile'
 
 const PlumbingUi = () => {
   return (
-    <ScrollView style={{flex:1, position: "relative" }}>
+    <ScrollView style={{ flex: 1, position: "relative" }}>
       <PlumbingBgScreen />
       <Image source={require('../../assets/plumberWorking.png')} style={styles.image} />
       <Image source={require('../../assets/play1.png')} style={styles.icon} />
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
     width: "90%",
     // height: "20%",
-    paddingVertical:10,
+    paddingVertical: 10,
     paddingLeft: 5,
 
 
@@ -85,15 +85,15 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "serif",
     marginHorizontal: 20,
-    marginBottom:20,
-    marginTop:10,
+    marginBottom: 20,
+    marginTop: 10,
 
   },
   image: {
     width: 60,
     height: 78,
     position: "absolute",
-    top: 92,
+    top: 95,
     left: 283,
     borderRadius: 10,
   },
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 15,
     height: 15,
-    top: 123,
-    left: 305,
+    top: 126,
+    left: 307,
   }
 })
 

@@ -4,7 +4,7 @@ import React from 'react'
 const PlumbingDescrip = () => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.font,{fontWeight:"bold",fontSize:16,color:"white",lineHeight:22}]}>Reliable Bathroom Repairs</Text>
+      <Text style={[styles.font,{fontWeight:"bold",fontSize:16,color:"white",lineHeight:23,}]}>Reliable Bathroom Repairs</Text>
       <View style={styles.flex}>
         <Image source={require('../../assets/location2.png')} style={styles.icon} />
         <Text style={styles.font}>Object address: Moscow,St.. Proletarskaya, d. 12</Text>
