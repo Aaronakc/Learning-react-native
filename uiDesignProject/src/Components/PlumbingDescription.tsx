@@ -5,12 +5,12 @@ const PlumbingDescription = () => {
   return (
     <View style={styles.container}>
       <View style={styles.flex}>
-        <Text style={[styles.font,{color:"orange",backgroundColor:"#faf2e9fd",borderTopLeftRadius:10,paddingVertical:5,paddingHorizontal:10,borderTopRightRadius:24,}]}>Description</Text>
-        <Text style={[styles.font,{color:"gray"}]}>Review</Text>
+        <Text style={[styles.font,{color:"#f0750f",backgroundColor:"#faf2e9fd",borderTopLeftRadius:10,paddingVertical:5,paddingHorizontal:10,borderTopRightRadius:10,}]}>Description</Text>
+        <Text style={[styles.font,{color:"gray",paddingVertical:5}]}>Review</Text>
       </View>
 
       <View style={styles.bgColor}>
-        <Text style={styles.font}>From leaky faucets to broken tiles, our professional repair team handles all types of bathroom issues ... <Text style={[styles.font,{color:"orange",lineHeight:23}]}>Read More</Text></Text>
+        <Text style={styles.font}>From leaky faucets to broken tiles, our professional repair team handles all types of bathroom issues ... <Text style={[styles.font,{color:"#f0750f",lineHeight:23}]}>Read More</Text></Text>
       </View>
     </View>
   )
@@ -18,8 +18,8 @@ const PlumbingDescription = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 15,
-    marginLeft: 15,
+    marginTop: 23,
+    marginLeft: 20,
     marginRight:10,
   },
   flex: {
@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
   },
   font: {
     fontFamily: "serif",
-    fontSize: 16,
+    fontSize: 15,
 
   },
   bgColor:{
     backgroundColor:"#faf2e9fd",
-    borderBottomLeftRadius:10,
-    borderBottomRightRadius:10,
-    borderTopRightRadius:10,
+    borderBottomLeftRadius:14,
+    borderBottomRightRadius:14,
+    borderTopRightRadius:14,
 
     paddingHorizontal:10,
     paddingVertical:20,

@@ -14,7 +14,7 @@ const PlumbingBgScreen = () => {
 }
 const styles=StyleSheet.create({
   image:{
-    height:210,
+    height:250,
     width: "100%",
   }
 })

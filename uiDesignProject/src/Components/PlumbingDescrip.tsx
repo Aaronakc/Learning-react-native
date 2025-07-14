@@ -4,13 +4,13 @@ import React from 'react'
 const PlumbingDescrip = () => {
   return (
     <View style={styles.container}>
-      <Text style={[styles.font,{fontWeight:"bold",fontSize:20,color:"white"}]}>Reliable Bathroom Repairs</Text>
+      <Text style={[styles.font,{fontWeight:"bold",fontSize:16,color:"white",lineHeight:22}]}>Reliable Bathroom Repairs</Text>
       <View style={styles.flex}>
-        <Image source={require('../../assets/location.png')} style={styles.icon} />
+        <Image source={require('../../assets/location2.png')} style={styles.icon} />
         <Text style={styles.font}>Object address: Moscow,St.. Proletarskaya, d. 12</Text>
       </View>
       <View style={[styles.flex,{marginTop:5}]}>
-        <Image source={require('../../assets/clockIcon.png')} style={styles.icon} />
+        <Image source={require('../../assets/clock1.png')} style={styles.icon} />
         <Text style={styles.font}>Work Period 4 days</Text>
       </View>
     </View>
@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
 
   container:{
     backgroundColor:"#f0750f",
-    paddingHorizontal:10,
+    paddingLeft:15,
     borderRadius:15,
     marginHorizontal:20,
     paddingVertical: 20,
-    marginTop:-55,
+    marginTop:-50,
 
   },
   flex: {
@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: 'serif',
     color:"white",
+    fontSize:12,
+    lineHeight:20,
 
   },
   icon: {
