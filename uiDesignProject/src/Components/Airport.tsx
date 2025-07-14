@@ -6,15 +6,17 @@ interface AirportProps{
   country?:string;
   airportName?:string;
   icon?:any;
-  color?:string,
+  darkMode?:boolean
 }
-const Airport = ({shortForm,country,airportName,icon,color}:AirportProps) => {
+const Airport = ({shortForm,country,airportName,icon,darkMode}:AirportProps) => {
+
+  const textColor=darkMode ? "white":"#08354bff"
   return (
     
     <View style={styles.container}>
-     <Text style={[styles.shortForm,{color:color}]}>{shortForm}</Text>
-     <Text style={[styles.name,{color:color}]}>{country}</Text>
-     <Text style={[styles.name,{color:color}]}>{airportName}</Text>
+     <Text style={[styles.shortForm,{color:textColor}]}>{shortForm}</Text>
+     <Text style={[styles.name,{color:textColor}]}>{country}</Text>
+     <Text style={[styles.name,{color:textColor}]}>{airportName}</Text>
      <View style={styles.flexbox}>
      <Image source={icon} style={styles.image}/>
      <Image source={icon} style={styles.image}/>

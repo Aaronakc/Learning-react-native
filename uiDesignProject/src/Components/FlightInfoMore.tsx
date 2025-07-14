@@ -5,16 +5,17 @@ interface FlightInfoMoreProps {
   flightTitle: string;
   seatTitle: string;
   terminalTitle: string;
-  color?:string;
+  darkMode?:boolean
   fontSize?:number;
 }
 
-const FlightInfoMore = ({ flightTitle, seatTitle, terminalTitle ,color,fontSize}: FlightInfoMoreProps) => {
+const FlightInfoMore = ({ flightTitle, seatTitle, terminalTitle ,darkMode,fontSize}: FlightInfoMoreProps) => {
+  const textColor=darkMode?"white":"#08354bff"
   return (
     <View style={styles.container}>
-      <View style={styles.column}><Text style={[styles.text,{color:color,fontSize:fontSize}]}>{flightTitle}</Text></View>
-      <View style={styles.column}><Text style={[styles.text,{color:color,fontSize:fontSize}]}> {seatTitle}</Text></View>
-      <View style={styles.column}><Text style={[styles.text,{color:color,fontSize:fontSize}]}>{terminalTitle}</Text></View>
+      <View style={styles.column}><Text style={[styles.text,{color:textColor,fontSize:fontSize}]}>{flightTitle}</Text></View>
+      <View style={styles.column}><Text style={[styles.text,{color:textColor,fontSize:fontSize}]}> {seatTitle}</Text></View>
+      <View style={styles.column}><Text style={[styles.text,{color:textColor,fontSize:fontSize}]}>{terminalTitle}</Text></View>
     </View>
   )
 }

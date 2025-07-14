@@ -2,9 +2,11 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
 interface PlaneDescriptionProps{
   color?:string;
-  subColor?:string
+  darkMode?:boolean;
 }
-const PlaneDescription = ({color,subColor}:PlaneDescriptionProps) => {
+const PlaneDescription = ({color,darkMode}:PlaneDescriptionProps) => {
+
+  const textColor=darkMode ? "white" : "#08354bff"
   return (
     <View style={styles.flexbox}>
       <View style={styles.div}>
@@ -12,19 +14,19 @@ const PlaneDescription = ({color,subColor}:PlaneDescriptionProps) => {
 
       </View>
       <View style={styles.textContainer}>
-        <Text style={[styles.text, { fontSize: 18, color: color, fontWeight: "bold" ,marginTop:15,marginLeft:15}]}>A350-1000</Text>
+        <Text style={[styles.text, { fontSize: 18, color: textColor, fontWeight: "bold" ,marginTop:15,marginLeft:15}]}>A350-1000</Text>
         <View style={styles.detailContainer}>
           <View style={styles.flex}>
             <View>
-              <Text style={[styles.text, { color: subColor }]}>Seating:</Text>
+              <Text style={[styles.text, { color: textColor }]}>Seating:</Text>
 
-              <Text style={[styles.text, { color: subColor }]}>Range: </Text>
-              <Text style={[styles.text, { color: subColor }]}>Speed: </Text>
+              <Text style={[styles.text, { color: textColor }]}>Range: </Text>
+              <Text style={[styles.text, { color: textColor }]}>Speed: </Text>
             </View>
             <View>
-              <Text style={styles.textSpace}>366</Text>
-              <Text style={[styles.textSpace]}>16,100 km</Text>
-              <Text style={[styles.textSpace]}>950 km/h</Text>
+              <Text style={[styles.textSpace,{color:textColor}]}>366</Text>
+              <Text style={[styles.textSpace,{color:textColor}]}>16,100 km</Text>
+              <Text style={[styles.textSpace,{color:textColor}]}>950 km/h</Text>
 
             </View>
             </View>

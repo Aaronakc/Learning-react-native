@@ -4,12 +4,13 @@ import React from 'react'
 
 interface TimeProps{
 text:string;
-color?:string;
+darkMode?:boolean;
 }
-const Time = ({text,color}:TimeProps) => {
+const Time = ({text,darkMode}:TimeProps) => {
+  const textColor=darkMode?"white":"#08354bff"
   return (
     <View style={styles.container}>
-      <Text style={[styles.font,{color:color}]}>{text}</Text>
+      <Text style={[styles.font,{color:textColor}]}>{text}</Text>
     </View>
   )
 }
