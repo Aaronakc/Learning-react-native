@@ -24,13 +24,17 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {/* <TouchableOpacity onPress={handleNav}> */}
+      <Text style={styles.heading}>My Tasks</Text>
       <FlatList
         data={todos}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.wrapper}>
-            <Text>Title: {item.title}</Text>
-            <Button title="view detail" onPress={() => navigation.navigate('DetailScreen', { todos: todos })} />
+            <TouchableOpacity onPress={()=>navigation.navigate('DetailScreen',{todos:todos})}>
+              <Text style={styles.font}>Title: {item.title}</Text>
+
+            </TouchableOpacity>
+            {/* <Button title="view detail" onPress={() => navigation.navigate('DetailScreen', { todos: todos })} /> */}
 
           </View>
         )}
@@ -47,23 +51,36 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    borderRadius: 10,
+    borderRadius: 50,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: 'gray',
-    fontSize: 20,
+    backgroundColor: "#7d9aeeff",
+    fontSize: 25,
     color: "white",
     position: "absolute",
     top: 495,
     left: 290,
   },
   wrapper: {
-    elevation: 5,
-    backgroundColor: "pink",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginHorizontal: 15,
-    marginVertical: 5,
+    elevation: 3,
+    borderRadius:10,
+    backgroundColor: "#d4dcf3ff",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    marginHorizontal: 20,
+    marginVertical: 20,
+
+  },
+  font:{
+    fontFamily:"serif",
+  },
+  heading:{
+    fontFamily:"serif",
+    fontWeight:"bold",
+    fontSize:20,
+    marginHorizontal:20,
+    marginTop:10,
+    
 
   }
 })

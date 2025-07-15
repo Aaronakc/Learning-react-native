@@ -25,14 +25,15 @@ const DetailScreen = ({ navigation }: Props) => {
   }
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>Details</Text>
       <FlatList
         data={todos}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.wrapper}>
-            <Text>Title: {item.title}</Text>
-            <Text>description: {item.description}</Text>
-            <Text>date: {item.date}</Text>
+            <Text style={styles.font}>Title: {item.title}</Text>
+            <Text style={styles.font}>description: {item.description}</Text>
+            <Text style={styles.font}>date: {item.date}</Text>
 
           </View>
         )}
@@ -60,11 +61,32 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     elevation: 5,
-    backgroundColor: "pink",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginHorizontal: 15,
-    marginVertical: 5,
+    borderRadius:10,
+    backgroundColor: "#d4dcf3ff",
+    paddingHorizontal: 5,
+    paddingVertical: 15,
+    marginHorizontal: 20,
+    marginVertical: 20,
+
+  },
+  
+  font:{
+    fontFamily:"serif",
+    paddingHorizontal:15,
+
+    // marginHorizontal:20,
+    // marginTop:10,
+    
+
+  },
+    heading:{
+    fontFamily:"serif",
+    fontWeight:"bold",
+    fontSize:20,
+    marginHorizontal:20,
+    marginTop:10,
+
+    
 
   }
 })
