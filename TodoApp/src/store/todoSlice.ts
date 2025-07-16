@@ -5,6 +5,7 @@ export interface Todo {
   title:string,
   description:string,
   date:string,
+  checked:boolean,
 }
 
 interface TodoState{
@@ -25,11 +26,16 @@ export const todoSlice = createSlice({
     deleteTodo:(state,action:PayloadAction<number>)=>{
     state.todos=state.todos.filter((_,index)=>index !== action.payload)
     },
+    toggleTodo:(state,action:PayloadAction<number>)=>{
+    const index=action.payload
+    if(state.todos[index])
+      state.todos[index].checked=!state.todos[index].checked
+    }
+  
   
   },
 })
 
-// Action creators are generated for each case reducer function
-export const { addTodo ,deleteTodo} = todoSlice.actions
+export const { addTodo ,deleteTodo,toggleTodo} = todoSlice.actions
 
 export default todoSlice.reducer

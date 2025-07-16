@@ -2,54 +2,57 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Button, FlatList } fro
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
-import { useRoute } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
-import { deleteTodo } from '../store/todoSlice';
-interface Todo {
-  title: string;
-  description: string;
-  date: string;
+import { deleteTodo, toggleTodo } from '../store/todoSlice';
 
-}
 
 type Props = NativeStackScreenProps<RootStackParamList, 'HomeScreen'>;
 const HomeScreen = ({ navigation }: Props) => {
 
-  // const route = useRoute()
-  // const todos = (route.params as { todos?: Todo[] })?.todos || [];
+
+
   const { todos } = useAppSelector((state: RootState) => state.todo)
-  const dispatch= useAppDispatch()
+  const dispatch = useAppDispatch()
 
 
   const handleNav = () => {
     navigation.navigate('AddTaskScreen')
-    // console.error('btn pressed')
+
   }
 
-  const handleDeleteIndex=(i:number)=>{
+  const handleDeleteIndex = (i: number) => {
     dispatch(deleteTodo(i))
 
   }
+
+  const handleToggleIndex = (i: number) => {
+    dispatch(toggleTodo(i))
+  }
   return (
     <View style={styles.container}>
-      {/* <TouchableOpacity onPress={handleNav}> */}
       <Text style={styles.heading}>My Tasks</Text>
       <FlatList
         data={todos}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item ,index}) => (
+        renderItem={({ item, index }) => (
           <View style={styles.wrapper}>
             <TouchableOpacity onPress={() => navigation.navigate('DetailScreen')}>
               <View style={styles.flex}>
-                <Text style={styles.font}>Title: {item.title}</Text>
-                <TouchableOpacity onPress={()=>handleDeleteIndex(index)}>
+                <View style={[styles.flex, { gap: 20, flex: 1 }]}>
+                  <TouchableOpacity onPress={() => handleToggleIndex(index)}>
+                    <Image source={item.checked ? require('../../assets/checkIcon.png') : require('../../assets/unCheckIcon.png')} style={styles.icon} />
+                  </TouchableOpacity>
+                  <Text style={styles.font}>Title: {item.title}</Text>
+
+                </View>
+                <TouchableOpacity onPress={() => handleDeleteIndex(index)}>
                   <Image source={require('../../assets/deleteIcon.png')} style={styles.icon} />
                 </TouchableOpacity>
               </View>
 
             </TouchableOpacity>
-            {/* <Button title="view detail" onPress={() => navigation.navigate('DetailScreen', { todos: todos })} /> */}
+
 
           </View>
         )}
@@ -85,9 +88,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
 
+
   },
   font: {
     fontFamily: "serif",
+    flex: 1,
+
   },
   heading: {
     fontFamily: "serif",
@@ -100,7 +106,9 @@ const styles = StyleSheet.create({
   },
   flex: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center",
+
   },
   icon: {
     width: 18,

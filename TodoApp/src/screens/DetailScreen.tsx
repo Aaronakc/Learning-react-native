@@ -15,8 +15,8 @@ interface Todo {
 type Props = NativeStackScreenProps<RootStackParamList, 'DetailScreen'>;
 const DetailScreen = ({ navigation }: Props) => {
 
-  const {todos}=useAppSelector((state:RootState)=>state.todo)
-  
+  const { todos } = useAppSelector((state: RootState) => state.todo)
+
   // const route = useRoute()
   // const todos = (route.params as { todos?: Todo[] })?.todos || [];
   // console.log("btn presssed",todos)
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     elevation: 5,
-    borderRadius:10,
+    borderRadius: 10,
     backgroundColor: "#d4dcf3ff",
     paddingHorizontal: 5,
     paddingVertical: 15,
@@ -71,20 +71,20 @@ const styles = StyleSheet.create({
     marginVertical: 20,
 
   },
-  
-  font:{
-    fontFamily:"serif",
-    paddingHorizontal:15,
+
+  font: {
+    fontFamily: "serif",
+    paddingHorizontal: 15,
 
   },
-    heading:{
-    fontFamily:"serif",
-    fontWeight:"bold",
-    fontSize:20,
-    marginHorizontal:20,
-    marginTop:10,
+  heading: {
+    fontFamily: "serif",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginHorizontal: 20,
+    marginTop: 10,
 
-    
+
 
   }
 })

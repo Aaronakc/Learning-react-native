@@ -11,7 +11,8 @@ const AddDetailsPage = ({ navigation }: Props) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
-  const [todos, setTodos] = useState<{ title: string, description: string, date: string }[]>([])
+  // const [todos, setTodos] = useState<{ title: string, description: string, date: string }[]>([])
+  const [checked, setChecked] = useState(false)
 
   const handleTitle = (text: string) => setTitle(text)
   const handleDescription = (text: string) => setDescription(text)
@@ -28,6 +29,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
       title,
       description,
       date,
+      checked,
     }
     dispatch(addTodo(updatedTodos))
     setTitle('')
