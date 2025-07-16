@@ -52,7 +52,7 @@ const DetailScreen = ({ route, navigation }: Props) => {
                   />
                 </>
               ) : (
-                <Text>Title:{item?.title}</Text>
+                <Text style={styles.title}>Title:{item?.title}</Text>
               )}
             </View>
             <View style={styles.font}>
@@ -66,7 +66,7 @@ const DetailScreen = ({ route, navigation }: Props) => {
                   />
                 </>
               ) : (
-                <Text>Description:{item?.description}</Text>
+                <Text style={styles.desc}>Description:{item?.description}</Text>
               )}
             </View>
             <View style={styles.font}>
@@ -80,7 +80,7 @@ const DetailScreen = ({ route, navigation }: Props) => {
                   />
                 </>
               ) : (
-                <Text>Date:{item?.date}</Text>
+                <Text style={styles.date}>Date:{item?.date}</Text>
               )}
             </View>
           </View>
@@ -169,6 +169,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  desc: {
+    marginTop: 4,
+    color: '#555',
+  },
+  date: {
+    marginTop: 6,
+    fontStyle: 'italic',
+    color: '#888',
   },
 });
 

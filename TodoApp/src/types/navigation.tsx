@@ -3,4 +3,5 @@ export type RootStackParamList = {
   AddTaskScreen: undefined;
   DetailScreen:  {index:number};
   CompletedTaskScreen:undefined;
+  RemainingTaskScreen:undefined;
 };

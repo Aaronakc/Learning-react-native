@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }: Props) => {
           <Text style={styles.title}>Completed Task</Text>
 
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Remainingbtn}>
+        <TouchableOpacity style={styles.Remainingbtn} onPress={()=>navigation.navigate('RemainingTaskScreen')}>
           <Text style={styles.title}>Remaining Task</Text>
 
         </TouchableOpacity>
