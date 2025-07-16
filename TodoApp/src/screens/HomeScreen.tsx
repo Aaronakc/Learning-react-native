@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button, FlatList } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
@@ -39,25 +39,19 @@ const HomeScreen = ({ navigation }: Props) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View style={styles.wrapper}>
-            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen',{index})}>
+            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { index })}>
               <View style={styles.flex}>
                 <View style={[styles.flex, { gap: 20, flex: 1 }]}>
                   <TouchableOpacity onPress={() => handleToggleIndex(index)}>
                     <Image source={item.checked ? require('../../assets/checkIcon.png') : require('../../assets/unCheckIcon.png')} style={styles.icon} />
                   </TouchableOpacity>
-                  <Text style={styles.font}>Title: {item.title}</Text>
-
+                  <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
                 </View>
                 <TouchableOpacity onPress={() => handleDeleteIndex(index)}>
                   <Image source={require('../../assets/deleteIcon.png')} style={styles.icon} />
                 </TouchableOpacity>
-
-
               </View>
-
             </TouchableOpacity>
-
-
           </View>
         )}
       />

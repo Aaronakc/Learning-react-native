@@ -11,7 +11,6 @@ const AddDetailsPage = ({ navigation }: Props) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
-  // const [todos, setTodos] = useState<{ title: string, description: string, date: string }[]>([])
   const [checked, setChecked] = useState(false)
   const [edit,setEdit]=useState(false)
 
@@ -21,6 +20,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
 
 
   const dispatch = useAppDispatch()
+  console.log("add")
 
   const handleAdd = () => {
     if (!title || !description || !date) {
