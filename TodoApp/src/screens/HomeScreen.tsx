@@ -34,6 +34,17 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
+      <View style={styles.flexBox}>
+        <TouchableOpacity style={styles.Completedbtn} onPress={()=>navigation.navigate('CompletedTaskScreen')}>
+          <Text style={styles.title}>Completed Task</Text>
+
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.Remainingbtn}>
+          <Text style={styles.title}>Remaining Task</Text>
+
+        </TouchableOpacity>
+
+      </View>
       <FlatList
         data={todos}
         keyExtractor={(item, index) => index.toString()}
@@ -112,6 +123,35 @@ const styles = StyleSheet.create({
   icon: {
     width: 18,
     height: 18,
+  },
+  flexBox: {
+    flexDirection: "row",
+    marginHorizontal: 18,
+    marginVertical: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  Completedbtn:{
+    backgroundColor:"#cb736e",
+    paddingHorizontal:10,
+    paddingVertical:5,
+    borderRadius:10,
+
+  
+
+  },
+  Remainingbtn:{
+    backgroundColor:"#e49e7e",
+    paddingHorizontal:10,
+    paddingVertical:5,
+    borderRadius:10,
+  
+
+  },
+  title:{
+    color:"white",
+    fontFamily:"serif",
+
   }
 })
 

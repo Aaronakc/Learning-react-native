@@ -55,7 +55,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
           <TouchableOpacity onPress={handleAdd}>
             <Text style={styles.btn}>SAVE</Text>
           </TouchableOpacity>
-          <TouchableOpacity >
+          <TouchableOpacity onPress={()=>navigation.goBack()}>
             <Text style={[styles.btn]}>CANCEL</Text>
           </TouchableOpacity>
 
