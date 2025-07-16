@@ -29,6 +29,8 @@ const HomeScreen = ({ navigation }: Props) => {
   const handleToggleIndex = (i: number) => {
     dispatch(toggleTodo(i))
   }
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
@@ -37,7 +39,7 @@ const HomeScreen = ({ navigation }: Props) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View style={styles.wrapper}>
-            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen')}>
+            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen',{index})}>
               <View style={styles.flex}>
                 <View style={[styles.flex, { gap: 20, flex: 1 }]}>
                   <TouchableOpacity onPress={() => handleToggleIndex(index)}>
@@ -49,6 +51,8 @@ const HomeScreen = ({ navigation }: Props) => {
                 <TouchableOpacity onPress={() => handleDeleteIndex(index)}>
                   <Image source={require('../../assets/deleteIcon.png')} style={styles.icon} />
                 </TouchableOpacity>
+
+
               </View>
 
             </TouchableOpacity>
@@ -93,6 +97,7 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: "serif",
     flex: 1,
+    paddingRight: 15,
 
   },
   heading: {

@@ -13,6 +13,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
   const [date, setDate] = useState('')
   // const [todos, setTodos] = useState<{ title: string, description: string, date: string }[]>([])
   const [checked, setChecked] = useState(false)
+  const [edit,setEdit]=useState(false)
 
   const handleTitle = (text: string) => setTitle(text)
   const handleDescription = (text: string) => setDescription(text)
@@ -30,6 +31,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
       description,
       date,
       checked,
+      edit
     }
     dispatch(addTodo(updatedTodos))
     setTitle('')

@@ -6,6 +6,7 @@ export interface Todo {
   description:string,
   date:string,
   checked:boolean,
+  edit:boolean,
 }
 
 interface TodoState{
@@ -23,15 +24,16 @@ export const todoSlice = createSlice({
     addTodo: (state,action:PayloadAction<Todo>) => {
     state.todos.push(action.payload)
     },
+
     deleteTodo:(state,action:PayloadAction<number>)=>{
     state.todos=state.todos.filter((_,index)=>index !== action.payload)
     },
+
     toggleTodo:(state,action:PayloadAction<number>)=>{
     const index=action.payload
     if(state.todos[index])
       state.todos[index].checked=!state.todos[index].checked
-    }
-  
+    },
   
   },
 })
