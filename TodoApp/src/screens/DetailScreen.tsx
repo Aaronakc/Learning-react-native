@@ -3,6 +3,8 @@ import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { useRoute } from '@react-navigation/native';
+import { useAppSelector } from '../store/Hooks';
+import { RootState } from '../store/store';
 interface Todo {
   title: string;
   description: string;
@@ -13,16 +15,16 @@ interface Todo {
 type Props = NativeStackScreenProps<RootStackParamList, 'DetailScreen'>;
 const DetailScreen = ({ navigation }: Props) => {
 
-  const route = useRoute()
-
-
-  const todos = (route.params as { todos?: Todo[] })?.todos || [];
+  const {todos}=useAppSelector((state:RootState)=>state.todo)
+  
+  // const route = useRoute()
+  // const todos = (route.params as { todos?: Todo[] })?.todos || [];
   // console.log("btn presssed",todos)
 
-  const handleNav = () => {
-    navigation.navigate('AddTaskScreen')
-    // console.error('btn pressed')
-  }
+  // const handleNav = () => {
+  //   navigation.navigate('AddTaskScreen')
+  //   console.error('btn pressed')
+  // }
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Details</Text>
@@ -73,10 +75,6 @@ const styles = StyleSheet.create({
   font:{
     fontFamily:"serif",
     paddingHorizontal:15,
-
-    // marginHorizontal:20,
-    // marginTop:10,
-    
 
   },
     heading:{

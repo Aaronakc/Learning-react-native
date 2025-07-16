@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import InputElem from '../Components/InputElem'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
+import { useAppDispatch } from '../store/Hooks';
+import { addTodo } from '../store/todoSlice';
 type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
 const AddDetailsPage = ({ navigation }: Props) => {
 
@@ -15,16 +17,24 @@ const AddDetailsPage = ({ navigation }: Props) => {
   const handleDescription = (text: string) => setDescription(text)
   const handleDate = (text: string) => setDate(text)
 
+
+  const dispatch=useAppDispatch()
+
   const handleAdd=()=>{
     if(!title || !description || !date){
       return
     }
+    const updatedTodos={
+      title,
+      description,
+      date,
+    }
+    dispatch(addTodo(updatedTodos))
     setTitle('')
     setDescription('')
     setDate('')
-    const updatedTodos=[...todos,{title:title,description:description,date:date}]
-    setTodos(updatedTodos)
-    navigation.navigate('HomeScreen',{todos:updatedTodos})
+  
+    navigation.navigate('HomeScreen')
   }
 
 

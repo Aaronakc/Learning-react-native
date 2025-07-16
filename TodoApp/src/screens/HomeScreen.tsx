@@ -3,6 +3,8 @@ import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import { useRoute } from '@react-navigation/native';
+import { useAppSelector } from '../store/Hooks';
+import { RootState } from '../store/store';
 interface Todo {
   title: string;
   description: string;
@@ -13,8 +15,9 @@ interface Todo {
 type Props = NativeStackScreenProps<RootStackParamList, 'HomeScreen'>;
 const HomeScreen = ({ navigation }: Props) => {
 
-  const route = useRoute()
-  const todos = (route.params as { todos?: Todo[] })?.todos || [];
+  // const route = useRoute()
+  // const todos = (route.params as { todos?: Todo[] })?.todos || [];
+  const {todos}=useAppSelector((state:RootState)=>state.todo)
 
 
   const handleNav = () => {
@@ -30,7 +33,7 @@ const HomeScreen = ({ navigation }: Props) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <View style={styles.wrapper}>
-            <TouchableOpacity onPress={()=>navigation.navigate('DetailScreen',{todos:todos})}>
+            <TouchableOpacity onPress={()=>navigation.navigate('DetailScreen')}>
               <Text style={styles.font}>Title: {item.title}</Text>
 
             </TouchableOpacity>
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     borderRadius:10,
     backgroundColor: "#d4dcf3ff",
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 15,
     marginHorizontal: 20,
     marginVertical: 20,
 
