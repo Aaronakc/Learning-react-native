@@ -18,13 +18,13 @@ const AddDetailsPage = ({ navigation }: Props) => {
   const handleDate = (text: string) => setDate(text)
 
 
-  const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch()
 
-  const handleAdd=()=>{
-    if(!title || !description || !date){
+  const handleAdd = () => {
+    if (!title || !description || !date) {
       return
     }
-    const updatedTodos={
+    const updatedTodos = {
       title,
       description,
       date,
@@ -33,7 +33,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
     setTitle('')
     setDescription('')
     setDate('')
-  
+
     navigation.navigate('HomeScreen')
   }
 
@@ -41,21 +41,20 @@ const AddDetailsPage = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Add New Task</Text>
-      <InputElem text="Title" onChangeText={handleTitle} input={title}  placeholder='Example:Wake up'/>
+      <InputElem text="Title" onChangeText={handleTitle} input={title} placeholder='Example:Wake up' />
       <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' />
-      <InputElem text="Date" onChangeText={handleDate} input={date} placeholder='2082/03/31'/>
+      <InputElem text="Date" onChangeText={handleDate} input={date} placeholder='2082/03/31' />
       <View>
         <View style={styles.flex}>
-        
-          {/* <Button title="Save" onPress={handleAdd} /> */}
+
+
           <TouchableOpacity onPress={handleAdd}>
             <Text style={styles.btn}>SAVE</Text>
           </TouchableOpacity>
           <TouchableOpacity >
             <Text style={[styles.btn]}>CANCEL</Text>
           </TouchableOpacity>
-        
-          {/* <Button title="Cancel" color="#841584" /> */}
+
 
         </View>
       </View>
@@ -67,9 +66,6 @@ const AddDetailsPage = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginHorizontal:15,
-
-    // backgroundColor:'pink'
   },
   flex: {
     flexDirection: "column",
@@ -78,27 +74,27 @@ const styles = StyleSheet.create({
     marginVertical: 20,
 
   },
-  text:{
-    fontFamily:"serif",
-    fontWeight:"bold",
-    fontSize:27,
+  text: {
+    fontFamily: "serif",
+    fontWeight: "bold",
+    fontSize: 27,
     marginHorizontal: 15,
-    marginTop:10,
-    marginBottom:15,
+    marginTop: 10,
+    marginBottom: 15,
 
 
   },
-  btn:{
+  btn: {
     borderRadius: 8,
-    paddingHorizontal:10,
-    paddingVertical:10,
-    marginHorizontal:5,
-    fontSize:15,
-    textAlign:"center",
-    backgroundColor:"#b34c6bff",
-    color:"white",
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginHorizontal: 5,
+    fontSize: 15,
+    textAlign: "center",
+    backgroundColor: "#b34c6bff",
+    color: "white",
   },
-  
+
 })
 
 export default AddDetailsPage
