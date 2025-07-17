@@ -34,6 +34,7 @@ export const todoSlice = createSlice({
     if(state.todos[index])
       state.todos[index].checked=!state.todos[index].checked
     },
+    
     startEdit:(state,action:PayloadAction<number>)=>{
     const index=action.payload
     if(state.todos[index])

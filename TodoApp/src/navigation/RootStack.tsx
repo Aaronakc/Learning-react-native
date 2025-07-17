@@ -16,8 +16,8 @@ const RootStack = () => {
       initialRouteName="HomeScreen"
       screenOptions={{
         headerShown: true,
-        animation: 'none'  ,
-    
+        animation: 'none',
+
       }}
     >
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
@@ -25,9 +25,9 @@ const RootStack = () => {
       <Stack.Screen name="DetailScreen" component={DetailScreen} />
       <Stack.Screen name="CompletedTaskScreen" component={CompletedTask} />
       <Stack.Screen name="RemainingTaskScreen" component={RemainingTaskPage} />
-  
-     
-    
+
+
+
     </Stack.Navigator>
 
   )

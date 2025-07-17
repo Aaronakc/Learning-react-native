@@ -12,7 +12,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
   const [checked, setChecked] = useState(false)
-  const [edit,setEdit]=useState(false)
+  const [edit, setEdit] = useState(false)
 
   const handleTitle = (text: string) => setTitle(text)
   const handleDescription = (text: string) => setDescription(text)
@@ -55,7 +55,7 @@ const AddDetailsPage = ({ navigation }: Props) => {
           <TouchableOpacity onPress={handleAdd}>
             <Text style={styles.btn}>SAVE</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={[styles.btn]}>CANCEL</Text>
           </TouchableOpacity>
 

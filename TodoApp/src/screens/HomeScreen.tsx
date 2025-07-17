@@ -35,11 +35,11 @@ const HomeScreen = ({ navigation }: Props) => {
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
       <View style={styles.flexBox}>
-        <TouchableOpacity style={styles.Completedbtn} onPress={()=>navigation.navigate('CompletedTaskScreen')}>
+        <TouchableOpacity style={styles.Completedbtn} onPress={() => navigation.navigate('CompletedTaskScreen')}>
           <Text style={styles.title}>Completed Task</Text>
 
         </TouchableOpacity>
-        <TouchableOpacity style={styles.Remainingbtn} onPress={()=>navigation.navigate('RemainingTaskScreen')}>
+        <TouchableOpacity style={styles.Remainingbtn} onPress={() => navigation.navigate('RemainingTaskScreen')}>
           <Text style={styles.title}>Remaining Task</Text>
 
         </TouchableOpacity>
@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
+    marginBottom: 70,
+    marginTop: 0,
 
   },
   text: {
@@ -85,8 +87,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
     position: "absolute",
-    top: 495,
+    top: 455,
     left: 290,
+    fontWeight: "bold",
+    // left: 160,
   },
   wrapper: {
     elevation: 3,
@@ -96,7 +100,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 20,
     marginVertical: 10,
-
 
   },
   font: {
@@ -111,9 +114,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginHorizontal: 20,
     marginTop: 10,
-
-
   },
+
   flex: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -131,26 +133,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  Completedbtn:{
-    backgroundColor:"#cb736e",
-    paddingHorizontal:10,
-    paddingVertical:5,
-    borderRadius:10,
-
-  
+  Completedbtn: {
+    backgroundColor: "#cb736e",
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 10,
 
   },
-  Remainingbtn:{
-    backgroundColor:"#e49e7e",
-    paddingHorizontal:10,
-    paddingVertical:5,
-    borderRadius:10,
-  
+  Remainingbtn: {
+    backgroundColor: "#e49e7e",
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 10,
+
 
   },
-  title:{
-    color:"white",
-    fontFamily:"serif",
+  title: {
+    color: "white",
+    fontFamily: "serif",
 
   }
 })
