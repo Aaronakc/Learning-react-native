@@ -5,6 +5,7 @@ import HistroyScreen from '../screens/HistroyScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { Image, StyleSheet } from 'react-native';
 import { BottomTabParamList } from '../types/navigation';
+import HomeScreen from '../screens/HomeScreen';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -24,9 +25,9 @@ const BottomTabs = () => {
         tabBarHideOnKeyboard: true,
       })}
     >
-      <Tab.Screen name="Home" component={RootStack} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="History" component={HistroyScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen}  />
 
     </Tab.Navigator>
   )

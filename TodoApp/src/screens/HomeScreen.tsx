@@ -1,15 +1,19 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { BottomTabParamList, RootStackParamList } from '../types/navigation';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
 import { deleteTodo, toggleTodo } from '../store/todoSlice';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
 
 
-type Props = NativeStackScreenProps<RootStackParamList, 'HomeScreen'>;
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<BottomTabParamList,'Home'>,
+  NativeStackScreenProps<RootStackParamList,'HomeScreen'>
+>;
 const HomeScreen = ({ navigation }: Props) => {
-
 
 
   const { todos } = useAppSelector((state: RootState) => state.todo)
