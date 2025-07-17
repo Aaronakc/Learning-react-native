@@ -2,26 +2,28 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
 import React from 'react'
 
 
-interface InputElemProps{
-  text?:string;
-  input:string;
-  placeholder?:string;
-  onChangeText?:(value:string)=>void;
+interface InputElemProps {
+  text?: string;
+  input: string;
+  placeholder?: string;
+  onChangeText?: (value: string) => void;
+  multiline?: boolean;
 
 }
-const InputElem = ({text,onChangeText,input,placeholder}:InputElemProps) => {
+const InputElem = ({ text, onChangeText, input, placeholder, multiline = false }: InputElemProps) => {
   return (
     <View style={styles.container}>
-      
+
       <View>
-      <Text style={styles.text}>{text}</Text>
+        <Text style={styles.text}>{text}</Text>
 
       </View>
       <TextInput
-        style={styles.input}
+        style={[styles.input, multiline && styles.multiline]}
         value={input}
         placeholder={placeholder}
-        onChangeText={(text)=>onChangeText?.(text)}
+        onChangeText={(text) => onChangeText?.(text)}
+        multiline={multiline}
 
       />
 
@@ -31,25 +33,32 @@ const InputElem = ({text,onChangeText,input,placeholder}:InputElemProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
+    marginVertical: 5,
     // backgroundColor:"pink"
   },
   text: {
-    marginHorizontal: 20,
-    fontFamily:"serif",
-    fontWeight:"400",
+    marginHorizontal: 23,
+    fontFamily: "serif",
+    fontWeight: "500",
+    fontSize:18,
+    
     // marginVertical: 0,
 
   },
 
   input: {
     marginHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 5,
     borderWidth: 1,
-    padding: 10,
-    borderRadius:10,
-    borderColor:"#ded3daff",
+    padding: 15,
+    borderRadius: 10,
+    borderColor: "#ded3daff",
+    elevation: 2,
 
+  },
+  multiline: {
+    height: 100,
+    textAlignVertical: 'top',
   },
 
 

@@ -6,6 +6,8 @@ import ProfileScreen from '../screens/ProfileScreen';
 import { Image, StyleSheet } from 'react-native';
 import { BottomTabParamList } from '../types/navigation';
 import HomeScreen from '../screens/HomeScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -14,19 +16,29 @@ const BottomTabs = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={({ route }) => ({
-        tabBarIcon: () => {
-          if (route.name === 'Home') return <Image source={require('../../assets/homeIcon2.png')} style={styles.icon} />;
-          if (route.name === 'History') return <Image source={require('../../assets/historyIcon5.png')} style={styles.icon} />;
-          return <Image source={require('../../assets/profileIcon2.png')} style={styles.icon} />;
+        tabBarIcon: ({focused,color,size}) => {
+          let iconName = '';
+
+      if (route.name === 'Home') {
+        iconName = focused ? 'home' : 'home-outline';
+      } else if (route.name === 'History') {
+        iconName = focused ? 'time' : 'time-outline'; 
+      } else if (route.name === 'Profile') {
+        iconName = focused ? 'person' : 'person-outline';
+      }
+
+      return <Ionicons name={iconName} size={24} color={color} />;
+   
         },
-        headerShown: false,
-        tabBarStyle: { backgroundColor: '#020325ff', paddingTop: 2 },
+    
+        tabBarStyle: {backgroundColor:"#b56d69ff"},
         tabBarActiveTintColor: "white",
         tabBarHideOnKeyboard: true,
+        // tabBarActiveBackgroundColor:"#cb736e"
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="History" component={HistroyScreen} />
+      <Tab.Screen name="Home" component={HomeScreen}/>
+      <Tab.Screen name="History" component={HistroyScreen}/>
       <Tab.Screen name="Profile" component={ProfileScreen}  />
 
     </Tab.Navigator>
@@ -35,8 +47,8 @@ const BottomTabs = () => {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
   }
 
 })

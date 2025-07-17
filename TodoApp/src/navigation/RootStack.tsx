@@ -10,6 +10,7 @@ import BottomTabs from './BottomTabs';
 import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -20,25 +21,27 @@ const RootStack = () => {
     <Stack.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
+        animation:"none",
 
       }}
     >
-      <Stack.Screen name="HomeScreen" component={BottomTabs} />
+      <Stack.Screen name="HomeScreen" component={BottomTabs} options={{animation:'none'}} />
       <Stack.Screen name="AddTaskScreen" component={AddDetailsPage}
         options={{
           presentation: 'modal',
           animation: 'slide_from_bottom',
+          headerShown: true,
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image source={require('../../assets/crossIcon.png')} style={styles.icon} />
+              <MaterialIcons name="close" size={24} color="black" style={styles.icon} />
             </TouchableOpacity>
           )
 
         }} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />
-      <Stack.Screen name="CompletedTaskScreen" component={CompletedTask} options={{presentation:"modal",animation:'slide_from_left'}}/>
-      <Stack.Screen name="RemainingTaskScreen" component={RemainingTaskPage} options={{presentation:"modal",animation:'slide_from_right'}} />
+      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true,animation:"none" }} />
+      <Stack.Screen name="CompletedTaskScreen" component={CompletedTask} options={{ presentation: "modal", animation: 'slide_from_left', headerShown: true }} />
+      <Stack.Screen name="RemainingTaskScreen" component={RemainingTaskPage} options={{ presentation: "modal", animation: 'slide_from_right', headerShown: true }} />
 
     </Stack.Navigator>
 
@@ -47,9 +50,10 @@ const RootStack = () => {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 17,
-    height: 17,
+  
     marginRight: 10,
+    flexDirection:"row",
+    alignItems:"center",
   }
 })
 

@@ -9,6 +9,9 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 
 
+
+
+
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomTabParamList,'Home'>,
   NativeStackScreenProps<RootStackParamList,'HomeScreen'>
@@ -38,7 +41,8 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
-      <View style={styles.flexBox}>
+      
+      {/* <View style={styles.flexBox}>
         <TouchableOpacity style={styles.Completedbtn} onPress={() => navigation.navigate('CompletedTaskScreen')}>
           <Text style={styles.title}>Completed Task</Text>
 
@@ -48,7 +52,7 @@ const HomeScreen = ({ navigation }: Props) => {
 
         </TouchableOpacity>
 
-      </View>
+      </View> */}
       <FlatList
         data={todos}
         keyExtractor={(item, index) => index.toString()}
@@ -87,11 +91,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: "#7d9aeeff",
+    // backgroundColor: "#7d9aeeff",
+    backgroundColor:"#cb736e",
     fontSize: 25,
     color: "white",
     position: "absolute",
-    top: 455,
+    top: 440,
     left: 290,
     fontWeight: "bold",
     // left: 160,
@@ -99,9 +104,9 @@ const styles = StyleSheet.create({
   wrapper: {
     elevation: 3,
     borderRadius: 10,
-    backgroundColor: "#d4dcf3ff",
+    // backgroundColor: "#d4dcf3ff",
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 28,
     marginHorizontal: 20,
     marginVertical: 10,
 
@@ -115,9 +120,12 @@ const styles = StyleSheet.create({
   heading: {
     fontFamily: "serif",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 19,
+    textAlign:"center",
     marginHorizontal: 20,
-    marginTop: 10,
+    marginTop: 20,
+    color:"#cb736e",
+    marginBottom:10,
   },
 
   flex: {
