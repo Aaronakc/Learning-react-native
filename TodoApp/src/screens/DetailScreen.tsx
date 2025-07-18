@@ -36,7 +36,7 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
 
   return (
     <View style={styles.container}>
-      {edit ? <Text style={styles.heading}>Edit</Text> : <Text style={styles.heading}>Details</Text>}
+      {edit ? <Text style={styles.heading}>Edit</Text> : <Text style={styles.heading}>Task Details</Text>}
       {item ? (
         <View style={edit ? styles.editWrapper : styles.wrapper}>
           <View style={{ flex: 1 }}>
@@ -143,10 +143,10 @@ const styles = StyleSheet.create({
   heading: {
     fontFamily: 'serif',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
     textAlign:"center",
     color:"#cb736e",
-    marginTop:10,
+    marginTop:20,
   },
   icon: {
     width: 15,

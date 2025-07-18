@@ -12,16 +12,17 @@ const MaterialTopTab = () => {
     <Tab.Navigator initialRouteName="AllTask"
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: "#b56d69ff"
+          backgroundColor: "#b56d69ff",
         },
         tabBarIndicatorStyle: {
           backgroundColor: "white",
         },
         tabBarActiveTintColor: "white",
+        
       }}
       
     >
-      <Tab.Screen name='AllTask' component={AllTaskScreen} />
+      <Tab.Screen name='AllTask' component={AllTaskScreen}/>
       <Tab.Screen name='CompletedTask' component={CompletedTask} />
       <Tab.Screen name='RemainingTask' component={RemainingTaskPage} />
     </Tab.Navigator>

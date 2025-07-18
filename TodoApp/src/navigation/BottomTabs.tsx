@@ -6,7 +6,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import { StyleSheet, View } from 'react-native';
 import { BottomTabParamList } from '../types/navigation';
 import HomeScreen from '../screens/HomeScreen';
-import Ionicons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialTopTab from './MaterialTopTab';
 import { Text } from 'react-native';
@@ -39,12 +39,21 @@ const BottomTabs = () => {
         tabBarHideOnKeyboard: true,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{
+        headerTitleAlign:"center",
+        headerTitleStyle:{
+          fontFamily:"serif",
+        }
+        }} />
       <Tab.Screen name="History" component={MaterialTopTab}
         options={{
           headerTitleStyle: {
             fontFamily: "serif",
           },
+           headerStyle: {
+          backgroundColor:"white",
+          elevation:0,
+        },
           headerTitleAlign: "center",
           headerTitle: () => (
             <View style={styles.flex}>
@@ -55,7 +64,13 @@ const BottomTabs = () => {
 
         }}
       />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{
+        headerTitleAlign:"center",
+        headerTitleStyle:{
+          fontFamily:"serif",
+      
+        }
+      }} />
 
     </Tab.Navigator>
   )
@@ -69,11 +84,11 @@ const styles = StyleSheet.create({
   flex:{
     flexDirection:"row",
     alignItems:"center",
-    gap:2,
+    gap:5,
   },
   text:{
     fontFamily:"serif",
-    fontSize:18,
+    fontSize:20,
   }
 
 })

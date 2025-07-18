@@ -28,6 +28,8 @@ const RootStack = () => {
     >
       <Stack.Screen name="HomeScreen" component={BottomTabs} options={{
         animation: 'none',
+
+       
       }} />
       <Stack.Screen name="AddTaskScreen" component={AddDetailsPage}
         options={{
@@ -49,7 +51,12 @@ const RootStack = () => {
 
 
         }} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true, animation: "none" }}  />
+      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true, animation: "none",
+        headerTitleStyle:{
+          fontFamily:"serif",
+        },
+        headerTitleAlign:"center",
+       }}  />
 
 
     </Stack.Navigator>
