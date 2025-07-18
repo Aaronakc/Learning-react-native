@@ -14,55 +14,11 @@ const HistroyScreen = () => {
   // const navigation=useNavigation()
   return (
     <View>
-      <View style={styles.flexBox}>
-        <TouchableOpacity style={styles.Completedbtn}>
-          <Text style={styles.title}>All Task</Text>
-
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Completedbtn} >
-          <Text style={styles.title}>Completed Task</Text>
-
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Remainingbtn}>
-          <Text style={styles.title}>Remaining Task</Text>
-
-        </TouchableOpacity>
-
-      </View>
+     
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  flexBox: {
-    flexDirection: "row",
-    marginHorizontal: 18,
-    marginTop: 15,
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap:5,
-  },
-  Completedbtn: {
-    backgroundColor: "#cb736e",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    borderRadius: 10,
 
-  },
-  Remainingbtn: {
-    // backgroundColor: "#e49e7e",
-    backgroundColor: "#cb736e",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    borderRadius: 10,
-
-
-  },
-  title: {
-    color: "white",
-    fontFamily: "serif",
-
-  },
-})
 
 export default HistroyScreen

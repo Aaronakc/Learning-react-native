@@ -3,11 +3,12 @@ import React from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { RootStackParamList } from '../types/navigation'
+import { MaterialTopTabProps } from '../types/navigation'
 
-type Props = NativeStackScreenProps<RootStackParamList, 'RemainingTaskScreen'>
 
-const RemainingTaskPage = ({ navigation }: Props) => {
+
+
+const RemainingTaskPage = ({ navigation }: MaterialTopTabProps<'RemainingTask'>) => {
   const { todos } = useAppSelector((state: RootState) => state.todo)
 
   const remainingTodos = todos.filter(todo => !todo.checked)
@@ -37,12 +38,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    marginTop:8,
   },
   taskBox: {
-    backgroundColor: '#ffbfa8',
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,
+    paddingHorizontal:20,
+    paddingVertical:20,
     elevation: 2,
   },
   title: {

@@ -3,11 +3,12 @@ import React from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { RootStackParamList } from '../types/navigation'
+import { MaterialTopTabProps} from '../types/navigation'
 
-type Props = NativeStackScreenProps<RootStackParamList, 'CompletedTaskScreen'>
 
-const CompletedTask = ({ navigation }: Props) => {
+
+
+const CompletedTask = ({ navigation }:MaterialTopTabProps<'CompletedTask'> ) => {
   const { todos } = useAppSelector((state: RootState) => state.todo)
 
   const completedTodos = todos.filter(todo => todo.checked)
@@ -39,10 +40,11 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   taskBox: {
-    backgroundColor: '#e5c7a3',
-    borderRadius: 8,
+    borderRadius: 10,
     padding: 12,
     marginBottom: 12,
+    paddingHorizontal:20,
+    paddingVertical:20,
     elevation: 2,
   },
   title: {

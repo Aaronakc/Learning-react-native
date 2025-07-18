@@ -1,22 +1,13 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabParamList, RootStackParamList } from '../types/navigation';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
 import { deleteTodo, toggleTodo } from '../store/todoSlice';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps } from '@react-navigation/native';
+import { HomeTabScreenProps } from '../types/navigation';
 
 
-
-
-
-type Props = CompositeScreenProps<
-  BottomTabScreenProps<BottomTabParamList,'Home'>,
-  NativeStackScreenProps<RootStackParamList,'HomeScreen'>
->;
-const HomeScreen = ({ navigation }: Props) => {
+const HomeScreen = ({ navigation }:HomeTabScreenProps<'Home'> ) => {
 
 
   const { todos } = useAppSelector((state: RootState) => state.todo)
@@ -41,7 +32,7 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
-      
+
       {/* <View style={styles.flexBox}>
         <TouchableOpacity style={styles.Completedbtn} onPress={() => navigation.navigate('CompletedTaskScreen')}>
           <Text style={styles.title}>Completed Task</Text>
@@ -92,7 +83,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     // backgroundColor: "#7d9aeeff",
-    backgroundColor:"#cb736e",
+    backgroundColor: "#cb736e",
     fontSize: 25,
     color: "white",
     position: "absolute",
@@ -121,11 +112,11 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
     fontWeight: "bold",
     fontSize: 19,
-    textAlign:"center",
+    textAlign: "center",
     marginHorizontal: 20,
     marginTop: 20,
-    color:"#cb736e",
-    marginBottom:10,
+    color: "#cb736e",
+    marginBottom: 10,
   },
 
   flex: {

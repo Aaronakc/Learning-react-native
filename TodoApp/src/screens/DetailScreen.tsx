@@ -1,14 +1,13 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
 import { saveEdit, startEdit } from '../store/todoSlice';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'DetailScreen'>;
 
-const DetailScreen = ({ route, navigation }: Props) => {
+const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'>) => {
   console.log("details screen");
   const index = route.params?.index;
   const { todos } = useAppSelector((state: RootState) => state.todo);
@@ -127,11 +126,10 @@ const styles = StyleSheet.create({
     left: 290,
   },
   wrapper: {
-    elevation: 5,
+    elevation: 2,
     borderRadius: 10,
-    backgroundColor: '#d4dcf3ff',
-    paddingHorizontal: 5,
-    paddingVertical: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
     marginHorizontal: 20,
     marginVertical: 20,
     flexDirection: 'row',
@@ -146,8 +144,9 @@ const styles = StyleSheet.create({
     fontFamily: 'serif',
     fontWeight: 'bold',
     fontSize: 20,
-    marginHorizontal: 20,
-    marginTop: 10,
+    textAlign:"center",
+    color:"#cb736e",
+    marginTop:10,
   },
   icon: {
     width: 15,

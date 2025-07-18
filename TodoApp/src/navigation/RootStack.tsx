@@ -22,15 +22,21 @@ const RootStack = () => {
       initialRouteName="HomeScreen"
       screenOptions={{
         headerShown: false,
-        animation:"none",
+        animation: "none",
 
       }}
     >
-      <Stack.Screen name="HomeScreen" component={BottomTabs} options={{animation:'none'}} />
+      <Stack.Screen name="HomeScreen" component={BottomTabs} options={{
+        animation: 'none',
+      }} />
       <Stack.Screen name="AddTaskScreen" component={AddDetailsPage}
         options={{
           presentation: 'modal',
           animation: 'slide_from_bottom',
+          headerTitleStyle: {
+            fontFamily: "serif",
+          },
+          headerTitleAlign: "center",
           headerShown: true,
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -38,10 +44,13 @@ const RootStack = () => {
             </TouchableOpacity>
           )
 
+
+
+
+
         }} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true,animation:"none" }} />
-      <Stack.Screen name="CompletedTaskScreen" component={CompletedTask} options={{ presentation: "modal", animation: 'slide_from_left', headerShown: true }} />
-      <Stack.Screen name="RemainingTaskScreen" component={RemainingTaskPage} options={{ presentation: "modal", animation: 'slide_from_right', headerShown: true }} />
+      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true, animation: "none" }}  />
+
 
     </Stack.Navigator>
 
@@ -50,10 +59,10 @@ const RootStack = () => {
 
 const styles = StyleSheet.create({
   icon: {
-  
+
     marginRight: 10,
-    flexDirection:"row",
-    alignItems:"center",
+    flexDirection: "row",
+    alignItems: "center",
   }
 })
 

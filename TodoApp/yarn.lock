@@ -1759,6 +1759,15 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
+"@react-navigation/material-top-tabs@^7.3.2":
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-7.3.2.tgz#e0c4ad3595bf2072e9cbf890ef5b7c9e0dae9b28"
+  integrity sha512-ggZlsWV8ZiKWdVoxBZ1fiq8Af/VxYivsLWAccIvOQKom7yquSUkk0VKOc+rdfnRxXv40JhCmGhqCVLko9fjsRA==
+  dependencies:
+    "@react-navigation/elements" "^2.5.2"
+    color "^4.2.3"
+    react-native-tab-view "^4.1.2"
+
 "@react-navigation/native-stack@^7.3.21":
   version "7.3.21"
   resolved "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-7.3.21.tgz"
@@ -5860,6 +5869,11 @@ react-native-is-edge-to-edge@^1.1.7:
   resolved "https://registry.npmjs.org/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.2.1.tgz"
   integrity sha512-FLbPWl/MyYQWz+KwqOZsSyj2JmLKglHatd3xLZWskXOpRaio4LfEDEz8E/A6uD8QoTHW6Aobw1jbEwK7KMgR7Q==
 
+react-native-pager-view@^6.8.1:
+  version "6.8.1"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-6.8.1.tgz#fa0ec09ea7c44190c7c013d75dd09fdc17b96100"
+  integrity sha512-XIyVEMhwq7sZqM7GobOJZXxFCfdFgVNq/CFB2rZIRNRSVPJqE1k1fsc8xfQKfdzsp6Rpt6I7VOIvhmP7/YHdVg==
+
 react-native-safe-area-context@^5.5.2:
   version "5.5.2"
   resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-5.5.2.tgz"
@@ -5873,6 +5887,13 @@ react-native-screens@^4.11.1:
     react-freeze "^1.0.0"
     react-native-is-edge-to-edge "^1.1.7"
     warn-once "^0.1.0"
+
+react-native-tab-view@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-4.1.2.tgz#c4aa05812668f24a048d2e574d53182f47f4fed2"
+  integrity sha512-uzC1hxZGNXeQay8rSjCc7egnoYGHRpB/Y1tAwK5/nnZwrziKry7T6+gNscZgoq88+7Aag/JeNOifdWMZyRclOA==
+  dependencies:
+    use-latest-callback "^0.2.4"
 
 react-native-vector-icons@^10.2.0:
   version "10.2.0"

@@ -2,11 +2,11 @@ import { View, Text, StyleSheet, Button, TouchableOpacity, KeyboardAvoidingView,
 import React, { useState } from 'react'
 import InputElem from '../Components/InputElem'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 import { useAppDispatch } from '../store/Hooks';
 import { addTodo } from '../store/todoSlice';
-type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
-const AddDetailsPage = ({ navigation }: Props) => {
+// type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
+const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
