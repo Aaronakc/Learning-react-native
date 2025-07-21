@@ -3,12 +3,12 @@ import React from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { MaterialTopTabProps } from '../types/navigation'
+import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
 
 
 
 
-const RemainingTaskPage = ({ navigation }: MaterialTopTabProps<'RemainingTask'>) => {
+const RemainingTaskPage = ({ navigation }: DrawerNavigationProps<'RemainingTask'>) => {
   const { todos } = useAppSelector((state: RootState) => state.todo)
 
   const remainingTodos = todos.filter(todo => !todo.checked)

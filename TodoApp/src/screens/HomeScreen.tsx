@@ -5,9 +5,10 @@ import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
 import { deleteTodo, toggleTodo } from '../store/todoSlice';
 import { HomeTabScreenProps } from '../types/navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-const HomeScreen = ({ navigation }:HomeTabScreenProps<'Home'> ) => {
+const HomeScreen = ({ navigation }: HomeTabScreenProps<'Home'>) => {
 
 
   const { todos } = useAppSelector((state: RootState) => state.todo)
@@ -32,18 +33,6 @@ const HomeScreen = ({ navigation }:HomeTabScreenProps<'Home'> ) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
-
-      {/* <View style={styles.flexBox}>
-        <TouchableOpacity style={styles.Completedbtn} onPress={() => navigation.navigate('CompletedTaskScreen')}>
-          <Text style={styles.title}>Completed Task</Text>
-
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Remainingbtn} onPress={() => navigation.navigate('RemainingTaskScreen')}>
-          <Text style={styles.title}>Remaining Task</Text>
-
-        </TouchableOpacity>
-
-      </View> */}
       <FlatList
         data={todos}
         keyExtractor={(item, index) => index.toString()}
@@ -58,7 +47,7 @@ const HomeScreen = ({ navigation }:HomeTabScreenProps<'Home'> ) => {
                   <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
                 </View>
                 <TouchableOpacity onPress={() => handleDeleteIndex(index)}>
-                  <Image source={require('../../assets/deleteIcon.png')} style={styles.icon} />
+                  <Ionicons name="trash-outline" size={20} color="red" />
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
@@ -112,7 +101,7 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
     fontWeight: "bold",
     fontSize: 19,
-    textAlign: "center",
+    textAlign: "left",
     marginHorizontal: 20,
     marginTop: 20,
     color: "#cb736e",

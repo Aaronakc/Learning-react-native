@@ -1,7 +1,10 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { DrawerScreenProps } from "@react-navigation/drawer";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -21,7 +24,7 @@ export type BottomTabParamList = {
 };
 
 export type MaterialTopTabParamList = {
-  AllTask:undefined;
+  AllTask: undefined;
   CompletedTask: undefined;
   RemainingTask: undefined;
 }
@@ -33,11 +36,33 @@ export type HomeTabScreenProps<T extends keyof BottomTabParamList> =
     RootStackScreenProps<keyof RootStackParamList>
   >;
 
-  export type MaterialTopTabProps<T extends keyof MaterialTopTabParamList> =
+export type MaterialTopTabProps<T extends keyof MaterialTopTabParamList> =
   CompositeScreenProps<
     MaterialTopTabScreenProps<MaterialTopTabParamList, T>,
     HomeTabScreenProps<'History'>
   >;
 
+export type DrawerNavigationParamList = {
+  Home:undefined;
+  History:undefined;
+  Profile:undefined;
+  AllTask: undefined;
+  CompletedTask: undefined;
+  RemainingTask: undefined;
+};
 
- 
+export type DrawerNavigationProps<T extends keyof DrawerNavigationParamList> =
+  CompositeScreenProps<
+    DrawerScreenProps<DrawerNavigationParamList, T>,
+    MaterialTopTabProps<keyof MaterialTopTabParamList>
+  >;
+
+
+
+
+
+
+
+
+
+

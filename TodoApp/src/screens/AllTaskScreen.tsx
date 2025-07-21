@@ -2,13 +2,13 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native
 import React from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
-import { MaterialTopTabProps } from '../types/navigation'
+import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
 
 
 
 
 
-const AllTaskScreen = ({ navigation }: MaterialTopTabProps<'AllTask'>) => {
+const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
 
   const { todos } = useAppSelector((state: RootState) => state.todo)
 

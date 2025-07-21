@@ -3,12 +3,12 @@ import React from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { MaterialTopTabProps} from '../types/navigation'
+import { DrawerNavigationProps, MaterialTopTabProps} from '../types/navigation'
 
 
 
 
-const CompletedTask = ({ navigation }:MaterialTopTabProps<'CompletedTask'> ) => {
+const CompletedTask = ({ navigation }:DrawerNavigationProps<'CompletedTask'> ) => {
   const { todos } = useAppSelector((state: RootState) => state.todo)
 
   const completedTodos = todos.filter(todo => todo.checked)

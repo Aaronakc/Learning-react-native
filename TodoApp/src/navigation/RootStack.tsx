@@ -11,6 +11,7 @@ import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import DrawerNavigation from './DrawerNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,11 +27,10 @@ const RootStack = () => {
 
       }}
     >
-      <Stack.Screen name="HomeScreen" component={BottomTabs} options={{
+      <Stack.Screen name="HomeScreen" component={DrawerNavigation} options={{
         animation: 'none',
-
-       
       }} />
+
       <Stack.Screen name="AddTaskScreen" component={AddDetailsPage}
         options={{
           presentation: 'modal',
@@ -51,12 +51,13 @@ const RootStack = () => {
 
 
         }} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: true, animation: "none",
-        headerTitleStyle:{
-          fontFamily:"serif",
+      <Stack.Screen name="DetailScreen" component={DetailScreen} options={{
+        headerShown: true, animation: "none",
+        headerTitleStyle: {
+          fontFamily: "serif",
         },
-        headerTitleAlign:"center",
-       }}  />
+        headerTitleAlign: "center",
+      }} />
 
 
     </Stack.Navigator>
