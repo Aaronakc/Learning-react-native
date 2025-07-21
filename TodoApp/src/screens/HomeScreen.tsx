@@ -8,7 +8,7 @@ import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-const HomeScreen = ({ navigation }: HomeTabScreenProps<'Home'>) => {
+const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
 
 
   const { todos } = useAppSelector((state: RootState) => state.todo)

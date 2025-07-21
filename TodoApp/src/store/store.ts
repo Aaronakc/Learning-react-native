@@ -1,5 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import todoReducer from '../store/todoSlice'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+
 
 export const store = configureStore({
   reducer: {

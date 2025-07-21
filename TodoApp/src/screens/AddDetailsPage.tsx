@@ -34,6 +34,8 @@ const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) =
       edit
     }
     dispatch(addTodo(updatedTodos))
+    
+  
     setTitle('')
     setDescription('')
     setDate('')

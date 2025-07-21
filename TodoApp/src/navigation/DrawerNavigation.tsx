@@ -14,13 +14,27 @@ const DrawerNavigation = () => {
   return (
     <Drawer.Navigator screenOptions={{headerShown:false}} >
       <Drawer.Screen name="Home" component={BottomTabs}/>
-      <Drawer.Screen name="History" component={MaterialTopTab} options={{headerShown:true}} />
-      <Drawer.Screen name="Profile" component={ProfileScreen} options={{headerShown:true}}/>
-      <Drawer.Screen name="AllTask" component={AllTaskScreen} options={{headerShown:true}}/>
-      <Drawer.Screen name="CompletedTask" component={CompletedTask} options={{headerShown:true}} />
-      <Drawer.Screen name="RemainingTask" component={RemainingTaskPage} options={{headerShown:true}}/>
+      <Drawer.Screen name="History" component={MaterialTopTab} options={{headerShown:true,headerTitleStyle:{
+        fontFamily:"serif",
+      },
+      }} />
+      <Drawer.Screen name="Profile" component={ProfileScreen} options={{headerShown:true,headerTitleStyle:{
+        fontFamily:"serif",
+      },
+      }}/>
+      <Drawer.Screen name="AllTask" component={AllTaskScreen} options={{headerShown:true,headerTitleStyle:{
+        fontFamily:"serif",
+      },
+      }}/>
+      <Drawer.Screen name="CompletedTask" component={CompletedTask} options={{headerShown:true,headerTitleStyle:{
+        fontFamily:"serif",
+      },
+      }} />
+      <Drawer.Screen name="RemainingTask" component={RemainingTaskPage} options={{headerShown:true,headerTitleStyle:{
+        fontFamily:"serif",
+      },
+      }}/>
     </Drawer.Navigator>
-
   )
 }
 

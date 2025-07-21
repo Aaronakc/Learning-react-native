@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RootStackParamList } from '../types/navigation';
 import HomeScreen from '../screens/HomeScreen';
 import AddDetailsPage from '../screens/AddDetailsPage';
@@ -12,11 +12,35 @@ import { Text } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerNavigation from './DrawerNavigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppDispatch } from '../store/Hooks';
+import { loadTodo } from '../store/todoSlice';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack = () => {
   const navigation = useNavigation()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const loadFromStorage = async () => {
+      try {
+        let todos = await AsyncStorage.getItem('todos');
+
+        if(todos) {
+          dispatch(loadTodo(JSON.parse(todos)))
+        }
+
+      } catch (error) {
+        console.error(`Error storing data for key":`, error);
+      }
+    };
+
+    loadFromStorage()
+    console.log("loaded from async")
+
+  }, [])
+
   return (
 
     <Stack.Navigator
@@ -45,11 +69,6 @@ const RootStack = () => {
               <MaterialIcons name="close" size={24} color="black" style={styles.icon} />
             </TouchableOpacity>
           )
-
-
-
-
-
         }} />
       <Stack.Screen name="DetailScreen" component={DetailScreen} options={{
         headerShown: true, animation: "none",
@@ -58,8 +77,6 @@ const RootStack = () => {
         },
         headerTitleAlign: "center",
       }} />
-
-
     </Stack.Navigator>
 
   )

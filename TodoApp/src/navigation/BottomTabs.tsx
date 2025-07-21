@@ -17,12 +17,12 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 const BottomTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="BottomHome"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color }) => {
           let iconName = '';
 
-          if (route.name === 'Home') {
+          if (route.name === 'BottomHome') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'History') {
             iconName = focused ? 'time' : 'time-outline';
@@ -43,7 +43,7 @@ const BottomTabs = () => {
       
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{
+      <Tab.Screen name="BottomHome" component={HomeScreen} options={{
         // headerShown: false,
         headerLeft:()=><MenuButton/>,
         headerTitleAlign: "center",
