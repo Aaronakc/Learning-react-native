@@ -20,27 +20,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack = () => {
   const navigation = useNavigation()
-  // const dispatch = useAppDispatch()
-// for data loading using async storage
-  // useEffect(() => {
-  //   const loadFromStorage = async () => {
-  //     try {
-  //       let todos = await AsyncStorage.getItem('todos');
-
-  //       if(todos) {
-  //         dispatch(loadTodo(JSON.parse(todos)))
-  //       }
-
-  //     } catch (error) {
-  //       console.error(`Error storing data for key":`, error);
-  //     }
-  //   };
-
-  //   loadFromStorage()
-  //   console.log("loaded from async")
-
-  // }, [])
-
+ 
   return (
 
     <Stack.Navigator

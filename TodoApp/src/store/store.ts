@@ -13,6 +13,7 @@ const persistConfig = {
 const rootReducer=combineReducers({
   todo:todoReducer,
 })
+
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
@@ -21,12 +22,9 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false, // disables all serializability checks
     }),
-  
 })
 
 export const persistor = persistStore(store)
-
-
 
 export type RootState = ReturnType<typeof store.getState>
 
