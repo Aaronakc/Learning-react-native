@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import todoReducer from '../store/todoSlice'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistReducer, persistStore } from 'redux-persist'
+import { toastMiddleware } from './middleware/ToastMiddleware'
 
 
 const persistConfig = {
@@ -20,8 +21,8 @@ export const store = configureStore({
   reducer:  persistedReducer,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // disables all serializability checks
-    }),
+      serializableCheck: false,
+    }).concat(toastMiddleware),
 })
 
 export const persistor = persistStore(store)

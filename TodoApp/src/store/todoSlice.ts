@@ -26,37 +26,16 @@ export const todoSlice = createSlice({
   reducers: {
     addTodo: (state,action:PayloadAction<Todo>) => {
     state.todos.push(action.payload)
-    
-    Toast.show({
-      type:'success',
-      text1:'Tasked Added!',
-      text2:'Task has been added Successfully!',
-
-    })
     }, 
 
     deleteTodo:(state,action:PayloadAction<number>)=>{
     state.todos=state.todos.filter((_,index)=>index !== action.payload)
-  
-    Toast.show({
-      type:'success',
-      text1:"Task Deleted!",
-      text2:'Your task has been deleted Successfully',
-    })
     },
 
     toggleTodo:(state,action:PayloadAction<number>)=>{
     const index=action.payload
     if(state.todos[index])
       state.todos[index].checked=!state.todos[index].checked
-    if(state.todos[index].checked){
-      Toast.show({
-        type:'info',
-        text1:'Task Completed!',
-        text2:'Task has been Completed.',
-      })
-    }
-   
     },
     
     startEdit:(state,action:PayloadAction<number>)=>{
@@ -72,13 +51,6 @@ export const todoSlice = createSlice({
         state.todos[index]={
           ...state.todos[index],title,description,date,edit:false,
         }
-      
-        Toast.show({
-          type:'success',
-          text1:'Task Edited!',
-          text2:'Task has been edited Successfully',
-
-        })
       }
 
     }
