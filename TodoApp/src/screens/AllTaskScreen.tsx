@@ -13,7 +13,7 @@ const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
   const { todos } = useAppSelector((state: RootState) => state.todo)
 
   return (
-    <View style={{ flex: 1, marginTop: 12 }}>
+    <View style={{ flex: 1, marginTop: 12 ,marginBottom:15}}>
       {todos.length === 0 ? (
         <Text style={styles.text}>No task to Show</Text>)
         : (

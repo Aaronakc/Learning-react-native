@@ -20,7 +20,7 @@ const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) =
 
 
   const dispatch = useAppDispatch()
-  console.log("add")
+  // console.log("add")
 
   const handleAdd = () => {
     if (!title || !description || !date) {

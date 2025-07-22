@@ -33,24 +33,26 @@ const BottomTabs = () => {
           return <Ionicons name={iconName} size={24} color={color} />;
 
         },
-        headerShown:true,
-        headerTitle:route.name,
-        headerLeft:()=><MenuButton/>,
+        headerShown: true,
+        headerTitle: route.name,
+        headerLeft: () => <MenuButton />,
 
         tabBarStyle: { backgroundColor: "#b56d69ff" },
         tabBarActiveTintColor: "white",
         tabBarHideOnKeyboard: true,
-      
+
       })}
     >
       <Tab.Screen name="BottomHome" component={HomeScreen} options={{
         // headerShown: false,
-        headerLeft:()=><MenuButton/>,
+        headerLeft: () => <MenuButton />,
         headerTitleAlign: "center",
         headerTitleStyle: {
           fontFamily: "serif",
         },
-  
+        headerTitle: 'Home',
+        tabBarLabel: 'Home',
+
         headerRight: () => (
           <TouchableOpacity style={{ marginRight: 10 }}>
             <View style={{
@@ -79,7 +81,7 @@ const BottomTabs = () => {
             elevation: 0,
           },
           headerTitleAlign: "center",
-          headerLeft: () => <MenuButton/>,
+          headerLeft: () => <MenuButton />,
           headerRight: () => (
             <TouchableOpacity style={{ marginRight: 10 }}>
               <Ionicons name="search" size={24} color="black" />
@@ -94,7 +96,7 @@ const BottomTabs = () => {
           fontFamily: "serif",
 
         },
-        headerLeft:()=><MenuButton/>,
+        headerLeft: () => <MenuButton />,
         headerRight: () => (
           <TouchableOpacity style={{ marginRight: 10 }}>
             <MaterialIcon name="logout" size={24} color="black" />

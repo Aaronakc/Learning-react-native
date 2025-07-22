@@ -14,32 +14,32 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerNavigation from './DrawerNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppDispatch } from '../store/Hooks';
-import { loadTodo } from '../store/todoSlice';
+// import { loadTodo } from '../store/todoSlice';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack = () => {
   const navigation = useNavigation()
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
+// for data loading using async storage
+  // useEffect(() => {
+  //   const loadFromStorage = async () => {
+  //     try {
+  //       let todos = await AsyncStorage.getItem('todos');
 
-  useEffect(() => {
-    const loadFromStorage = async () => {
-      try {
-        let todos = await AsyncStorage.getItem('todos');
+  //       if(todos) {
+  //         dispatch(loadTodo(JSON.parse(todos)))
+  //       }
 
-        if(todos) {
-          dispatch(loadTodo(JSON.parse(todos)))
-        }
+  //     } catch (error) {
+  //       console.error(`Error storing data for key":`, error);
+  //     }
+  //   };
 
-      } catch (error) {
-        console.error(`Error storing data for key":`, error);
-      }
-    };
+  //   loadFromStorage()
+  //   console.log("loaded from async")
 
-    loadFromStorage()
-    console.log("loaded from async")
-
-  }, [])
+  // }, [])
 
   return (
 
