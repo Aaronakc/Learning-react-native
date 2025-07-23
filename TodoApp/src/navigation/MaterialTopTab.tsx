@@ -13,7 +13,7 @@ const MaterialTopTab = () => {
     <Tab.Navigator initialRouteName="AllTask"
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: "#b56d69ff",
+          backgroundColor: "#900157ff",
         },
         tabBarIndicatorStyle: {
           backgroundColor: "white",

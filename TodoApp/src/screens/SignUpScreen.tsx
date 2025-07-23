@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ImageBackground, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground, Platform, KeyboardAvoidingView, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import InputElem from '../Components/InputElem'
 import { TouchableOpacity } from 'react-native'
@@ -16,6 +16,7 @@ const SignUpScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleEmail = ((text: string) => setEmail(text))
   const handlePassword = ((text: string) => setPassword(text))
@@ -37,6 +38,8 @@ const SignUpScreen = ({ navigation }: Props) => {
       })
       return;
     }
+
+    setLoading(true)
     createUserWithEmailAndPassword(getAuth(), email, password)
       .then(() => {
         Toast.show({
@@ -63,6 +66,7 @@ const SignUpScreen = ({ navigation }: Props) => {
 
         console.log(error)
       })
+      .finally(() => { setLoading(false) })
   }
 
   return (
@@ -71,16 +75,21 @@ const SignUpScreen = ({ navigation }: Props) => {
       extraScrollHeight={20}
       keyboardShouldPersistTaps="handled">
       <View style={styles.container}>
-        <View style={styles.backgroundWrapper}>
+        <ImageBackground source={require('../../assets/loginBg.jpg')} style={styles.backgroundWrapper}>
           <Text style={styles.heading}>Create Account</Text>
-        </View>
+        </ImageBackground>
         <View style={styles.formWrapper}>
-          <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} iconName='email' />
-          <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} iconName='lock' />
-          <InputElem text="Confirm Password" placeholder='Confirm Your Password' onChangeText={handleConfirmPassword} iconName='lock' />
-          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-            <Text style={{ color: "white" }}>Sign Up</Text>
+          <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} iconName='email' iconColor="#ac116eff" />
+          <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} iconName='lock' iconColor="#ac116eff" />
+          <InputElem text="Confirm Password" placeholder='Confirm Your Password' onChangeText={handleConfirmPassword} iconName='lock' iconColor="#ac116eff" />
+          <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={loading}>
+            {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text style={{ color: "white" }}>Sign Up</Text>
+            )}
           </TouchableOpacity>
+
           <View style={styles.flexBox}>
             <Text style={styles.position}>Already Have an Account?</Text>
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -88,8 +97,8 @@ const SignUpScreen = ({ navigation }: Props) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.footer}>
-        </View>
+         <ImageBackground source={require('../../assets/loginBg.jpg')} style={styles.footer}>
+        </ImageBackground>
       </View>
     </KeyboardAwareScrollView>
   )
@@ -101,7 +110,9 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    backgroundColor: "#b56d69ff",
+    // backgroundColor: "#b56d69ff",
+    backgroundColor: "#900157ff",
+    // backgroundColor:"#ac116eff",
     marginHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
@@ -112,10 +123,12 @@ const styles = StyleSheet.create({
   flexBox: {
     flexDirection: "row",
     gap: 5,
+    justifyContent:"center",
+    
 
   },
   textDecorate: {
-    color: "#b56d69ff",
+    color: "#900157ff",
     textDecorationLine: "underline",
 
   },
@@ -124,19 +137,19 @@ const styles = StyleSheet.create({
 
   },
   backgroundWrapper: {
-    backgroundColor: "#b56d69ff",
+    // backgroundColor: "#b56d69ff",
     flex: 3,
     justifyContent: "center",
     alignItems: "center",
   },
   formWrapper: {
-    flex: 4,
+    flex: 2,
     marginTop: -32,
     elevation: 2,
-    borderTopRightRadius: 35,
+    // borderTopRightRadius: 35,
     borderTopLeftRadius: 35,
     borderBottomRightRadius: 43,
-    borderBottomLeftRadius: 43,
+    // borderBottomLeftRadius: 43,
     backgroundColor: "white",
     marginBottom: -40,
     paddingHorizontal: 5,
@@ -148,7 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
     fontSize: 17,
     color: "white",
-    fontWeight:"bold",
+    fontWeight: "bold",
   },
   footer: {
     backgroundColor: "#b56d69ff",

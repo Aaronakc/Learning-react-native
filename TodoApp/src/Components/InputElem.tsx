@@ -11,9 +11,10 @@ interface InputElemProps {
   multiline?: boolean;
   iconName?: string;
   color?:string,
+  iconColor?:string,
 
 }
-const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, iconName,color }: InputElemProps) => {
+const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, iconName,color,iconColor }: InputElemProps) => {
   return (
     <View style={styles.container}>
 
@@ -23,7 +24,7 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
       </View>
 
       <View style={styles.inputWrapper}>
-        {iconName && <Icon name={iconName} size={20} color="#b56d69ff" style={styles.icon}/>}
+        {iconName && <Icon name={iconName} size={20} color={iconColor} style={styles.icon}/>}
 
         <TextInput
           style={[styles.input, multiline && styles.multiline]}

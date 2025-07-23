@@ -6,7 +6,7 @@ import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 import { useAppDispatch } from '../store/Hooks';
 import { addTodo } from '../store/todoSlice';
 // type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
-const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) => {
+const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -18,9 +18,9 @@ const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) =
   // const handleDescription = (text: string) => setDescription(text)
   // const handleDate = (text: string) => setDate(text)
 
-  const handleTitle=useCallback((text:string)=>{setTitle(text)},[])
-  const handleDescription=useCallback((text:string)=>{setDescription(text)},[])
-  const handleDate=useCallback((text:string)=>{setDate(text)},[])
+  const handleTitle = useCallback((text: string) => { setTitle(text) }, [])
+  const handleDescription = useCallback((text: string) => { setDescription(text) }, [])
+  const handleDate = useCallback((text: string) => { setDate(text) }, [])
 
 
   const dispatch = useAppDispatch()
@@ -38,8 +38,8 @@ const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) =
       edit
     }
     dispatch(addTodo(updatedTodos))
-    
-  
+
+
     setTitle('')
     setDescription('')
     setDate('')
@@ -58,7 +58,7 @@ const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) =
         <View style={styles.container}>
           {/* <Text style={styles.text}>Add New Task</Text> */}
           <InputElem text="Title" onChangeText={handleTitle} input={title} placeholder='Example:Wake up' />
-          <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' multiline />
+          <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' multiline  />
           <InputElem text="Date" onChangeText={handleDate} input={date} placeholder='2082/03/31' />
           <View>
             <View style={styles.flex}>

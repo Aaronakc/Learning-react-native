@@ -43,7 +43,7 @@ const BottomTabs = () => {
         headerTitle: route.name,
         headerLeft: () => <MenuButton />,
 
-        tabBarStyle: { backgroundColor: "#b56d69ff" },
+        tabBarStyle: { backgroundColor: "#900157ff" },
         tabBarActiveTintColor: "white",
         tabBarHideOnKeyboard: true,
 
@@ -62,7 +62,7 @@ const BottomTabs = () => {
         headerRight: () => (
           <TouchableOpacity style={{ marginRight: 10 }}>
             <View style={{
-              backgroundColor: "#b56d69ff",
+              backgroundColor: "#900157ff",
               width: 35,
               height: 35,
               borderRadius: 50,

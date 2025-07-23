@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     // backgroundColor: "#7d9aeeff",
-    backgroundColor: "#cb736e",
+    // backgroundColor: "#cb736e",
+    backgroundColor: "#900157ff",
     fontSize: 25,
     color: "white",
     position: "absolute",
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginHorizontal: 20,
     marginTop: 20,
-    color: "#cb736e",
+    color: "#900157ff",
     marginBottom: 10,
   },
 

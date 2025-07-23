@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     textAlign: "center",
-    color: "#cb736e",
+    color: "#900157ff",
     marginTop: 20,
   },
   icon: {
