@@ -1,4 +1,4 @@
-import { BaseToast, InfoToast } from "react-native-toast-message";
+import { BaseToast, ErrorToast, InfoToast } from "react-native-toast-message";
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 export const toastConfig = {
@@ -31,6 +31,22 @@ export const toastConfig = {
       }}
       renderLeadingIcon={() => (
         <MaterialIcon name="info" size={24} color="orange" />
+      )}
+
+    />
+  ),
+  error: (props: any) => (
+    <ErrorToast
+      {...props}
+      style={{ borderBottomColor: 'red',borderBottomWidth:4,borderLeftColor:0, justifyContent: "center", alignItems: "center",marginTop:8 }}
+      contentContainerStyle={{ paddingHorizontal: 10 }}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        fontFamily:"serif"
+      }}
+      renderLeadingIcon={() => (
+        <MaterialIcon name="error" size={24} color="red" />
       )}
 
     />

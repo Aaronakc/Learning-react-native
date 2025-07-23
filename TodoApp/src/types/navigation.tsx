@@ -7,6 +7,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 
 export type RootStackParamList = {
+  Login:undefined,
+  SignUp:undefined,
   HomeScreen: undefined;
   AddTaskScreen: undefined;
   DetailScreen: { index: number };

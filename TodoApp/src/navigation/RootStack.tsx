@@ -14,6 +14,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerNavigation from './DrawerNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppDispatch } from '../store/Hooks';
+import LoginScreen from '../screens/LoginScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 // import { loadTodo } from '../store/todoSlice';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -24,13 +26,15 @@ const RootStack = () => {
   return (
 
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Login"
       screenOptions={{
         headerShown: false,
         animation: "none",
 
       }}
     >
+      <Stack.Screen name='Login' component={LoginScreen}/>
+      <Stack.Screen name='SignUp' component={SignUpScreen}/>
       <Stack.Screen name="HomeScreen" component={DrawerNavigation} options={{
         animation: 'none',
       }} />

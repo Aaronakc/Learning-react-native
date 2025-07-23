@@ -1,7 +1,7 @@
 import Toast from 'react-native-toast-message'
 import { Middleware } from '@reduxjs/toolkit'
 
-export const toastMiddleware: Middleware = ({getState}) => next => (action:any) => {
+export const toastMiddleware: Middleware = ({ getState }) => next => (action: any) => {
   const result = next(action)
 
   switch (action.type) {
@@ -20,14 +20,14 @@ export const toastMiddleware: Middleware = ({getState}) => next => (action:any) 
       })
       break
     case 'todo/toggleTodo':
-      console.log(action)
+      // console.log(action)
       const index = action.payload
-    const item = getState().todo.todos[index]
-      if(item.checked) {
+      const item = getState().todo.todos[index]
+      if (item.checked) {
         Toast.show({
-          type:'info',
-          text1:'Task Completed!',
-          text2:'Task has been Completed.',
+          type: 'info',
+          text1: 'Task Completed!',
+          text2: 'Task has been Completed.',
         })
       }
 

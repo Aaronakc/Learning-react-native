@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import InputElem from '../Components/InputElem'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
@@ -14,9 +14,13 @@ const AddDetailsPage = ({ navigation }:RootStackScreenProps<'AddTaskScreen'> ) =
   const [checked, setChecked] = useState(false)
   const [edit, setEdit] = useState(false)
 
-  const handleTitle = (text: string) => setTitle(text)
-  const handleDescription = (text: string) => setDescription(text)
-  const handleDate = (text: string) => setDate(text)
+  // const handleTitle = (text: string) => setTitle(text)
+  // const handleDescription = (text: string) => setDescription(text)
+  // const handleDate = (text: string) => setDate(text)
+
+  const handleTitle=useCallback((text:string)=>{setTitle(text)},[])
+  const handleDescription=useCallback((text:string)=>{setDescription(text)},[])
+  const handleDate=useCallback((text:string)=>{setDate(text)},[])
 
 
   const dispatch = useAppDispatch()

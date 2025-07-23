@@ -10,11 +10,17 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialTopTab from './MaterialTopTab';
 import { Text } from 'react-native';
 import MenuButton from '../Components/MenuButton';
+import { getAuth } from '@react-native-firebase/auth';
 
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
+const auth=getAuth()
+
 const BottomTabs = () => {
+  const handleLogout=()=>{
+
+  }
   return (
     <Tab.Navigator
       initialRouteName="BottomHome"
@@ -98,7 +104,7 @@ const BottomTabs = () => {
         },
         headerLeft: () => <MenuButton />,
         headerRight: () => (
-          <TouchableOpacity style={{ marginRight: 10 }}>
+          <TouchableOpacity style={{ marginRight: 10 }} onPress={handleLogout}>
             <MaterialIcon name="logout" size={24} color="black" />
           </TouchableOpacity>
         ),
