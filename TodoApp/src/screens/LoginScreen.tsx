@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ImageBackground } from 'react-native'
+import { View, Text, StyleSheet, ImageBackground, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import InputElem from '../Components/InputElem'
 import { TouchableOpacity } from 'react-native'
@@ -12,6 +12,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const LoginScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleEmail = ((text: string) => setEmail(text))
   const handlePassword = ((text: string) => setPassword(text))
@@ -26,6 +27,7 @@ const LoginScreen = ({ navigation }: Props) => {
       })
       return;
     }
+    setLoading(true)
     signInWithEmailAndPassword(getAuth(), email, password)
       .then(() => {
         navigation.navigate('HomeScreen')
@@ -38,6 +40,7 @@ const LoginScreen = ({ navigation }: Props) => {
         });
         console.log(error)
       })
+      .finally(() => setLoading(false))
   }
 
 
@@ -50,8 +53,15 @@ const LoginScreen = ({ navigation }: Props) => {
             <Text style={styles.heading}>Login</Text>
             <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} color="white" iconName='email' />
             <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} color="white" iconName='lock' />
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
               <Text style={{ color: "white" }}>Login</Text>
+            </TouchableOpacity> */}
+            <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+              {loading ? (
+                <ActivityIndicator size="small" color="white" />
+              ) : (
+                <Text style={{ color: "white" }}>Login</Text>
+              )}
             </TouchableOpacity>
             <View style={styles.flexBox}>
               <Text style={styles.position}>Do not  Have an Account?</Text>
@@ -94,8 +104,8 @@ const styles = StyleSheet.create({
   },
   textDecorate: {
     // color: "#dfd4dcff",
-    color:"orange",
-    fontFamily:"serif",
+    color: "orange",
+    fontFamily: "serif",
     textDecorationLine: "underline",
 
   },

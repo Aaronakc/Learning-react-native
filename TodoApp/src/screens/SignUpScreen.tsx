@@ -58,7 +58,7 @@ const SignUpScreen = ({ navigation }: Props) => {
         else if (error.code === 'auth/weak-password') {
           message = 'Password should be atleast 6 characters'
         }
-
+        
         Toast.show({
           type: 'error',
           text1: message,
@@ -97,7 +97,7 @@ const SignUpScreen = ({ navigation }: Props) => {
             </TouchableOpacity>
           </View>
         </View>
-         <ImageBackground source={require('../../assets/loginBg.jpg')} style={styles.footer}>
+        <ImageBackground source={require('../../assets/loginBg.jpg')} style={styles.footer}>
         </ImageBackground>
       </View>
     </KeyboardAwareScrollView>
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
   flexBox: {
     flexDirection: "row",
     gap: 5,
-    justifyContent:"center",
-    
+    justifyContent: "center",
+
 
   },
   textDecorate: {
