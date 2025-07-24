@@ -17,31 +17,65 @@ const SignUpScreen = ({ navigation }: Props) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("")
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleEmail = ((text: string) => setEmail(text))
-  const handlePassword = ((text: string) => setPassword(text))
-  const handleConfirmPassword = ((text: string) => setConfirmPassword(text))
 
-  const handleSignUp = () => {
 
-    if (!email || !password || !confirmPassword) {
-      Toast.show({
+  const emailFormat = /^.+@.+\..+$/;
+  // const passwordFormat = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
+
+  const handleEmail = ((text: string) => { 
+    setEmail(text.trim()) 
+    setError('')
+    setErrorMsg('')
+  })
+
+  const handlePassword = ((text: string) => { 
+    setPassword(text.trim())
+    setError('')
+    setErrorMsg('')
+   })
+
+  const handleConfirmPassword = ((text: string) => { 
+    setConfirmPassword(text.trim()) 
+    setError('')
+    setErrorMsg('')
+  })
+
+  const validateSignUp = () => {
+    if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
+       Toast.show({
         type: 'error',
         text1: 'All fields are required',
       });
-      return;
+      return false;
+    } else if(!emailFormat.test(email)) {
+      setError("email")
+      setErrorMsg("Invalid Email Format!")
+      return false
+    } else if (password.length < 6) {
+      setError("password")
+      setErrorMsg("Password must have atleast six characters!")
+      return false
+    } else if (password !== confirmPassword) {
+      setError("confirm password")
+      setErrorMsg("Passwords didn't match")
+      return false
     }
-    if (password != confirmPassword) {
-      Toast.show({
-        type: "error",
-        text1: "Password did not Matched",
-      })
-      return;
-    }
+  return true
+  }
 
+
+  const handleSignUp = () => {
+    const isValid = validateSignUp()
+    if(!isValid) {
+      return;
+    }
     setLoading(true)
     createUserWithEmailAndPassword(getAuth(), email, password)
       .then(() => {
+        navigation.navigate('Login')
         Toast.show({
           type: "success",
           text1: "User Registered"
@@ -52,13 +86,7 @@ const SignUpScreen = ({ navigation }: Props) => {
         if (error.code === 'auth/email-already-in-use') {
           message = 'Email already taken'
         }
-        else if (error.code === 'auth/invalid-email') {
-          message = "Invalid email format"
-        }
-        else if (error.code === 'auth/weak-password') {
-          message = 'Password should be atleast 6 characters'
-        }
-        
+
         Toast.show({
           type: 'error',
           text1: message,
@@ -79,9 +107,11 @@ const SignUpScreen = ({ navigation }: Props) => {
           <Text style={styles.heading}>Create Account</Text>
         </ImageBackground>
         <View style={styles.formWrapper}>
-          <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} iconName='email' iconColor="#ac116eff" />
-          <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} iconName='lock' iconColor="#ac116eff" />
-          <InputElem text="Confirm Password" placeholder='Confirm Your Password' onChangeText={handleConfirmPassword} iconName='lock' iconColor="#ac116eff" />
+          <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} iconName='email' iconColor="#ac116eff" error={error} name={"email"} errorMsg={errorMsg} color="red"/>
+
+          <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} iconName='lock' iconColor="#ac116eff" error={error} name="password" errorMsg={errorMsg} color="red"/>
+
+          <InputElem text="Confirm Password" placeholder='Confirm Your Password' onChangeText={handleConfirmPassword} iconName='lock' iconColor="#ac116eff" error={error} name="confirm password" errorMsg={errorMsg} color="red"/>
           <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={loading}>
             {loading ? (
               <ActivityIndicator size="small" color="white" />
@@ -110,9 +140,7 @@ const styles = StyleSheet.create({
 
   },
   button: {
-    // backgroundColor: "#b56d69ff",
     backgroundColor: "#900157ff",
-    // backgroundColor:"#ac116eff",
     marginHorizontal: 20,
     justifyContent: "center",
     alignItems: "center",
@@ -167,7 +195,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#b56d69ff",
     flex: 3,
     zIndex: 1,
+  },
+  error: {
+    color: "red",
+    fontFamily: "serif",
+    fontSize: 10,
+    marginLeft: 22,
+    marginRight: 15,
+
   }
+
 
 })
 

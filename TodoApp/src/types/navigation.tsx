@@ -55,7 +55,7 @@ export type DrawerNavigationParamList = {
 export type DrawerNavigationProps<T extends keyof DrawerNavigationParamList> =
   CompositeScreenProps<
     DrawerScreenProps<DrawerNavigationParamList, T>,
-    MaterialTopTabProps<keyof MaterialTopTabParamList>
+     RootStackScreenProps<keyof RootStackParamList>
   >;
 
 

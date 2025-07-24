@@ -13,31 +13,58 @@ const LoginScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [errorMsg, setErrorMsg] = useState("")
 
-  const handleEmail = ((text: string) => setEmail(text))
-  const handlePassword = ((text: string) => setPassword(text))
+  const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+
+  const handleEmail = ((text: string) => {
+    setEmail(text.trim())
+    setError('')
+    setErrorMsg('')
+  })
+
+  const handlePassword = ((text: string) => setPassword(text.trim()))
 
   const handleLogin = () => {
-    if (!email || !password) {
+    if (!email.trim() || !password.trim()) {
       Toast.show({
         type: 'error',
         text1: "All field are required"
-
       })
-      return;
+      return
     }
+    if (!emailFormat.test(email)) {
+      setError('email')
+      setErrorMsg('Invalid Email Format')
+      return
+    }
+
+
     setLoading(true)
     signInWithEmailAndPassword(getAuth(), email, password)
       .then(() => {
         navigation.navigate('HomeScreen')
+        Toast.show({
+          type: "success",
+          text1: "Successfully Logged in!"
+
+        })
       })
       .catch(error => {
+        console.log(error.code)
+        let message = "Something went wrong"
+        if (error.code === 'auth/invalid-credential') {
+          message = 'Incorrect email or password'
+        }
+
+
         Toast.show({
           type: 'error',
-          text1: 'Login Failed',
-          text2: error.message || 'Invalid email or password',
-        });
+          text1: message,
+        })
+
         console.log(error)
       })
       .finally(() => setLoading(false))
@@ -46,16 +73,13 @@ const LoginScreen = ({ navigation }: Props) => {
 
 
   return (
-    <KeyboardAwareScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={{ flex: 1 }}>
+    <KeyboardAwareScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}    enableOnAndroid={true} extraScrollHeight={20} keyboardShouldPersistTaps="handled">
+        <View style={{ flex: 1 }}>
         <ImageBackground source={require('../../assets/loginBg.jpg')} style={{ flex: 1 }}>
           <View style={styles.formWrapper}>
             <Text style={styles.heading}>Login</Text>
-            <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} color="white" iconName='email' />
-            <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} color="white" iconName='lock' />
-            {/* <TouchableOpacity style={styles.button} onPress={handleLogin}>
-              <Text style={{ color: "white" }}>Login</Text>
-            </TouchableOpacity> */}
+            <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} color="white" iconName='email' error={error} errorMsg={errorMsg} name="email" labelColor='white' />
+            <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} color="white" iconName='lock' labelColor='white' />
             <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
               {loading ? (
                 <ActivityIndicator size="small" color="white" />
@@ -72,8 +96,8 @@ const LoginScreen = ({ navigation }: Props) => {
 
           </View>
         </ImageBackground>
-      </View>
-    </KeyboardAwareScrollView>
+    </View>
+      </KeyboardAwareScrollView>
   )
 }
 
@@ -107,7 +131,6 @@ const styles = StyleSheet.create({
     color: "orange",
     fontFamily: "serif",
     textDecorationLine: "underline",
-
   },
   position: {
     marginLeft: 22,
@@ -119,6 +142,12 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
     textAlign: "center",
     fontSize: 50,
+  },
+  errorText: {
+    fontSize: 10,
+    color: "white",
+    marginLeft: 25,
+
   }
 
 })

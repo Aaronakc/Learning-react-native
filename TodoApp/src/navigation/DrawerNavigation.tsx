@@ -11,8 +11,8 @@ import ProfileScreen from '../screens/ProfileScreen';
 import CustomDrawerContent from '../Components/CustomDrawerContent';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+const Drawer = createDrawerNavigator<DrawerNavigationParamList>();
 const DrawerNavigation = () => {
-  const Drawer = createDrawerNavigator<DrawerNavigationParamList>();
   return (
     <Drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Home" component={BottomTabs} options={{ drawerIcon: ({ color, size }) => (
@@ -27,8 +27,6 @@ const DrawerNavigation = () => {
         ),
        
       }}
-
-
       />
       <Drawer.Screen name="Profile" component={ProfileScreen} options={{
         headerShown: true, headerTitleStyle: {

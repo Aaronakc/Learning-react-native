@@ -11,19 +11,23 @@ interface InputElemProps {
   multiline?: boolean;
   iconName?: string;
   color?:string,
+  labelColor?:string;
   iconColor?:string,
-
+  error?:string,
+  name?: string,
+  errorMsg?: string
 }
-const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, iconName,color,iconColor }: InputElemProps) => {
+const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, iconName,color,iconColor,error, name, errorMsg,labelColor }: InputElemProps) => {
+  let passwordNotMatched = (error == "confirm password" && name == "password")
   return (
     <View style={styles.container}>
 
       <View>
-        <Text style={[styles.text,{color:color}]}>{text}</Text>
+        <Text style={[styles.text,{color:labelColor}]}>{text}</Text>
 
       </View>
 
-      <View style={styles.inputWrapper}>
+      <View style={[styles.inputWrapper,{borderColor: (name==error || passwordNotMatched)? "red": undefined}]}>
         {iconName && <Icon name={iconName} size={20} color={iconColor} style={styles.icon}/>}
 
         <TextInput
@@ -32,10 +36,13 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
           placeholder={placeholder}
           onChangeText={(text) => onChangeText?.(text)}
           multiline={multiline}
-
         />
       </View>
-
+        {
+          error===name && <Text style={[styles.text, {color: color}]}>
+            {errorMsg}
+          </Text>
+        }
     </View>
   )
 }
@@ -43,13 +50,14 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
 const styles = StyleSheet.create({
   container: {
     marginVertical: 5,
+    paddingHorizontal: 20
     // backgroundColor:"pink"
   },
   text: {
-    marginHorizontal: 23,
+    marginHorizontal: 5,
     fontFamily: "serif",
     fontWeight: "500",
-    fontSize: 18,
+    fontSize: 15,
 
     // marginVertical: 0,
 
@@ -73,11 +81,10 @@ const styles = StyleSheet.create({
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 20,
     marginVertical: 5,
-    borderWidth: 1,
+    borderWidth: 0.25,
     borderRadius: 12,
-    borderColor: "#ded3daff",
+    // borderColor: "#ded3daff",
     elevation: 2,
     paddingHorizontal: 10,
     backgroundColor: 'white',

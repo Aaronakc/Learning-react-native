@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import RootStack from './RootStack';
 import ProfileScreen from '../screens/ProfileScreen';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { BottomTabParamList, HomeTabScreenProps } from '../types/navigation';
+import { BottomTabParamList, DrawerNavigationProps, HomeTabScreenProps } from '../types/navigation';
 import HomeScreen from '../screens/HomeScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -11,16 +11,19 @@ import MaterialTopTab from './MaterialTopTab';
 import { Text } from 'react-native';
 import MenuButton from '../Components/MenuButton';
 import { getAuth, signOut } from '@react-native-firebase/auth';
+import Toast from 'react-native-toast-message';
 
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-const auth=getAuth()
-
-const BottomTabs = ({navigation}:HomeTabScreenProps<'Profile'>) => {
+const BottomTabs = ({navigation}:DrawerNavigationProps<'Home'>) => {
   const handleLogout=()=>{
     signOut(getAuth()).then(()=>navigation.navigate('Login'))
+    Toast.show({
+      type:"success",
+      text1:"Logged out successfully"
 
+    })
   }
   return (
     <Tab.Navigator
