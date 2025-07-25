@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RootStackParamList } from '../types/navigation';
 import HomeScreen from '../screens/HomeScreen';
 import AddDetailsPage from '../screens/AddDetailsPage';
@@ -7,7 +7,7 @@ import DetailScreen from '../screens/DetailScreen';
 import CompletedTask from '../screens/CompletedTask';
 import RemainingTaskPage from '../screens/RemainingTaskPage';
 import BottomTabs from './BottomTabs';
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -16,25 +16,49 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppDispatch } from '../store/Hooks';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 // import { loadTodo } from '../store/todoSlice';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootStack = () => {
   const navigation = useNavigation()
- 
+
+  const [initializing, setInitializing] = useState(true)
+  const [user, setUser] = useState<any>(null)
+
+
+  const handleAuthStateChanged = (user: any) => {
+    setUser(user)
+    if (initializing) setInitializing(false)
+  }
+
+  useEffect(() => {
+    const subscriber = onAuthStateChanged(getAuth(), handleAuthStateChanged);
+    return subscriber;
+
+  }, [])
+
+    if (initializing) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#E3098C" />
+      </View>
+    );
+  }
+
   return (
 
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName={user ? 'HomeScreen' : 'Login'}
       screenOptions={{
         headerShown: false,
         animation: "none",
 
       }}
     >
-      <Stack.Screen name='Login' component={LoginScreen}/>
-      <Stack.Screen name='SignUp' component={SignUpScreen}/>
+      <Stack.Screen name='Login' component={LoginScreen} />
+      <Stack.Screen name='SignUp' component={SignUpScreen} />
       <Stack.Screen name="HomeScreen" component={DrawerNavigation} options={{
         animation: 'none',
       }} />
@@ -72,7 +96,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
     flexDirection: "row",
     alignItems: "center",
-  }
+  },
+    loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
 })
 
 export default RootStack
