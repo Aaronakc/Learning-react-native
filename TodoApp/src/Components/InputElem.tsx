@@ -49,28 +49,20 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 5,
+    marginVertical: 2,
     paddingHorizontal: 20
-    // backgroundColor:"pink"
+   
   },
   text: {
     marginHorizontal: 5,
     fontFamily: "serif",
     fontWeight: "500",
     fontSize: 15,
-
-    // marginVertical: 0,
-
   },
 
   input: {
-    // marginHorizontal: 20,
-    // marginVertical: 5,
-  
     padding: 15,
     borderRadius: 12,
-    // borderColor: "#ded3daff",
-  
     flex:1,
 
   },
@@ -84,7 +76,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderWidth: 0.25,
     borderRadius: 12,
-    // borderColor: "#ded3daff",
     elevation: 2,
     paddingHorizontal: 10,
     backgroundColor: 'white',

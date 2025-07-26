@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ImageBackground, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import InputElem from '../Components/InputElem'
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
@@ -8,6 +8,10 @@ import { RootStackParamList } from '../types/navigation'
 import Toast from 'react-native-toast-message'
 import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import SigninWithApps from '../Components/SigninWithApps'
+import { onFacebookButtonPress } from '../utils/FacebookSignin'
+
+
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const LoginScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('')
@@ -17,6 +21,7 @@ const LoginScreen = ({ navigation }: Props) => {
   const [errorMsg, setErrorMsg] = useState("")
 
   const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 
 
   const handleEmail = ((text: string) => {
@@ -70,11 +75,25 @@ const LoginScreen = ({ navigation }: Props) => {
       .finally(() => setLoading(false))
   }
 
+  const handleFacebookSignIn = async () => {
+    try {
+      await onFacebookButtonPress();
+      console.log('Signed in with Facebook');
+      navigation.navigate('HomeScreen');
+    } catch (error) {
+      console.log("Facebook login error:", error);
+      Toast.show({
+        type: 'error',
+        text1: 'Facebook login failed',
+
+      });
+    }
+  };
 
 
   return (
-    <KeyboardAwareScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}    enableOnAndroid={true} extraScrollHeight={20} keyboardShouldPersistTaps="handled">
-        <View style={{ flex: 1 }}>
+    <KeyboardAwareScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }} enableOnAndroid={true} extraScrollHeight={20} keyboardShouldPersistTaps="handled">
+      <View style={{ flex: 1 }}>
         <ImageBackground source={require('../../assets/loginBg.jpg')} style={{ flex: 1 }}>
           <View style={styles.formWrapper}>
             <Text style={styles.heading}>Login</Text>
@@ -87,17 +106,17 @@ const LoginScreen = ({ navigation }: Props) => {
                 <Text style={{ color: "white" }}>Login</Text>
               )}
             </TouchableOpacity>
+            <SigninWithApps text="Signin with Facebook" color="white" onPress={handleFacebookSignIn} icon={require('../../assets/facebooklogo.webp')} />
             <View style={styles.flexBox}>
               <Text style={styles.position}>Do not  Have an Account?</Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                 <Text style={styles.textDecorate}>SignUp</Text>
               </TouchableOpacity>
             </View>
-
           </View>
         </ImageBackground>
-    </View>
-      </KeyboardAwareScrollView>
+      </View>
+    </KeyboardAwareScrollView>
   )
 }
 
@@ -106,15 +125,12 @@ const styles = StyleSheet.create({
     flex: 1
   },
   button: {
-    // backgroundColor: "#df8c88ff",
     backgroundColor: "rgba(227, 9, 140, 0.62)",
-    marginHorizontal: 20,
+    marginHorizontal: 21,
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
-    borderRadius: 10,
-    marginVertical: 15,
-
+    borderRadius: 15,
   },
   formWrapper: {
     marginTop: 120,

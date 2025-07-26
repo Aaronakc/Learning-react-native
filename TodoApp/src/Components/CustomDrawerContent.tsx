@@ -30,8 +30,8 @@ const CustomDrawerContent = (props: any) => {
 const styles = StyleSheet.create({
   profileContainer: {
     alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 15,
   },
   profileImage: {
     width: 50,
