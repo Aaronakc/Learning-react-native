@@ -49,7 +49,7 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 2,
+    marginVertical: 4,
     paddingHorizontal: 20
    
   },

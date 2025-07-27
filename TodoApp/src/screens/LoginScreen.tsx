@@ -10,6 +10,8 @@ import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SigninWithApps from '../Components/SigninWithApps'
 import { onFacebookButtonPress } from '../utils/FacebookSignin'
+// import { onGoogleButtonPress } from '../utils/GoogleSignin'
+
 
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
@@ -32,48 +34,46 @@ const LoginScreen = ({ navigation }: Props) => {
 
   const handlePassword = ((text: string) => setPassword(text.trim()))
 
+
   const handleLogin = () => {
+
     if (!email.trim() || !password.trim()) {
-      Toast.show({
-        type: 'error',
-        text1: "All field are required"
-      })
-      return
-    }
-    if (!emailFormat.test(email)) {
-      setError('email')
-      setErrorMsg('Invalid Email Format')
-      return
+      Toast.show({ type: 'error', text1: 'All fields are required' });
+      return;
     }
 
+    if (!emailFormat.test(email)) {
+      setError('email');
+      setErrorMsg('Invalid Email Format');
+      return;
+    }
 
     setLoading(true)
+
     signInWithEmailAndPassword(getAuth(), email, password)
       .then(() => {
-        navigation.navigate('HomeScreen')
-        Toast.show({
-          type: "success",
-          text1: "Successfully Logged in!"
-
-        })
+        console.log('Login success');
+        navigation.navigate('HomeScreen');
+        Toast.show({ type: 'success', text1: 'Successfully Logged in!' });
       })
       .catch(error => {
-        console.log(error.code)
-        let message = "Something went wrong"
+        console.log('Login error:', error);
         if (error.code === 'auth/invalid-credential') {
-          message = 'Incorrect email or password'
+          Toast.show({
+            type: 'error',
+            text1: 'Invalid Email or Password',
+          })
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: 'Login Failed',
+            text2: 'An unexpected error occurred. Please try again later.',
+          })
         }
-
-
-        Toast.show({
-          type: 'error',
-          text1: message,
-        })
-
-        console.log(error)
       })
       .finally(() => setLoading(false))
   }
+
 
   const handleFacebookSignIn = async () => {
     try {
@@ -89,16 +89,31 @@ const LoginScreen = ({ navigation }: Props) => {
       });
     }
   };
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     await onGoogleButtonPress();
+  //     console.log('Signed in with Google');
+  //     navigation.navigate('HomeScreen');
+  //   } catch (error) {
+  //     console.log("Google login error:", error);
+  //     Toast.show({
+  //       type: 'error',
+  //       text1: 'Google login failed',
+
+  //     })
+  //   }
+  // }
 
 
   return (
-    <KeyboardAwareScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }} enableOnAndroid={true} extraScrollHeight={20} keyboardShouldPersistTaps="handled">
-      <View style={{ flex: 1 }}>
-        <ImageBackground source={require('../../assets/loginBg.jpg')} style={{ flex: 1 }}>
+    <ImageBackground source={require('../../assets/loginBg.jpg')} style={{ flex: 1 }}>
+      <KeyboardAwareScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }} enableOnAndroid={true} extraScrollHeight={20} keyboardShouldPersistTaps="handled">
+        <View style={{ flex: 1 }}>
           <View style={styles.formWrapper}>
             <Text style={styles.heading}>Login</Text>
             <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} color="white" iconName='email' error={error} errorMsg={errorMsg} name="email" labelColor='white' />
             <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} color="white" iconName='lock' labelColor='white' />
+
             <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
               {loading ? (
                 <ActivityIndicator size="small" color="white" />
@@ -106,7 +121,9 @@ const LoginScreen = ({ navigation }: Props) => {
                 <Text style={{ color: "white" }}>Login</Text>
               )}
             </TouchableOpacity>
-            <SigninWithApps text="Signin with Facebook" color="white" onPress={handleFacebookSignIn} icon={require('../../assets/facebooklogo.webp')} />
+
+            <SigninWithApps text="Signin with Facebook" color="white" onPress={handleFacebookSignIn} icon={require('../../assets/facebooklogo.webp')} disabled={loading} />
+            <SigninWithApps text="Continue with Google" color="white"  icon={require('../../assets/googlelogo.webp')} disabled={loading} />
             <View style={styles.flexBox}>
               <Text style={styles.position}>Do not  Have an Account?</Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
@@ -114,9 +131,9 @@ const LoginScreen = ({ navigation }: Props) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
-      </View>
-    </KeyboardAwareScrollView>
+        </View>
+      </KeyboardAwareScrollView>
+    </ImageBackground>
   )
 }
 
@@ -126,15 +143,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "rgba(227, 9, 140, 0.62)",
-    marginHorizontal: 21,
+    marginLeft: 22,
+    marginRight: 22,
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
-    borderRadius: 15,
+    borderRadius: 8,
   },
   formWrapper: {
     marginTop: 120,
-
   },
   flexBox: {
     flexDirection: "row",
@@ -151,6 +168,7 @@ const styles = StyleSheet.create({
   position: {
     marginLeft: 22,
     color: "white",
+
 
   },
   heading: {
