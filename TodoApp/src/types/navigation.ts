@@ -11,7 +11,7 @@ export type RootStackParamList = {
   SignUp:undefined,
   HomeScreen: undefined;
   AddTaskScreen: undefined;
-  DetailScreen: { index: number };
+  DetailScreen: { todoid: string };
 
 };
 

@@ -50,3 +50,31 @@ export const ToggleTodoFromFirebase=async(todoid:string)=>{
   if(todo)
     await todoRef.update({checked:!todo.checked})
 }
+
+
+export const getTodoDetails = async(todoid: string)=> {
+  const uid=getUserId()
+  
+  const todoRef=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(todoid)
+
+  const doc=await todoRef.get()
+  const todo=doc.data()
+
+  if(todo) {
+    return todo
+  }
+   
+}
+export const handleSaveTodo=async(todoid:string, title:string, description: string, date: string)=>{
+  const uid=getUserId()
+  
+  const todoRef=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(todoid)
+
+  const doc=await todoRef.get()
+  // console.log(doc)
+  const todo=doc.data()
+
+  if(todo)
+    await todoRef.update({title, description, date})
+}
+

@@ -59,7 +59,7 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View style={styles.wrapper}>
-            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { index })}>
+            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid:item.todoid })}>
               <View style={styles.flex}>
                 <View style={[styles.flex, { gap: 20, flex: 1 }]}>
                   <TouchableOpacity onPress={() => handleToggleIndex(item.todoid)}>

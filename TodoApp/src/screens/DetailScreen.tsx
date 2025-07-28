@@ -1,43 +1,65 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
 import { saveEdit, startEdit } from '../store/todoSlice';
+import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/FireStore';
 
 
 const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'>) => {
-  console.log("details screen");
-  const index = route.params?.index;
-  const { todos } = useAppSelector((state: RootState) => state.todo);
-  const dispatch = useAppDispatch();
-  const item = todos[index];
+  // const [title, setTitle] = useState(item?.title || '');
+  // const [description, setDescription] = useState(item?.description || '');
+  // const [date, setDate] = useState(item?.date || '');
 
-  const edit = item.edit;
+   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [edit, setEdit] = useState(false)
 
-  const [title, setTitle] = useState(item?.title || '');
-  const [description, setDescription] = useState(item?.description || '');
-  const [date, setDate] = useState(item?.date || '');
 
-  const handleEdit = (index: number) => {
-    dispatch(startEdit(index));
-  };
+  const id = route.params?.todoid
+  useEffect(()=>{
+    getTodoDetails(id)
+    .then(todo => {
+      console.log(todo)
+      if(todo) {
+        setTitle(todo.title)
+        setDescription(todo.description)
+        setDate(todo.date)
+      }
+    })
+    }, [id])
 
-  const handleSave = (index: number, title: string, description: string, date: string) => {
-    const editedText = {
-      index,
-      title,
-      description,
-      date,
-    };
-    dispatch(saveEdit(editedText));
-  };
+  // const index = route.params?.index;
+  // const { todos } = useAppSelector((state: RootState) => state.todo);
+  // const dispatch = useAppDispatch();/
+  // const item = todos[index];
+  // const edit = item.edit;
+
+  const handleSave = async () => {
+    await handleSaveTodo(id, title, description, date)
+    setEdit(false)
+  }
+
+  // const handleEdit = (index: number) => {
+  //   dispatch(startEdit(index));
+  // };
+
+  // const handleSave = (index: number, title: string, description: string, date: string) => {
+  //   const editedText = {
+  //     index,
+  //     title,
+  //     description,
+  //     date,
+  //   };
+  //   dispatch(saveEdit(editedText));
+  // };
 
   return (
     <View style={styles.container}>
       {edit ? <Text style={styles.heading}>Edit</Text> : <Text style={styles.heading}>Task Details</Text>}
-      {item ? (
         <View style={edit ? styles.editWrapper : styles.wrapper}>
           <View style={{ flex: 1 }}>
             <View style={styles.font}>
@@ -51,7 +73,7 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
                   />
                 </>
               ) : (
-                <Text style={styles.title}>Title:{item?.title}</Text>
+                <Text style={styles.title}>Title:{title}</Text>
               )}
             </View>
             <View style={styles.font}>
@@ -65,7 +87,7 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
                   />
                 </>
               ) : (
-                <Text style={styles.desc}>Description:{item?.description}</Text>
+                <Text style={styles.desc}>Description:{description}</Text>
               )}
             </View>
             <View style={styles.font}>
@@ -79,7 +101,7 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
                   />
                 </>
               ) : (
-                <Text style={styles.date}>Date:{item?.date}</Text>
+                <Text style={styles.date}>Date:{date}</Text>
               )}
             </View>
           </View>
@@ -87,8 +109,8 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
             <TouchableOpacity
               onPress={
                 edit
-                  ? () => handleSave(index, title, description, date)
-                  : () => handleEdit(index)
+                  ? () => handleSave()
+                  : () => setEdit(true)
               }
             >
               <Image
@@ -102,9 +124,6 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
             </TouchableOpacity>
           </View>
         </View>
-      ) : (
-        <Text style={styles.font}>Task not found</Text>
-      )}
     </View>
   );
 };
