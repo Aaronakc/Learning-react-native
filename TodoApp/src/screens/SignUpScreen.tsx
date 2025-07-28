@@ -60,7 +60,7 @@ const SignUpScreen = ({ navigation }: Props) => {
       return false
     } else if (password !== confirmPassword) {
       setError("confirm password")
-      setErrorMsg("Passwords didn't match")
+      setErrorMsg("Passwords did not match")
       return false
     }
   return true

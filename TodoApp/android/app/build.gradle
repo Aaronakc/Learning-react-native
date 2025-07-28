@@ -85,7 +85,7 @@ android {
 
     namespace "com.todoapp"
     defaultConfig {
-        applicationId "com.todoapp"
+        applicationId "com.todoapp.aarona"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

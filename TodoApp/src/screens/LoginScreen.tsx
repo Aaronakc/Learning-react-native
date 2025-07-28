@@ -10,7 +10,7 @@ import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SigninWithApps from '../Components/SigninWithApps'
 import { onFacebookButtonPress } from '../utils/FacebookSignin'
-// import { onGoogleButtonPress } from '../utils/GoogleSignin'
+import { onGoogleButtonPress } from '../utils/GoogleSignin'
 
 
 
@@ -89,20 +89,21 @@ const LoginScreen = ({ navigation }: Props) => {
       });
     }
   };
-  // const handleGoogleSignIn = async () => {
-  //   try {
-  //     await onGoogleButtonPress();
-  //     console.log('Signed in with Google');
-  //     navigation.navigate('HomeScreen');
-  //   } catch (error) {
-  //     console.log("Google login error:", error);
-  //     Toast.show({
-  //       type: 'error',
-  //       text1: 'Google login failed',
 
-  //     })
-  //   }
-  // }
+  const handleGoogleSignIn = async () => {
+    try {
+      await onGoogleButtonPress();
+      console.log('Signed in with Google');
+      navigation.navigate('HomeScreen');
+    } catch (error) {
+      console.log("Google login error:", error);
+      Toast.show({
+        type: 'error',
+        text1: 'Google login failed',
+
+      });
+    }
+  };
 
 
   return (
@@ -123,7 +124,7 @@ const LoginScreen = ({ navigation }: Props) => {
             </TouchableOpacity>
 
             <SigninWithApps text="Signin with Facebook" color="white" onPress={handleFacebookSignIn} icon={require('../../assets/facebooklogo.webp')} disabled={loading} />
-            <SigninWithApps text="Continue with Google" color="white"  icon={require('../../assets/googlelogo.webp')} disabled={loading} />
+            <SigninWithApps text="Continue with Google" color="white" onPress={handleGoogleSignIn} icon={require('../../assets/googlelogo.webp')} disabled={loading} />
             <View style={styles.flexBox}>
               <Text style={styles.position}>Do not  Have an Account?</Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>

@@ -33,6 +33,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273941533530:android:4d883f271e3663bcad1963",
+        "android_client_info": {
+          "package_name": "com.todoapp.aarona"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273941533530-cvk57lkd8at48l3bh66tcgftf1u2p86l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.todoapp.aarona",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "273941533530-sf0hfm9iuufafqojb7e1qhregbki74hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7POIeiIccayQ9yhl0v0FoF1Ag0rA8isY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273941533530-sf0hfm9iuufafqojb7e1qhregbki74hq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

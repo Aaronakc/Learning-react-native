@@ -24,7 +24,6 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
 
       <View>
         <Text style={[styles.text,{color:labelColor}]}>{text}</Text>
-
       </View>
 
       <View style={[styles.inputWrapper,{borderColor: (name==error || passwordNotMatched)? "red": undefined}]}>
