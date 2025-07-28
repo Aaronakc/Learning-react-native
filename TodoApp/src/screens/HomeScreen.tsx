@@ -6,12 +6,13 @@ import { RootState } from '../store/store';
 import { deleteTodo, toggleTodo } from '../store/todoSlice';
 import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { getTodosFromFirebase } from '../utils/FireStore';
+import { deleteTodoFromFirebase, getTodosFromFirebase, ToggleTodoFromFirebase } from '../utils/FireStore';
 import { Todo } from '../types/todos';
 
 
 const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
     const [todos, setTodos] = useState<Todo[]>([])
+    const [reload,setReload]=useState(false)
 
   // const { todos } = useAppSelector((state: RootState) => state.todo)
   // const dispatch = useAppDispatch()
@@ -28,21 +29,25 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
     }
 
     loadTodos()
-  }, [])
+  }, [reload])
 
   const handleNav = () => {
     navigation.navigate('AddTaskScreen')
 
   }
 
-  const handleDeleteIndex = (i: number) => {
+  const handleDeleteIndex = async(i: string) => {
     // dispatch(deleteTodo(i))
-    // deleteTodoFromFireStore(i.toString())
+    await deleteTodoFromFirebase(i)
+    setReload(!reload)
+    
 
   }
 
-  const handleToggleIndex = (i: number) => {
+  const handleToggleIndex = async(i: string) => {
     // dispatch(toggleTodo(i))
+    await ToggleTodoFromFirebase(i)
+    setReload(!reload)
   }
 
 
@@ -57,12 +62,12 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
             <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { index })}>
               <View style={styles.flex}>
                 <View style={[styles.flex, { gap: 20, flex: 1 }]}>
-                  <TouchableOpacity onPress={() => handleToggleIndex(index)}>
+                  <TouchableOpacity onPress={() => handleToggleIndex(item.todoid)}>
                     <Image source={item.checked ? require('../../assets/checkIcon.png') : require('../../assets/unCheckIcon.png')} style={styles.icon} />
                   </TouchableOpacity>
                   <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
                 </View>
-                <TouchableOpacity onPress={() => handleDeleteIndex(index)}>
+                <TouchableOpacity onPress={() => handleDeleteIndex(item.todoid)}>
                   <Ionicons name="trash-outline" size={20} color="red" />
                 </TouchableOpacity>
               </View>

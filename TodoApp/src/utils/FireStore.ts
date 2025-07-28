@@ -29,3 +29,24 @@ export const getTodosFromFirebase=async()=>{
   return todos
 
 }
+
+export const deleteTodoFromFirebase=async(todoid:string)=>{
+  const uid=getUserId()
+
+  const todoRef=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(todoid)
+  await todoRef.delete()
+
+}
+
+export const ToggleTodoFromFirebase=async(todoid:string)=>{
+  const uid=getUserId()
+  
+  const todoRef=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(todoid)
+
+  const doc=await todoRef.get()
+  // console.log(doc)
+  const todo=doc.data()
+
+  if(todo)
+    await todoRef.update({checked:!todo.checked})
+}
