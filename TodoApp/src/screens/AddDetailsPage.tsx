@@ -5,6 +5,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 import { useAppDispatch } from '../store/Hooks';
 import { addTodo } from '../store/todoSlice';
+import { addTodoToFirebase} from '../utils/FireStore';
 // type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
 const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) => {
 
@@ -26,18 +27,19 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
   const dispatch = useAppDispatch()
   // console.log("add")
 
-  const handleAdd = () => {
+  const handleAdd = async() => {
     if (!title || !description || !date) {
       return
     }
-    const updatedTodos = {
-      title,
-      description,
-      date,
-      checked,
-      edit
+   
+    // dispatch(addTodo(updatedTodos))
+    try{
+      await addTodoToFirebase(title,description,date)
+
     }
-    dispatch(addTodo(updatedTodos))
+    catch(error){
+      console.log('failed to save to the firestore',error)
+    }
 
 
     setTitle('')

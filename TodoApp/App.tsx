@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
   import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from './src/config/toastConfig';
+import firestore from '@react-native-firebase/firestore';
 
 
 export default function App() {
@@ -17,6 +18,8 @@ useEffect(()=>{
   });
 
 },[])
+
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

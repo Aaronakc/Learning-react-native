@@ -12,13 +12,15 @@ import { Text } from 'react-native';
 import MenuButton from '../Components/MenuButton';
 import { getAuth, signOut } from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabs = ({navigation}:DrawerNavigationProps<'Home'>) => {
-  const handleLogout=()=>{
+  const handleLogout=async()=>{
     signOut(getAuth()).then(()=>navigation.navigate('Login'))
+    await GoogleSignin.revokeAccess() 
     Toast.show({
       type:"success",
       text1:"Logged out successfully"

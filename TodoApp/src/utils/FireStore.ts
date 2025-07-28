@@ -1,0 +1,31 @@
+import firestore from '@react-native-firebase/firestore';
+import { getAuth } from "@react-native-firebase/auth"
+import { Todo } from '../types/todos';
+
+export const getUserId=()=>{
+  const uid=getAuth().currentUser?.uid
+  if(!uid) throw 'No such user id'
+  return uid
+}
+
+export const addTodoToFirebase=async(title:string,description:string,date:string)=>{
+  const uid=getUserId()
+
+  const id=Date.now().toString()
+
+  const ref=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(id)
+  
+  await ref.set({title,description,date,todoid:id,checked:false})
+
+}
+
+
+export const getTodosFromFirebase=async()=>{
+  const uid=getUserId()
+
+  const snapshot=await firestore().collection('Todos').doc(uid).collection('UserTodos').get()
+
+  const todos = snapshot.docs.map(doc => ({todoid: doc.id,...doc.data() as Omit<Todo, 'todoid'>}))
+  return todos
+
+}

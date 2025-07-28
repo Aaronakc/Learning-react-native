@@ -11,6 +11,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import SigninWithApps from '../Components/SigninWithApps'
 import { onFacebookButtonPress } from '../utils/FacebookSignin'
 import { onGoogleButtonPress } from '../utils/GoogleSignin'
+// import { saveUserToFireStore } from '../utils/FireStore'
 
 
 
@@ -51,7 +52,7 @@ const LoginScreen = ({ navigation }: Props) => {
     setLoading(true)
 
     signInWithEmailAndPassword(getAuth(), email, password)
-      .then(() => {
+      .then( () => {
         console.log('Login success');
         navigation.navigate('HomeScreen');
         Toast.show({ type: 'success', text1: 'Successfully Logged in!' });
@@ -77,8 +78,7 @@ const LoginScreen = ({ navigation }: Props) => {
 
   const handleFacebookSignIn = async () => {
     try {
-      await onFacebookButtonPress();
-      console.log('Signed in with Facebook');
+     await onFacebookButtonPress();
       navigation.navigate('HomeScreen');
     } catch (error) {
       console.log("Facebook login error:", error);
@@ -93,7 +93,6 @@ const LoginScreen = ({ navigation }: Props) => {
   const handleGoogleSignIn = async () => {
     try {
       await onGoogleButtonPress();
-      console.log('Signed in with Google');
       navigation.navigate('HomeScreen');
     } catch (error) {
       console.log("Google login error:", error);

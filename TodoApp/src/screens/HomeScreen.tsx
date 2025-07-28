@@ -1,19 +1,34 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
 import { deleteTodo, toggleTodo } from '../store/todoSlice';
 import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { getTodosFromFirebase } from '../utils/FireStore';
+import { Todo } from '../types/todos';
 
 
 const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
+    const [todos, setTodos] = useState<Todo[]>([])
 
+  // const { todos } = useAppSelector((state: RootState) => state.todo)
+  // const dispatch = useAppDispatch()
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        const data = await getTodosFromFirebase()
+        if(data)
+          console.log(data)
+        setTodos(data)
+      } catch (error) {
+        console.error('Failed to load todos', error)
+      }
+    }
 
-  const { todos } = useAppSelector((state: RootState) => state.todo)
-  const dispatch = useAppDispatch()
-
+    loadTodos()
+  }, [])
 
   const handleNav = () => {
     navigation.navigate('AddTaskScreen')
@@ -21,12 +36,13 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
   }
 
   const handleDeleteIndex = (i: number) => {
-    dispatch(deleteTodo(i))
+    // dispatch(deleteTodo(i))
+    // deleteTodoFromFireStore(i.toString())
 
   }
 
   const handleToggleIndex = (i: number) => {
-    dispatch(toggleTodo(i))
+    // dispatch(toggleTodo(i))
   }
 
 

@@ -90,7 +90,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-         resValue "string", "facebook_app_id", project.env.get("FACEBOOK_APP_ID")
+        resValue "string", "facebook_app_id", project.env.get("FACEBOOK_APP_ID")
         resValue "string", "facebook_client_token", project.env.get("FACEBOOK_CLIENT_TOKEN")
         resValue "string", "fb_login_protocol_scheme", project.env.get("FB_LOGIN_PROTOCOL_SCHEME")
     }
