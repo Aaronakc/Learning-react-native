@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
-import { deleteTodo, toggleTodo } from '../store/todoSlice';
+// import { deleteTodo, toggleTodo } from '../store/todoSlice';
 import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { deleteTodoFromFirebase, getTodosFromFirebase, ToggleTodoFromFirebase } from '../utils/FireStore';

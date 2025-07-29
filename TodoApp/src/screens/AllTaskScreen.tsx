@@ -1,16 +1,34 @@
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
 import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
+import { getTodosFromFirebase } from '../utils/FireStore'
+import { Todo } from '../types/todos'
 
 
 
 
 
 const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
+   const [todos, setTodos] = useState<Todo[]>([])
 
-  const { todos } = useAppSelector((state: RootState) => state.todo)
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        const data = await getTodosFromFirebase()
+        if(data)
+          console.log(data)
+        setTodos(data)
+      } catch (error) {
+        console.error('Failed to load todos', error)
+      }
+    }
+
+    loadTodos()
+  }, [])
+
+  // const { todos } = useAppSelector((state: RootState) => state.todo)
 
   return (
     <View style={{ flex: 1, marginTop: 12 ,marginBottom:15}}>
@@ -22,7 +40,7 @@ const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <View style={styles.wrapper}>
-                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { index })}>
+                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid:item.todoid })}>
                   <View >
                     <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
                   </View>

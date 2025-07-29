@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 import { useAppDispatch, useAppSelector } from '../store/Hooks';
 import { RootState } from '../store/store';
-import { saveEdit, startEdit } from '../store/todoSlice';
+// import { saveEdit, startEdit } from '../store/todoSlice';
 import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/FireStore';
 
 
@@ -42,7 +42,6 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
     await handleSaveTodo(id, title, description, date)
     setEdit(false)
   }
-
   // const handleEdit = (index: number) => {
   //   dispatch(startEdit(index));
   // };
