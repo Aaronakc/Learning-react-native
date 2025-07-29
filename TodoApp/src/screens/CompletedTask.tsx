@@ -1,15 +1,35 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../store/Hooks'
 import { RootState } from '../store/store'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { DrawerNavigationProps, MaterialTopTabProps} from '../types/navigation'
+import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
+import { getTodosFromFirebase } from '../utils/FireStore'
+import { Todo } from '../types/todos'
 
 
 
 
-const CompletedTask = ({ navigation }:DrawerNavigationProps<'CompletedTask'> ) => {
-  const { todos } = useAppSelector((state: RootState) => state.todo)
+const CompletedTask = ({ navigation }: DrawerNavigationProps<'CompletedTask'>) => {
+  // const { todos } = useAppSelector((state: RootState) => state.todo)
+  const [todos, setTodos] = useState<Todo[]>([])
+
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        const data = await getTodosFromFirebase()
+        if (data)
+          console.log(data)
+        setTodos(data)
+      } catch (error) {
+        console.error('Failed to load todos', error)
+      }
+    }
+
+    loadTodos()
+  }, [])
+
+
 
   const completedTodos = todos.filter(todo => todo.checked)
 
@@ -43,8 +63,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 12,
     marginBottom: 12,
-    paddingHorizontal:20,
-    paddingVertical:20,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
     elevation: 2,
   },
   title: {

@@ -24,7 +24,7 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
   const handleDate = useCallback((text: string) => { setDate(text) }, [])
 
 
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   // console.log("add")
 
   const handleAdd = async() => {

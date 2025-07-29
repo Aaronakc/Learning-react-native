@@ -7,11 +7,29 @@ import { TouchableOpacity } from 'react-native'
 import { useAppSelector } from '../store/Hooks'
 import RootStack from '../navigation/RootStack'
 import { RootState } from '../store/store'
+import { Todo } from '../types/todos'
+import { getTodosFromFirebase } from '../utils/FireStore'
 
 const ProfileScreen = () => {
   const [email, setEmail] = useState<string>('')
   const [name, setName] = useState<string>('')
-  const { todos } = useAppSelector((state: RootState) => state.todo)
+  const [todos, setTodos] = useState<Todo[]>([])
+  
+    useEffect(() => {
+      const loadTodos = async () => {
+        try {
+          const data = await getTodosFromFirebase()
+          if(data)
+            console.log(data)
+          setTodos(data)
+        } catch (error) {
+          console.error('Failed to load todos', error)
+        }
+      }
+  
+      loadTodos()
+    }, [])
+  // const { todos } = useAppSelector((state: RootState) => state.todo)
   const totalTask=todos.length
   const completedTask=todos.filter((todo)=>todo.checked)
   const totalCompletedTask=completedTask.length

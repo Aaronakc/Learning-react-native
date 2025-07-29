@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, TextInput }
 import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
-import { useAppDispatch, useAppSelector } from '../store/Hooks';
-import { RootState } from '../store/store';
+// import { useAppDispatch, useAppSelector } from '../store/Hooks';
+// import { RootState } from '../store/store';
 // import { saveEdit, startEdit } from '../store/todoSlice';
 import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/FireStore';
 

@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useAppDispatch, useAppSelector } from '../store/Hooks';
-import { RootState } from '../store/store';
+// import { useAppDispatch, useAppSelector } from '../store/Hooks';
+// import { RootState } from '../store/store';
 // import { deleteTodo, toggleTodo } from '../store/todoSlice';
 import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';

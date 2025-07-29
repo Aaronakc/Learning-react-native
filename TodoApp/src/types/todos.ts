@@ -4,4 +4,5 @@ export interface Todo{
   date:string;
   checked:boolean;
   todoid:string;
+  userid:string;
 }

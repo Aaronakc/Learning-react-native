@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import { persistor, store } from './src/store/store';
+// import { persistor, store } from './src/store/store';
 import RootStack from './src/navigation/RootStack';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { PersistGate } from 'redux-persist/integration/react';
   import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from './src/config/toastConfig';
@@ -21,13 +21,13 @@ useEffect(()=>{
 
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    // <Provider store={store}>
+      //  <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <RootStack />
+          <Toast config={toastConfig} position='bottom' />
         </NavigationContainer>
-        <Toast config={toastConfig} position='bottom' />
-      </PersistGate>
-    </Provider>
+      //  </PersistGate> 
+    // </Provider>
   );
 }
