@@ -8,6 +8,18 @@ export const getUserId=()=>{
   return uid
 }
 
+ export const getUserProfileData=async()=>{
+  const uid=getUserId()
+  const doc=await firestore().collection('Users').doc(uid).get()
+  return doc.exists() ? doc.data() : null
+ }
+
+ export const saveUserProfile = async (nickname: string, phone: string) => {
+  const uid = getUserId()
+  await firestore().collection('Users').doc(uid).set({ nickname, phone }, { merge: true })
+}
+
+
 export const addTodoToFirebase=async(title:string,description:string,date:string)=>{
   const uid=getUserId()
 

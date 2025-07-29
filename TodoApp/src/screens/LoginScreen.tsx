@@ -52,7 +52,7 @@ const LoginScreen = ({ navigation }: Props) => {
     setLoading(true)
 
     signInWithEmailAndPassword(getAuth(), email, password)
-      .then( () => {
+      .then(() => {
         console.log('Login success');
         navigation.navigate('HomeScreen');
         Toast.show({ type: 'success', text1: 'Successfully Logged in!' });
@@ -78,7 +78,7 @@ const LoginScreen = ({ navigation }: Props) => {
 
   const handleFacebookSignIn = async () => {
     try {
-     await onFacebookButtonPress();
+      await onFacebookButtonPress();
       navigation.navigate('HomeScreen');
     } catch (error) {
       console.log("Facebook login error:", error);

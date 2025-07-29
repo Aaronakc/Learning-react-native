@@ -1,40 +1,82 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { getAuth } from '@react-native-firebase/auth'
 import { TouchableOpacity } from 'react-native'
-import { useAppSelector } from '../store/Hooks'
-import RootStack from '../navigation/RootStack'
-import { RootState } from '../store/store'
+// import { useAppSelector } from '../store/Hooks'
+// import { RootState } from '../store/store'
 import { Todo } from '../types/todos'
-import { getTodosFromFirebase } from '../utils/FireStore'
+import { getTodosFromFirebase, getUserProfileData } from '../utils/FireStore'
+import { DrawerNavigationProps } from '../types/navigation'
+import { useFocusEffect } from '@react-navigation/native'
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }: DrawerNavigationProps<'Profile'>) => {
   const [email, setEmail] = useState<string>('')
   const [name, setName] = useState<string>('')
+  const [nickname, setNickname] = useState<string>('')
+  const [phone, setPhone] = useState<string>('')
   const [todos, setTodos] = useState<Todo[]>([])
-  
-    useEffect(() => {
-      const loadTodos = async () => {
+  const totalTask = todos.length
+  const completedTask = todos.filter((todo) => todo.checked)
+  const totalCompletedTask = completedTask.length
+  const remainingTask = todos.filter((todo) => !todo.checked)
+  const totalRemainingTask = remainingTask.length
+
+
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        const data = await getTodosFromFirebase()
+        if (data)
+          console.log(data)
+        setTodos(data)
+      } catch (error) {
+        console.error('Failed to load todos', error)
+      }
+    }
+
+    loadTodos()
+  }, [])
+
+
+  useFocusEffect(
+    useCallback(() => {
+      const loadProfile = async () => {
         try {
-          const data = await getTodosFromFirebase()
-          if(data)
-            console.log(data)
-          setTodos(data)
+          const profileData = await getUserProfileData()
+          if (profileData) {
+            setNickname(profileData.nickname || 'add nickname')
+            setPhone(profileData.phone || 'add num')
+          }
         } catch (error) {
-          console.error('Failed to load todos', error)
+          console.error('Failed to load user profile', error);
         }
       }
-  
-      loadTodos()
+
+      loadProfile()
     }, [])
+  )
+
+  // useEffect(() => {
+  //   const loadProfile = async () => {
+  //     try {
+  //       const profileData = await getUserProfileData()
+  //       if (profileData) {
+  //         setNickname(profileData.nickname || 'lily')
+  //         setPhone(profileData.phone || '5555555555')
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to load user profile', error);
+  //     }
+  //   };
+
+  //   loadProfile()
+  // }, [])
+
+
+
   // const { todos } = useAppSelector((state: RootState) => state.todo)
-  const totalTask=todos.length
-  const completedTask=todos.filter((todo)=>todo.checked)
-  const totalCompletedTask=completedTask.length
-  const remainingTask=todos.filter((todo)=>!todo.checked)
-  const totalRemainingTask=remainingTask.length
 
 
 
@@ -47,13 +89,22 @@ const ProfileScreen = () => {
     }
 
   }, [])
+
+  const handleEdit = () => {
+    navigation.navigate('EditProfileScreen', { nickname, phone })
+
+  }
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
+        <TouchableOpacity onPress={handleEdit}>
+          <Text style={styles.btn}>Edit</Text>
+        </TouchableOpacity>
         <Icon name='person-circle-outline' color='white' size={55} />
         <Text style={styles.text}>{name}</Text>
-
         <Text style={styles.text}>{email}</Text>
+        <Text style={styles.detailText}><Text>Nickname:</Text>{nickname}</Text>
+        <Text style={styles.detailText}><Text>PhoneNum:</Text>{phone}</Text>
 
       </View>
       <View style={styles.detailContainer}>
@@ -115,8 +166,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  btn: {
+    color: "white",
+  },
+  inputBox: {
+    borderWidth: 1,
+    borderColor: "white",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginVertical: 5,
+
+  },
   profileContainer: {
-    flex: 2,
+    flex: 3,
     backgroundColor: "#900157ff",
     alignItems: "center",
     justifyContent: "center",
@@ -148,7 +211,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     gap: 50,
     marginLeft: 15,
-    marginRight:15,
+    marginRight: 15,
   },
   font: {
     fontFamily: "serif",
@@ -174,6 +237,12 @@ const styles = StyleSheet.create({
     fontFamily: "serif",
     fontWeight: 900,
     fontSize: 20,
+
+  },
+  detailText: {
+    fontSize: 15,
+    color: "white",
+
   }
 
 })

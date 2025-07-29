@@ -1,14 +1,10 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../store/Hooks'
-import { RootState } from '../store/store'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+// import { useAppSelector } from '../store/Hooks'
+// import { RootState } from '../store/store'
 import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
 import { getTodosFromFirebase } from '../utils/FireStore'
 import { Todo } from '../types/todos'
-
-
-
 
 const CompletedTask = ({ navigation }: DrawerNavigationProps<'CompletedTask'>) => {
   // const { todos } = useAppSelector((state: RootState) => state.todo)

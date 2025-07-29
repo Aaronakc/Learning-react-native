@@ -17,6 +17,7 @@ import { useAppDispatch } from '../store/Hooks';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
+import EditProfileScreen from '../screens/EditProfileScreen';
 // import { loadTodo } from '../store/todoSlice';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -64,6 +65,21 @@ const RootStack = () => {
       }} />
 
       <Stack.Screen name="AddTaskScreen" component={AddDetailsPage}
+        options={{
+          presentation: 'modal',
+          animation: 'slide_from_bottom',
+          headerTitleStyle: {
+            fontFamily: "serif",
+          },
+          headerTitleAlign: "center",
+          headerShown: true,
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <MaterialIcons name="close" size={24} color="black" style={styles.icon} />
+            </TouchableOpacity>
+          )
+        }} />
+      <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}
         options={{
           presentation: 'modal',
           animation: 'slide_from_bottom',

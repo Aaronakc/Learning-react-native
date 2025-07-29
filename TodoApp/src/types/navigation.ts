@@ -12,6 +12,7 @@ export type RootStackParamList = {
   HomeScreen: undefined;
   AddTaskScreen: undefined;
   DetailScreen: { todoid: string };
+  EditProfileScreen:{nickname:string,phone:string};
 
 };
 

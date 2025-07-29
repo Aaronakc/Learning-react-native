@@ -5,19 +5,17 @@ import React, { useEffect, useState } from 'react'
 import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
 import { getTodosFromFirebase } from '../utils/FireStore'
 import { Todo } from '../types/todos'
-
-
-
+import Loader from '../Components/Loader'
 
 
 const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
-   const [todos, setTodos] = useState<Todo[]>([])
+  const [todos, setTodos] = useState<Todo[]>([])
 
   useEffect(() => {
     const loadTodos = async () => {
       try {
         const data = await getTodosFromFirebase()
-        if(data)
+        if (data)
           console.log(data)
         setTodos(data)
       } catch (error) {
@@ -29,9 +27,10 @@ const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
   }, [])
 
   // const { todos } = useAppSelector((state: RootState) => state.todo)
+ 
 
   return (
-    <View style={{ flex: 1, marginTop: 12 ,marginBottom:15}}>
+    <View style={{ flex: 1, marginTop: 12, marginBottom: 15 }}>
       {todos.length === 0 ? (
         <Text style={styles.text}>No task to Show</Text>)
         : (
@@ -40,7 +39,7 @@ const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <View style={styles.wrapper}>
-                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid:item.todoid })}>
+                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid: item.todoid })}>
                   <View >
                     <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
                   </View>
@@ -69,10 +68,10 @@ const styles = StyleSheet.create({
     paddingRight: 15,
 
   },
-  text:{
-    textAlign:"center",
-    color:"gray",
-    marginTop:16,
+  text: {
+    textAlign: "center",
+    color: "gray",
+    marginTop: 16,
   }
 })
 

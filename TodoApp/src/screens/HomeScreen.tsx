@@ -8,11 +8,13 @@ import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { deleteTodoFromFirebase, getTodosFromFirebase, ToggleTodoFromFirebase } from '../utils/FireStore';
 import { Todo } from '../types/todos';
+import Loader from '../Components/Loader';
 
 
 const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
     const [todos, setTodos] = useState<Todo[]>([])
     const [reload,setReload]=useState(false)
+    
 
   // const { todos } = useAppSelector((state: RootState) => state.todo)
   // const dispatch = useAppDispatch()
@@ -21,7 +23,7 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
       try {
         const data = await getTodosFromFirebase()
         if(data)
-          console.log(data)
+          // console.log(data)
         setTodos(data)
       } catch (error) {
         console.error('Failed to load todos', error)
@@ -49,6 +51,7 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
     await ToggleTodoFromFirebase(i)
     setReload(!reload)
   }
+
 
 
   return (
