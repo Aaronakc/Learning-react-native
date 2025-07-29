@@ -10,9 +10,11 @@ import Loader from '../Components/Loader'
 
 const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
   const [todos, setTodos] = useState<Todo[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const loadTodos = async () => {
+      setLoading(true)
       try {
         const data = await getTodosFromFirebase()
         if (data)
@@ -21,13 +23,19 @@ const AllTaskScreen = ({ navigation }: DrawerNavigationProps<'AllTask'>) => {
       } catch (error) {
         console.error('Failed to load todos', error)
       }
+      finally {
+        setLoading(false)
+      }
     }
 
     loadTodos()
   }, [])
 
   // const { todos } = useAppSelector((state: RootState) => state.todo)
- 
+  if (loading) {
+    return <Loader />
+  }
+
 
   return (
     <View style={{ flex: 1, marginTop: 12, marginBottom: 15 }}>

@@ -12,21 +12,26 @@ import Loader from '../Components/Loader';
 
 
 const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
-    const [todos, setTodos] = useState<Todo[]>([])
-    const [reload,setReload]=useState(false)
-    
+  const [todos, setTodos] = useState<Todo[]>([])
+  const [reload, setReload] = useState(false)
+  const [loading, setLoading] = useState(false)
+
 
   // const { todos } = useAppSelector((state: RootState) => state.todo)
   // const dispatch = useAppDispatch()
   useEffect(() => {
     const loadTodos = async () => {
+      setLoading(true)
       try {
         const data = await getTodosFromFirebase()
-        if(data)
+        if (data)
           // console.log(data)
-        setTodos(data)
+          setTodos(data)
       } catch (error) {
         console.error('Failed to load todos', error)
+      }
+      finally {
+        setLoading(false)
       }
     }
 
@@ -38,20 +43,23 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
 
   }
 
-  const handleDeleteIndex = async(i: string) => {
+  const handleDeleteIndex = async (i: string) => {
     // dispatch(deleteTodo(i))
     await deleteTodoFromFirebase(i)
     setReload(!reload)
-    
+
 
   }
 
-  const handleToggleIndex = async(i: string) => {
+  const handleToggleIndex = async (i: string) => {
     // dispatch(toggleTodo(i))
     await ToggleTodoFromFirebase(i)
     setReload(!reload)
   }
 
+  if (loading) {
+    return <Loader />
+  }
 
 
   return (
@@ -62,7 +70,7 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View style={styles.wrapper}>
-            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid:item.todoid })}>
+            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid: item.todoid })}>
               <View style={styles.flex}>
                 <View style={[styles.flex, { gap: 20, flex: 1 }]}>
                   <TouchableOpacity onPress={() => handleToggleIndex(item.todoid)}>

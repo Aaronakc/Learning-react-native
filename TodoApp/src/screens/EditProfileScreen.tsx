@@ -4,15 +4,17 @@ import InputElem from '../Components/InputElem'
 import { StyleSheet } from 'react-native'
 import { saveUserProfile } from '../utils/FireStore'
 import { RootStackScreenProps } from '../types/navigation'
+import Loader from '../Components/Loader'
 
 const EditProfileScreen = ({ route, navigation }: RootStackScreenProps<'EditProfileScreen'>) => {
   const { nickname: initialNickname, phone: initialPhone } = route.params ?? {}
 
   const [nickname, setNickname] = useState(initialNickname || '')
   const [phone, setPhone] = useState(initialPhone || '')
-  const [reload, setReload] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleSave = async () => {
+    setLoading(true)
     try {
       await saveUserProfile(nickname, phone)
       Alert.alert('Success', 'Profile updated successfully')
@@ -21,6 +23,13 @@ const EditProfileScreen = ({ route, navigation }: RootStackScreenProps<'EditProf
       Alert.alert('Error', 'Failed to save profile')
       console.error(error)
     }
+    finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (

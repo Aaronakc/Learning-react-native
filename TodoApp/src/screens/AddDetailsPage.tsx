@@ -1,19 +1,19 @@
-import { View, Text, StyleSheet, Button, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import InputElem from '../Components/InputElem'
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+// import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
-import { useAppDispatch } from '../store/Hooks';
-import { addTodo } from '../store/todoSlice';
-import { addTodoToFirebase} from '../utils/FireStore';
+// import { useAppDispatch } from '../store/Hooks';
+// import { addTodo } from '../store/todoSlice';
+import { addTodoToFirebase } from '../utils/FireStore';
 // type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
 const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
-  const [checked, setChecked] = useState(false)
-  const [edit, setEdit] = useState(false)
+  // const [checked, setChecked] = useState(false)
+  // const [edit, setEdit] = useState(false)
 
   // const handleTitle = (text: string) => setTitle(text)
   // const handleDescription = (text: string) => setDescription(text)
@@ -27,18 +27,18 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
   // const dispatch = useAppDispatch()
   // console.log("add")
 
-  const handleAdd = async() => {
+  const handleAdd = async () => {
     if (!title || !description || !date) {
       return
     }
-   
+
     // dispatch(addTodo(updatedTodos))
-    try{
-      await addTodoToFirebase(title,description,date)
+    try {
+      await addTodoToFirebase(title, description, date)
 
     }
-    catch(error){
-      console.log('failed to save to the firestore',error)
+    catch (error) {
+      console.log('failed to save to the firestore', error)
     }
 
 
@@ -60,7 +60,7 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
         <View style={styles.container}>
           {/* <Text style={styles.text}>Add New Task</Text> */}
           <InputElem text="Title" onChangeText={handleTitle} input={title} placeholder='Example:Wake up' />
-          <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' multiline  />
+          <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' multiline />
           <InputElem text="Date" onChangeText={handleDate} input={date} placeholder='2082/03/31' />
           <View>
             <View style={styles.flex}>

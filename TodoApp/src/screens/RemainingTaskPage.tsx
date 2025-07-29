@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
 import { Todo } from '../types/todos'
 import { getTodosFromFirebase } from '../utils/FireStore'
+import Loader from '../Components/Loader'
 
 
 
@@ -12,8 +13,10 @@ import { getTodosFromFirebase } from '../utils/FireStore'
 const RemainingTaskPage = ({ navigation }: DrawerNavigationProps<'RemainingTask'>) => {
   // const { todos } = useAppSelector((state: RootState) => state.todo)
   const [todos, setTodos] = useState<Todo[]>([])
+  const [loading,setLoading]=useState(false)
 
   useEffect(() => {
+    setLoading(true)
     const loadTodos = async () => {
       try {
         const data = await getTodosFromFirebase()
@@ -23,12 +26,19 @@ const RemainingTaskPage = ({ navigation }: DrawerNavigationProps<'RemainingTask'
       } catch (error) {
         console.error('Failed to load todos', error)
       }
+      finally{
+        setLoading(false)
+      }
     }
 
     loadTodos()
   }, [])
 
   const remainingTodos = todos.filter(todo => !todo.checked)
+
+  if(loading){
+    return <Loader/>
+  }
 
   return (
     <View style={styles.container}>

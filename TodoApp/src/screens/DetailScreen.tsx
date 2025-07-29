@@ -6,6 +6,7 @@ import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 // import { RootState } from '../store/store';
 // import { saveEdit, startEdit } from '../store/todoSlice';
 import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/FireStore';
+import Loader from '../Components/Loader';
 
 
 const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'>) => {
@@ -13,24 +14,26 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
   // const [description, setDescription] = useState(item?.description || '');
   // const [date, setDate] = useState(item?.date || '');
 
-   const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const [edit, setEdit] = useState(false)
+  const [edit, setEdit] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   const id = route.params?.todoid
-  useEffect(()=>{
+  useEffect(() => {
+    setLoading(true)
     getTodoDetails(id)
-    .then(todo => {
-      console.log(todo)
-      if(todo) {
-        setTitle(todo.title)
-        setDescription(todo.description)
-        setDate(todo.date)
-      }
-    })
-    }, [id])
+      .then(todo => {
+        console.log(todo)
+        if (todo) {
+          setTitle(todo.title)
+          setDescription(todo.description)
+          setDate(todo.date)
+        }
+      }).finally(() => setLoading(false))
+  }, [id])
 
   // const index = route.params?.index;
   // const { todos } = useAppSelector((state: RootState) => state.todo);
@@ -56,73 +59,77 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
   //   dispatch(saveEdit(editedText));
   // };
 
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <View style={styles.container}>
       {edit ? <Text style={styles.heading}>Edit</Text> : <Text style={styles.heading}>Task Details</Text>}
-        <View style={edit ? styles.editWrapper : styles.wrapper}>
-          <View style={{ flex: 1 }}>
-            <View style={styles.font}>
-              {edit ? (
-                <>
-                  <Text>Title</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={title}
-                    onChangeText={(text) => setTitle(text)}
-                  />
-                </>
-              ) : (
-                <Text style={styles.title}>Title:{title}</Text>
-              )}
-            </View>
-            <View style={styles.font}>
-              {edit ? (
-                <>
-                  <Text>Description:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={description}
-                    onChangeText={(text) => setDescription(text)}
-                  />
-                </>
-              ) : (
-                <Text style={styles.desc}>Description:{description}</Text>
-              )}
-            </View>
-            <View style={styles.font}>
-              {edit ? (
-                <>
-                  <Text>Date</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={date}
-                    onChangeText={(text) => setDate(text)}
-                  />
-                </>
-              ) : (
-                <Text style={styles.date}>Date:{date}</Text>
-              )}
-            </View>
+      <View style={edit ? styles.editWrapper : styles.wrapper}>
+        <View style={{ flex: 1 }}>
+          <View style={styles.font}>
+            {edit ? (
+              <>
+                <Text>Title</Text>
+                <TextInput
+                  style={styles.input}
+                  value={title}
+                  onChangeText={(text) => setTitle(text)}
+                />
+              </>
+            ) : (
+              <Text style={styles.title}>Title:{title}</Text>
+            )}
           </View>
-          <View>
-            <TouchableOpacity
-              onPress={
-                edit
-                  ? () => handleSave()
-                  : () => setEdit(true)
-              }
-            >
-              <Image
-                source={
-                  edit
-                    ? require('../../assets/saveIcon.png')
-                    : require('../../assets/editIcon.png')
-                }
-                style={styles.icon}
-              />
-            </TouchableOpacity>
+          <View style={styles.font}>
+            {edit ? (
+              <>
+                <Text>Description:</Text>
+                <TextInput
+                  style={styles.input}
+                  value={description}
+                  onChangeText={(text) => setDescription(text)}
+                />
+              </>
+            ) : (
+              <Text style={styles.desc}>Description:{description}</Text>
+            )}
+          </View>
+          <View style={styles.font}>
+            {edit ? (
+              <>
+                <Text>Date</Text>
+                <TextInput
+                  style={styles.input}
+                  value={date}
+                  onChangeText={(text) => setDate(text)}
+                />
+              </>
+            ) : (
+              <Text style={styles.date}>Date:{date}</Text>
+            )}
           </View>
         </View>
+        <View>
+          <TouchableOpacity
+            onPress={
+              edit
+                ? () => handleSave()
+                : () => setEdit(true)
+            }
+          >
+            <Image
+              source={
+                edit
+                  ? require('../../assets/saveIcon.png')
+                  : require('../../assets/editIcon.png')
+              }
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
@@ -171,12 +178,12 @@ const styles = StyleSheet.create({
     height: 15,
   },
   input: {
-    marginVertical:5,
-    borderWidth:0.5,
+    marginVertical: 5,
+    borderWidth: 0.5,
     padding: 15,
     borderRadius: 12,
     borderColor: "#ded3daff",
-    backgroundColor:"#eceae2ff",
+    backgroundColor: "#eceae2ff",
     elevation: 1,
   },
   editWrapper: {
