@@ -26,7 +26,7 @@ const InputElem = ({ text, onChangeText, input, placeholder, multiline = false, 
         <Text style={[styles.text,{color:labelColor}]}>{text}</Text>
       </View>
 
-      <View style={[styles.inputWrapper,{borderColor: (name==error || passwordNotMatched)? "red": undefined}]}>
+      <View style={[styles.inputWrapper,{borderColor: (name && error && name==error || passwordNotMatched)? "red": undefined}]}>
         {iconName && <Icon name={iconName} size={20} color={iconColor} style={styles.icon}/>}
 
         <TextInput

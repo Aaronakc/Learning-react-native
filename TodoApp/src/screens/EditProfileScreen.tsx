@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import InputElem from '../Components/InputElem'
 import { StyleSheet } from 'react-native'
-import { saveUserProfile } from '../utils/FireStore'
+import { saveUserProfile } from '../utils/fireStore'
 import { RootStackScreenProps } from '../types/navigation'
 import Loader from '../Components/Loader'
 

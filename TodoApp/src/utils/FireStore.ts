@@ -28,7 +28,7 @@ export const addTodoToFirebase=async(title:string,description:string,date:string
   const ref=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(id)
   
   await ref.set({title,description,date,todoid:id,checked:false,userid:uid})
-
+  return id
 }
 
 

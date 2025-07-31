@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerNavigation from './DrawerNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useAppDispatch } from '../store/Hooks';
+// import { useAppDispatch } from '../store/Hooks';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';

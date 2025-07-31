@@ -10,6 +10,10 @@ import { toastConfig } from './src/config/toastConfig';
 // import firestore from '@react-native-firebase/firestore';
 import { Alert, PermissionsAndroid, Platform, Text } from 'react-native';
 import messaging from '@react-native-firebase/messaging'
+import notifee, { AndroidImportance } from "@notifee/react-native"
+import { setupPushNotifications } from './src/utils/setupNotifications';
+import { navigationRef } from './src/navigation/RooteNavigation';
+import { setupNotificationHandlers } from './src/utils/onPressNotifyHandler';
 
 
 export default function App() {
@@ -21,29 +25,31 @@ export default function App() {
 
   }, [])
 
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS === 'android' && Platform.Version >= 33) {
-        await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
-        )
-      }
-      await messaging().registerDeviceForRemoteMessages()
-      const token = await messaging().getToken()
-      console.log("token", token)
-      const unsubscribe = messaging().onMessage(async remoteMessage => {
-        Toast.show({type:"success",text1:remoteMessage.notification?.body,text2:remoteMessage.notification?.title})
-      })
+useEffect(() => {
+  let unsubscribe: (() => void) | undefined;
 
-      return unsubscribe
-    })()
-  }, [])
+  const initializeNotifications = async () => {
+    unsubscribe = await setupPushNotifications();
+  }
+
+  initializeNotifications();
+
+  return () => {
+    if (unsubscribe) {
+      unsubscribe();
+    }
+  }
+}, [])
+  useEffect(() => {
+     setupNotificationHandlers()
+  }, []);
+
 
 
   return (
     // <Provider store={store}>
     //  <PersistGate loading={null} persistor={persistor}>
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootStack />
       <Toast config={toastConfig} position='bottom' />
     </NavigationContainer>

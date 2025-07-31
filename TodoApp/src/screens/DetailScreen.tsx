@@ -5,7 +5,7 @@ import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 // import { useAppDispatch, useAppSelector } from '../store/Hooks';
 // import { RootState } from '../store/store';
 // import { saveEdit, startEdit } from '../store/todoSlice';
-import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/FireStore';
+import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/fireStore';
 import Loader from '../Components/Loader';
 
 

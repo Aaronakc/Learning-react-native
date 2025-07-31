@@ -6,7 +6,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 // import { deleteTodo, toggleTodo } from '../store/todoSlice';
 import { HomeTabScreenProps } from '../types/navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { deleteTodoFromFirebase, getTodosFromFirebase, ToggleTodoFromFirebase } from '../utils/FireStore';
+import { deleteTodoFromFirebase, getTodosFromFirebase, ToggleTodoFromFirebase } from '../utils/fireStore';
 import { Todo } from '../types/todos';
 import Loader from '../Components/Loader';
 

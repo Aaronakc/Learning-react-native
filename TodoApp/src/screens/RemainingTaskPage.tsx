@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 // import { RootState } from '../store/store'
 import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
 import { Todo } from '../types/todos'
-import { getTodosFromFirebase } from '../utils/FireStore'
+import { getTodosFromFirebase } from '../utils/fireStore'
 import Loader from '../Components/Loader'
 
 

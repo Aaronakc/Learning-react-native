@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native'
 // import { useAppSelector } from '../store/Hooks'
 // import { RootState } from '../store/store'
 import { Todo } from '../types/todos'
-import { getTodosFromFirebase, getUserProfileData } from '../utils/FireStore'
+import { getTodosFromFirebase, getUserProfileData } from '../utils/fireStore'
 import { DrawerNavigationProps } from '../types/navigation'
 import { useFocusEffect } from '@react-navigation/native'
 
@@ -98,7 +98,7 @@ const ProfileScreen = ({ navigation }: DrawerNavigationProps<'Profile'>) => {
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <TouchableOpacity onPress={handleEdit}>
-          <Text style={styles.btn}>Edit</Text>
+          <Text style={styles.btn}>Edit Details</Text>
         </TouchableOpacity>
         <Icon name='person-circle-outline' color='white' size={55} />
         <Text style={styles.text}>{name}</Text>
@@ -182,8 +182,7 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: "#900157ff",
     alignItems: "center",
-    justifyContent: "center",
-
+    paddingTop:6,
   },
   image: {
     width: 50,
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
 
   },
   detailContainer: {
-    flex: 4,
+    flex: 5,
     backgroundColor: "white",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,

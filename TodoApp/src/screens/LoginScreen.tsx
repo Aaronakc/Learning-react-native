@@ -9,8 +9,8 @@ import Toast from 'react-native-toast-message'
 import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import SigninWithApps from '../Components/SigninWithApps'
-import { onFacebookButtonPress } from '../utils/FacebookSignin'
-import { onGoogleButtonPress } from '../utils/GoogleSignin'
+import { onFacebookButtonPress } from '../utils/facebookSignin'
+import { onGoogleButtonPress } from '../utils/googleSignin'
 // import { saveUserToFireStore } from '../utils/FireStore'
 
 
