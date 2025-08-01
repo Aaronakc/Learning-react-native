@@ -179,10 +179,10 @@ const styles = StyleSheet.create({
 
   },
   profileContainer: {
-    flex: 3,
+    flex: 4,
     backgroundColor: "#900157ff",
     alignItems: "center",
-    paddingTop: 6,
+    paddingTop: 20,
   },
   image: {
     width: 50,

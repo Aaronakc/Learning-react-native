@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { getAuth } from '@react-native-firebase/auth';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const CustomDrawerContent = (props: any) => {
   const[email,setEmail]=useState<string>('')
@@ -16,10 +17,12 @@ const CustomDrawerContent = (props: any) => {
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.profileContainer}>
-        <Image
+        {/* <Image
           source={require('../../assets/person2.png')}
           style={styles.profileImage}
-        />
+        /> */}
+           <Icon name='person-circle-outline' color='black' size={55} />
+        
         <Text style={styles.profileName}>{email}</Text>
       </View>
       <DrawerItemList {...props} />
