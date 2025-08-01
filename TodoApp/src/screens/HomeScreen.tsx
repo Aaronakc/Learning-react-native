@@ -9,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { deleteTodoFromFirebase, getTodosFromFirebase, ToggleTodoFromFirebase } from '../utils/fireStore';
 import { Todo } from '../types/todos';
 import Loader from '../Components/Loader';
+import Toast from 'react-native-toast-message';
 
 
 const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
@@ -46,13 +47,13 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
     // dispatch(deleteTodo(i))
     await deleteTodoFromFirebase(i)
     setReload(!reload)
+    Toast.show({ type: "success", text1: "task deleted successfully" })
   }
 
   const handleToggleIndex = async (i: string) => {
     // dispatch(toggleTodo(i))
     await ToggleTodoFromFirebase(i)
     setReload(!reload)
-
   }
 
   if (loading) {
@@ -63,29 +64,39 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>My Tasks</Text>
-      <FlatList
-        data={todos}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => (
-          <View style={styles.wrapper}>
-            <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid: item.todoid })}>
-              <View style={styles.flex}>
-                <View style={[styles.flex, { gap: 20, flex: 1 }]}>
-                  <TouchableOpacity onPress={() => handleToggleIndex(item.todoid)}>
-                    <Image source={item.checked ? require('../../assets/checkIcon.png') : require('../../assets/unCheckIcon.png')} style={styles.icon} />
-                  </TouchableOpacity>
-                  <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
-                </View>
-                <TouchableOpacity onPress={() => handleDeleteIndex(item.todoid)}>
-                  <Ionicons name="trash-outline" size={20} color="red" />
+      {todos.length == 0 ? <>
+        <View style={styles.textContainer}>
+          <Text style={styles.emptyTask}>No task to show</Text>
+        </View>
+      </>
+        :
+        <>
+          <FlatList
+            data={todos}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <View style={styles.wrapper}>
+                <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { todoid: item.todoid })}>
+                  <View style={styles.flex}>
+                    <View style={[styles.flex, { gap: 20, flex: 1 }]}>
+                      <TouchableOpacity onPress={() => handleToggleIndex(item.todoid)}>
+                        <Image source={item.checked ? require('../../assets/checkIcon.png') : require('../../assets/unCheckIcon.png')} style={styles.icon} />
+                      </TouchableOpacity>
+                      <Text style={styles.font}>Title: <Text>{item.title}</Text></Text>
+                    </View>
+                    <TouchableOpacity onPress={() => handleDeleteIndex(item.todoid)}>
+                      <Ionicons name="trash-outline" size={20} color="red" />
+                    </TouchableOpacity>
+                  </View>
                 </TouchableOpacity>
               </View>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+            )}
+          />
+        </>
+      }
       <Text style={styles.text} onPress={handleNav}>+</Text>
     </View>
+
   )
 }
 
@@ -96,6 +107,19 @@ const styles = StyleSheet.create({
     marginBottom: 70,
     marginTop: 0,
 
+  },
+  textContainer: {
+    flex: 1,
+    // backgroundColor:"blue",
+    alignItems: "center",
+    justifyContent: "center",
+
+  },
+  emptyTask: {
+    fontFamily: "serif",
+    fontSize: 20,
+    color: "gray",
+    textAlignVertical: "center",
   },
   text: {
     borderRadius: 50,

@@ -8,7 +8,6 @@ export function navigate<Name extends keyof RootStackParamList>(
   params?: RootStackParamList[Name]
 ) {
   if (navigationRef.isReady()) {
-    // cast to any to avoid TypeScript error
     (navigationRef.navigate as any)(name, params);
   }
 }

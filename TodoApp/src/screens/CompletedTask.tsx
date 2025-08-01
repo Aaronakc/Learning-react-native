@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 // import { useAppSelector } from '../store/Hooks'
 // import { RootState } from '../store/store'
 import { DrawerNavigationProps, MaterialTopTabProps } from '../types/navigation'
-import { getTodosFromFirebase } from '../utils/FireStore'
+import { getTodosFromFirebase } from '../utils/fireStore'
 import { Todo } from '../types/todos'
 import Loader from '../Components/Loader'
 

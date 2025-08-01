@@ -69,8 +69,15 @@ export const ToggleTodoFromFirebase=async(todoid:string)=>{
   // console.log(doc)
   const todo=doc.data()
 
-  if(todo)
-    await todoRef.update({checked:!todo.checked})
+  if(todo){
+    const checkStatus=!todo.checked
+    await todoRef.update({checked:checkStatus})
+    
+    if(checkStatus && todo?.notificationId){
+      await notifee.cancelNotification(todo?.notificationId)
+    }
+  }
+
 }
 
 

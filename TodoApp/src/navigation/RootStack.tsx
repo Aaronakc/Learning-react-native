@@ -67,6 +67,7 @@ const RootStack = () => {
       <Stack.Screen name="AddTaskScreen" component={AddDetailsPage}
         options={{
           presentation: 'modal',
+          headerTitle:"Add Todo Task",
           animation: 'slide_from_bottom',
           headerTitleStyle: {
             fontFamily: "serif",
@@ -96,6 +97,7 @@ const RootStack = () => {
         }} />
       <Stack.Screen name="DetailScreen" component={DetailScreen} options={{
         headerShown: true, animation: "none",
+        headerTitle:"Details",
         headerTitleStyle: {
           fontFamily: "serif",
         },

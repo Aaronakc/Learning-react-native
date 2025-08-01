@@ -9,6 +9,7 @@ import { addTodoToFirebase, getUserId } from '../utils/fireStore';
 import DatePicker from 'react-native-date-picker';
 import { scheduleNotification } from '../utils/scheduleNotification';
 import firestore from '@react-native-firebase/firestore';
+import Toast from 'react-native-toast-message';
 // type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
 const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) => {
 
@@ -34,12 +35,13 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
 
   const handleAdd = async () => {
     if (!title || !description || !date) {
+      Toast.show({type:"error",text1:"Fill up all the fields"})
       return
     }
 
     // dispatch(addTodo(updatedTodos))
     try {
-      const todoId = await addTodoToFirebase(title, description, date.toISOString(), '');
+      const todoId = await addTodoToFirebase(title, description, date.toISOString(), '')
 
       const notificationId = await scheduleNotification(title, description, todoId, date)
 
@@ -59,6 +61,7 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
     setDate(new Date())
 
     navigation.navigate('HomeScreen')
+    Toast.show({ type: "success", text1: "task added successfully" })
   }
 
 
@@ -75,7 +78,10 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
           <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' multiline />
           <View style={{ marginHorizontal: 25 }}>
             <Text style={{ marginBottom: 8, fontSize: 16 }}>Date</Text>
-            <Button title="select date" onPress={() => setOpen(true)} />
+            {/* <Button title="select date" onPress={() => setOpen(true)} /> */}
+            <TouchableOpacity style={styles.dateButton} onPress={() => setOpen(true)}>
+              <Text style={styles.dateButtonText}>Select Date</Text>
+            </TouchableOpacity>
             <DatePicker
               modal
               open={open}
@@ -97,7 +103,7 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
 
 
               <TouchableOpacity onPress={handleAdd}>
-                <Text style={[styles.btn, { backgroundColor: "#0797f0ff" }]}>SAVE</Text>
+                <Text style={[styles.btn, { backgroundColor: "#900157ff" }]}>SAVE</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Text style={[styles.btn, { backgroundColor: "gray" }]}>CANCEL</Text>
@@ -146,6 +152,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "#b34c6bff",
     color: "white",
+  },
+  dateButton: {
+    backgroundColor: '#900157ff', 
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  dateButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, TextInput, Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
@@ -7,6 +7,7 @@ import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 // import { saveEdit, startEdit } from '../store/todoSlice';
 import { getTodoDetails, getTodosFromFirebase, handleSaveTodo } from '../utils/fireStore';
 import Loader from '../Components/Loader';
+import DatePicker from 'react-native-date-picker';
 
 
 const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'>) => {
@@ -16,7 +17,9 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+  // const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date())
+  const [open, setOpen] = useState(false)
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +33,7 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
         if (todo) {
           setTitle(todo.title)
           setDescription(todo.description)
-          setDate(todo.date)
+          setDate(new Date(todo.date))
         }
       }).finally(() => setLoading(false))
   }, [id])
@@ -42,7 +45,7 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
   // const edit = item.edit;
 
   const handleSave = async () => {
-    await handleSaveTodo(id, title, description, date)
+    await handleSaveTodo(id, title, description, date.toISOString())
     setEdit(false)
   }
   // const handleEdit = (index: number) => {
@@ -100,14 +103,26 @@ const DetailScreen = ({ route, navigation }: RootStackScreenProps<'DetailScreen'
             {edit ? (
               <>
                 <Text>Date</Text>
-                <TextInput
-                  style={styles.input}
-                  value={date}
-                  onChangeText={(text) => setDate(text)}
+                <TouchableOpacity onPress={() => setOpen(true)}>
+                  <Text style={[styles.date, { color: '#900157ff', textDecorationLine: 'underline' }]}>
+                    {date.toLocaleString()}
+                  </Text>
+                </TouchableOpacity>
+                <DatePicker
+                  modal
+                  open={open}
+                  date={date}
+                  onConfirm={(date) => {
+                    setOpen(false)
+                    setDate(date)
+                  }}
+                  onCancel={() => {
+                    setOpen(false)
+                  }}
                 />
               </>
             ) : (
-              <Text style={styles.date}>Date:{date}</Text>
+              <Text style={styles.date}>Date:{date.toLocaleString()}</Text>
             )}
           </View>
         </View>
@@ -178,7 +193,7 @@ const styles = StyleSheet.create({
     height: 15,
   },
   input: {
-    marginVertical: 5,
+    marginVertical: 20,
     borderWidth: 0.5,
     padding: 15,
     borderRadius: 12,

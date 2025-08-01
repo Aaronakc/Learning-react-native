@@ -14,8 +14,8 @@ import { useFocusEffect } from '@react-navigation/native'
 const ProfileScreen = ({ navigation }: DrawerNavigationProps<'Profile'>) => {
   const [email, setEmail] = useState<string>('')
   const [name, setName] = useState<string>('')
-  const [nickname, setNickname] = useState<string>('')
-  const [phone, setPhone] = useState<string>('')
+  const [nickname, setNickname] = useState<string>('nickname')
+  const [phone, setPhone] = useState<string>('number')
   const [todos, setTodos] = useState<Todo[]>([])
   const totalTask = todos.length
   const completedTask = todos.filter((todo) => todo.checked)
@@ -46,8 +46,8 @@ const ProfileScreen = ({ navigation }: DrawerNavigationProps<'Profile'>) => {
         try {
           const profileData = await getUserProfileData()
           if (profileData) {
-            setNickname(profileData.nickname || 'add nickname')
-            setPhone(profileData.phone || 'add num')
+            setNickname(profileData.nickname)
+            setPhone(profileData.phone)
           }
         } catch (error) {
           console.error('Failed to load user profile', error);
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: "#900157ff",
     alignItems: "center",
-    paddingTop:6,
+    paddingTop: 6,
   },
   image: {
     width: 50,
