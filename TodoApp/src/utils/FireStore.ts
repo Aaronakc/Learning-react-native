@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import { getAuth } from "@react-native-firebase/auth"
 import { Todo } from '../types/todos';
+import notifee  from '@notifee/react-native';
 
 export const getUserId=()=>{
   const uid=getAuth().currentUser?.uid
@@ -20,14 +21,14 @@ export const getUserId=()=>{
 }
 
 
-export const addTodoToFirebase=async(title:string,description:string,date:string)=>{
+export const addTodoToFirebase=async(title:string,description:string,date:string,notificationId:string)=>{
   const uid=getUserId()
 
   const id=Date.now().toString()
 
   const ref=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(id)
   
-  await ref.set({title,description,date,todoid:id,checked:false,userid:uid})
+  await ref.set({title,description,date,todoid:id,checked:false,userid:uid,notificationId})
   return id
 }
 
@@ -46,7 +47,16 @@ export const deleteTodoFromFirebase=async(todoid:string)=>{
   const uid=getUserId()
 
   const todoRef=firestore().collection('Todos').doc(uid).collection('UserTodos').doc(todoid)
+
+  const doc = await todoRef.get()
+  const todo = doc.data()
+
+  if(todo?.notificationId){
+    await notifee.cancelNotification(todo.notificationId)
+  }
+ 
   await todoRef.delete()
+ 
 
 }
 

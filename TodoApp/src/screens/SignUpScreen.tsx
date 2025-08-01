@@ -17,7 +17,7 @@ const SignUpScreen = ({ navigation }: Props) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
 
@@ -25,32 +25,32 @@ const SignUpScreen = ({ navigation }: Props) => {
   const emailFormat = /^.+@.+\..+$/;
   // const passwordFormat = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/;
 
-  const handleEmail = ((text: string) => { 
-    setEmail(text.trim()) 
+  const handleEmail = ((text: string) => {
+    setEmail(text.trim())
     setError('')
     setErrorMsg('')
   })
 
-  const handlePassword = ((text: string) => { 
+  const handlePassword = ((text: string) => {
     setPassword(text.trim())
     setError('')
     setErrorMsg('')
-   })
+  })
 
-  const handleConfirmPassword = ((text: string) => { 
-    setConfirmPassword(text.trim()) 
+  const handleConfirmPassword = ((text: string) => {
+    setConfirmPassword(text.trim())
     setError('')
     setErrorMsg('')
   })
 
   const validateSignUp = () => {
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
-       Toast.show({
+      Toast.show({
         type: 'error',
         text1: 'All fields are required',
       });
       return false;
-    } else if(!emailFormat.test(email)) {
+    } else if (!emailFormat.test(email)) {
       setError("email")
       setErrorMsg("Invalid Email Format!")
       return false
@@ -63,13 +63,13 @@ const SignUpScreen = ({ navigation }: Props) => {
       setErrorMsg("Passwords did not match")
       return false
     }
-  return true
+    return true
   }
 
 
   const handleSignUp = () => {
     const isValid = validateSignUp()
-    if(!isValid) {
+    if (!isValid) {
       return;
     }
     setLoading(true)
@@ -107,11 +107,11 @@ const SignUpScreen = ({ navigation }: Props) => {
           <Text style={styles.heading}>Create Account</Text>
         </ImageBackground>
         <View style={styles.formWrapper}>
-          <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} iconName='email' iconColor="#ac116eff" error={error} name={"email"} errorMsg={errorMsg} color="red"/>
+          <InputElem text="Email" placeholder='Enter Your Email' onChangeText={handleEmail} iconName='email' iconColor="#ac116eff" error={error} name={"email"} errorMsg={errorMsg} color="red" />
 
-          <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} iconName='lock' iconColor="#ac116eff" error={error} name="password" errorMsg={errorMsg} color="red"/>
+          <InputElem text="Password" placeholder='Enter Your Password' onChangeText={handlePassword} iconName='lock' iconColor="#ac116eff" error={error} name="password" errorMsg={errorMsg} color="red" />
 
-          <InputElem text="Confirm Password" placeholder='Confirm Your Password' onChangeText={handleConfirmPassword} iconName='lock' iconColor="#ac116eff" error={error} name="confirm password" errorMsg={errorMsg} color="red"/>
+          <InputElem text="Confirm Password" placeholder='Confirm Your Password' onChangeText={handleConfirmPassword} iconName='lock' iconColor="#ac116eff" error={error} name="confirm password" errorMsg={errorMsg} color="red" />
           <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={loading}>
             {loading ? (
               <ActivityIndicator size="small" color="white" />

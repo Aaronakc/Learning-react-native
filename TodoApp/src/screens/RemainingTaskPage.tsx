@@ -13,7 +13,7 @@ import Loader from '../Components/Loader'
 const RemainingTaskPage = ({ navigation }: DrawerNavigationProps<'RemainingTask'>) => {
   // const { todos } = useAppSelector((state: RootState) => state.todo)
   const [todos, setTodos] = useState<Todo[]>([])
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -26,7 +26,7 @@ const RemainingTaskPage = ({ navigation }: DrawerNavigationProps<'RemainingTask'
       } catch (error) {
         console.error('Failed to load todos', error)
       }
-      finally{
+      finally {
         setLoading(false)
       }
     }
@@ -36,8 +36,8 @@ const RemainingTaskPage = ({ navigation }: DrawerNavigationProps<'RemainingTask'
 
   const remainingTodos = todos.filter(todo => !todo.checked)
 
-  if(loading){
-    return <Loader/>
+  if (loading) {
+    return <Loader />
   }
 
   return (

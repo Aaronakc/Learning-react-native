@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 // import { useAppDispatch, useAppSelector } from '../store/Hooks';
@@ -40,21 +40,19 @@ const HomeScreen = ({ navigation }: HomeTabScreenProps<'BottomHome'>) => {
 
   const handleNav = () => {
     navigation.navigate('AddTaskScreen')
-
   }
 
   const handleDeleteIndex = async (i: string) => {
     // dispatch(deleteTodo(i))
     await deleteTodoFromFirebase(i)
     setReload(!reload)
-
-
   }
 
   const handleToggleIndex = async (i: string) => {
     // dispatch(toggleTodo(i))
     await ToggleTodoFromFirebase(i)
     setReload(!reload)
+
   }
 
   if (loading) {

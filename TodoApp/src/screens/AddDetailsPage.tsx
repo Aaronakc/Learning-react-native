@@ -5,9 +5,10 @@ import InputElem from '../Components/InputElem'
 import { RootStackParamList, RootStackScreenProps } from '../types/navigation';
 // import { useAppDispatch } from '../store/Hooks';
 // import { addTodo } from '../store/todoSlice';
-import { addTodoToFirebase } from '../utils/fireStore';
+import { addTodoToFirebase, getUserId } from '../utils/fireStore';
 import DatePicker from 'react-native-date-picker';
 import { scheduleNotification } from '../utils/scheduleNotification';
+import firestore from '@react-native-firebase/firestore';
 // type Props = NativeStackScreenProps<RootStackParamList, 'AddTaskScreen'>;
 const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) => {
 
@@ -38,9 +39,14 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
 
     // dispatch(addTodo(updatedTodos))
     try {
-      const todoId = await addTodoToFirebase(title, description, date.toISOString());
+      const todoId = await addTodoToFirebase(title, description, date.toISOString(), '');
 
-      await scheduleNotification(title, description, todoId, date)
+      const notificationId = await scheduleNotification(title, description, todoId, date)
+
+      const uid = getUserId()
+      const todoRef = firestore().collection('Todos').doc(uid).collection('UserTodos').doc(todoId)
+
+      await todoRef.update({ notificationId })
 
     }
     catch (error) {
@@ -69,7 +75,7 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
           <InputElem text="Description" onChangeText={handleDescription} input={description} placeholder='Write the description' multiline />
           <View style={{ marginHorizontal: 25 }}>
             <Text style={{ marginBottom: 8, fontSize: 16 }}>Date</Text>
-            <Button title="Open" onPress={() => setOpen(true)} />
+            <Button title="select date" onPress={() => setOpen(true)} />
             <DatePicker
               modal
               open={open}
@@ -141,6 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#b34c6bff",
     color: "white",
   },
+
 
 })
 

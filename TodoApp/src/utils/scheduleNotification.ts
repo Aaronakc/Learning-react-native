@@ -13,10 +13,10 @@ export async function scheduleNotification( title: string, description: string, 
     alarmManager: true,
   };
 
-  await notifee.createTriggerNotification(
+  const notificationId=await notifee.createTriggerNotification(
     {
-      title: ` ${title}`,
-      body: ` ${description}\nTime to complete your task!`,
+      title: `${title}`,
+      body: `${description}\nTime to complete your task!`,
       android: {
         channelId: 'default',
         pressAction: {
@@ -29,4 +29,6 @@ export async function scheduleNotification( title: string, description: string, 
     },
     trigger
   );
+  return notificationId;
+
 }
