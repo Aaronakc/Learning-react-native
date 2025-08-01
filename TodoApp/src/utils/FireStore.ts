@@ -2,6 +2,9 @@ import firestore from '@react-native-firebase/firestore';
 import { getAuth } from "@react-native-firebase/auth"
 import { Todo } from '../types/todos';
 import notifee  from '@notifee/react-native';
+import { Alert } from 'react-native';
+import { scheduleNotification } from './scheduleNotification';
+import Toast from 'react-native-toast-message';
 
 export const getUserId=()=>{
   const uid=getAuth().currentUser?.uid
@@ -72,9 +75,27 @@ export const ToggleTodoFromFirebase=async(todoid:string)=>{
   if(todo){
     const checkStatus=!todo.checked
     await todoRef.update({checked:checkStatus})
-    
+
+    if(checkStatus){Toast.show({type:"success",text1:"Congrats on your task completion",visibilityTime:1000
+
+    })}
+
     if(checkStatus && todo?.notificationId){
       await notifee.cancelNotification(todo?.notificationId)
+    }
+    else if(!checkStatus){
+      const date = new Date(todo.date)
+      const now = new Date()
+
+      if(date > now){
+        const newNotificationId = await scheduleNotification(todo.title,todo.description,todoid,date)
+        await todoRef.update({ notificationId: newNotificationId })
+        Alert.alert('Oh oh! You did not complete it So,Task has been rescheduled')
+      }
+      else{
+        Alert.alert('Opps Time has passed !!', 'This task cannot be rescheduled\n Is it okay?')
+      }
+
     }
   }
 

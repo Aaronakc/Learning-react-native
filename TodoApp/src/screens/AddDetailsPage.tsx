@@ -61,7 +61,7 @@ const AddDetailsPage = ({ navigation }: RootStackScreenProps<'AddTaskScreen'>) =
     setDate(new Date())
 
     navigation.navigate('HomeScreen')
-    Toast.show({ type: "success", text1: "task added successfully" })
+    Toast.show({ type: "success", text1: "task added successfully",visibilityTime:1000 })
   }
 
 
