@@ -16,7 +16,13 @@ import { navigationRef } from './src/navigation/RooteNavigation';
 import { setupNotificationHandlers } from './src/utils/onPressNotifyHandler';
 
 
+
+
+
+
 export default function App() {
+
+
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -25,34 +31,40 @@ export default function App() {
 
   }, [])
 
-useEffect(() => {
-  let unsubscribe: (() => void) | undefined;
-
-  const initializeNotifications = async () => {
-    unsubscribe = await setupPushNotifications();
-  }
-
-  initializeNotifications();
-
-  return () => {
-    if (unsubscribe) {
-      unsubscribe();
-    }
-  }
-}, [])
   useEffect(() => {
-     setupNotificationHandlers()
+    let unsubscribe: (() => void) | undefined;
+
+    const initializeNotifications = async () => {
+      unsubscribe = await setupPushNotifications();
+    }
+
+    initializeNotifications();
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    }
+  }, [])
+  useEffect(() => {
+    setupNotificationHandlers()
   }, []);
 
 
 
+
   return (
+
     // <Provider store={store}>
     //  <PersistGate loading={null} persistor={persistor}>
-    <NavigationContainer ref={navigationRef}>
+     
+    <NavigationContainer ref={navigationRef} >
       <RootStack />
       <Toast config={toastConfig} position='bottom' />
     </NavigationContainer>
+
+
+
     //  </PersistGate> 
     // </Provider>
   );

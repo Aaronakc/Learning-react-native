@@ -18,8 +18,8 @@ function App() {
   return (
     <View style={styles.container}>
       {/* <UiScreen/> */}
-      {/* <FlightScreen/> */}
-      <PlumbingUi/>
+      <FlightScreen/>
+      {/* <PlumbingUi/> */}
     </View>
   );
 }

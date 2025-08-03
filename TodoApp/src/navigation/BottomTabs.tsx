@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import RootStack from './RootStack';
 import ProfileScreen from '../screens/ProfileScreen';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { BottomTabParamList, DrawerNavigationProps, HomeTabScreenProps } from '../types/navigation';
@@ -17,16 +16,26 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-const BottomTabs = ({navigation}:DrawerNavigationProps<'Home'>) => {
-  const handleLogout=async()=>{
-    signOut(getAuth()).then(()=>navigation.navigate('Login'))
-    await GoogleSignin.revokeAccess() 
+const BottomTabs = ({ navigation }: DrawerNavigationProps<'Home'>) => {
+  const handleLogout = async () => {
+    signOut(getAuth()).then(() => navigation.navigate('Login'))
+    await GoogleSignin.revokeAccess()
     Toast.show({
-      type:"success",
-      text1:"Logged out successfully"
+      type: "success",
+      text1: "Logged out successfully"
 
     })
   }
+    const [initial, setInitial] = useState('U');
+
+   useEffect(() => {
+    const user = getAuth().currentUser;
+    if (user && user.email) {
+      const email = user.email
+      const firstLetter = email.charAt(0).toUpperCase()
+      setInitial(firstLetter)
+    }
+  }, [])
   return (
     <Tab.Navigator
       initialRouteName="BottomHome"
@@ -75,7 +84,7 @@ const BottomTabs = ({navigation}:DrawerNavigationProps<'Home'>) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>A</Text>
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>{initial}</Text>
             </View>
           </TouchableOpacity>
         ),

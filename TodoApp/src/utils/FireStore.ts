@@ -76,7 +76,7 @@ export const ToggleTodoFromFirebase=async(todoid:string)=>{
     const checkStatus=!todo.checked
     await todoRef.update({checked:checkStatus})
 
-    if(checkStatus){Toast.show({type:"success",text1:"Congrats on your task completion",visibilityTime:1000
+    if(checkStatus){Toast.show({type:"success",text1:"Congrats on your task completion",visibilityTime:2000
 
     })}
 
@@ -93,7 +93,8 @@ export const ToggleTodoFromFirebase=async(todoid:string)=>{
         Alert.alert('Oh oh! You did not complete it So,Task has been rescheduled')
       }
       else{
-        Alert.alert('Opps Time has passed !!', 'This task cannot be rescheduled\n Is it okay?')
+        // Alert.alert('Opps Time has passed !!', 'This task cannot be rescheduled\n Is it okay?')
+        Toast.show({type:"info",text1:"Opps Time has passed",text2:"This task cannot be rescheduled again",visibilityTime:5000})
       }
 
     }

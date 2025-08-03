@@ -87,6 +87,7 @@ const RootStack = () => {
           headerTitleStyle: {
             fontFamily: "serif",
           },
+          headerTitle:"Edit Details",
           headerTitleAlign: "center",
           headerShown: true,
           headerLeft: () => (
