@@ -1,97 +1,143 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📱 React Native Firebase Todo App
 
-# Getting Started
+This is a complete **React Native Todo App** along with **Firebase**. It includes user authentication, Firestore-based task management, scheduled notifications using Notifee, editable user profile details, and an advanced navigation setup using Drawer, Bottom Tab, and Material Top Tabs.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 🔐 Authentication
+- **Email & Password Login/Signup** using **Firebase Authentication**.
+- Includes **validation** handled from frontend and helpful error messages.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Screenshots
 
-```sh
-# Using npm
-npm start
+#### Login Page  
+![Login UI](assets/Screenshots/login.jpeg)  
+*Login screen with email and password fields.*
 
-# OR using Yarn
-yarn start
-```
+#### Sign Up Page  
+![Sign Up UI](assets/Screenshots/signUp.jpeg)  
+*User registration page with validation and error handling.*
 
-## Step 2: Build and run your app
+#### Validations  
+![Validation 2](assets/Screenshots/validation2.jpeg)  
+*Validation error message example 1.*
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+![Validation 4](assets/Screenshots/validation4.jpeg)  
+*Validation error message example 2.*
 
-### Android
+![Validation 1](assets/Screenshots/validation1.jpeg)  
+*Validation error message example 3.*
 
-```sh
-# Using npm
-npm run android
+---
 
-# OR using Yarn
-yarn android
-```
+### ✅ Todo Functionality
+- Add, update, complete, and delete todos.
+- Todos are stored in **Firebase Firestore** and are user-specific.
+- Uses Firestore’s **real-time updates** with `onSnapshot`.
 
-### iOS
+#### Home Screen  
+![HomeScreen](assets/Screenshots/homescreen.jpeg)  
+*Main todo list with filtering and real-time updates.*
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+#### History Screen  
+![HistoryScreen](assets/Screenshots/historyScreen.jpeg)  
+*View of completed and past todos.*
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+#### Profile Screen  
+![ProfileScreen](assets/Screenshots/profileScreen.jpeg)  
+*User profile showing nickname and phone number.*
 
-```sh
-bundle install
-```
+#### AddTask Screen  
+![AddTaskScreen](assets/Screenshots/addTaskScreen.jpeg)  
+*Screen to add a new todo with title, description, and date.*
 
-Then, and every time you update your native dependencies, run:
+#### Editable TaskDetails Screen  
+| ![EditableDetailScreen](assets/Screenshots/editTask.jpeg) | ![EditedDetailScreen](assets/Screenshots/editedTask.jpeg) |  
+|:---------------------------------------------------------:|:---------------------------------------------------------:|  
+*Edit existing todo details and save changes.*
 
-```sh
-bundle exec pod install
-```
+---
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### 🔔 Notifications
+- Integrated **Notifee** to schedule **local notifications** if time has not passed.
+- Cancels notification in case of task deletion or completion.
+- Each todo notification includes:
+  - Title
+  - Description
+  - todoId (used to navigate directly to detail)
+- Tap notification → navigates to that todo’s detail screen.
 
-```sh
-# Using npm
-npm run ios
+#### Notifee Notification on Time  
+![Notification](assets/Screenshots/notifee.jpeg)  
+*Local notification triggered at scheduled todo time.*
 
-# OR using Yarn
-yarn ios
-```
+#### Rescheduling Notification  
+![Rescheduling](assets/Screenshots/taskRescheduling.jpeg)  
+*Notification rescheduling after task edit.*
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+#### Navigating to Scheduled Todo  
+![Navigating](assets/Screenshots/taskDetailScreen.jpeg)  
+*Navigation to todo details from notification tap.*
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+### 🔔 Toast Notifications
+- Toast notifications provide quick feedback on user actions.
 
-Now that you have successfully run the app, let's make changes!
+#### Task Completion Toast  
+![TaskCompletion](assets/Screenshots/toastNotification.jpeg)  
+*Toast shown when a task is marked complete.*
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+#### Information Toast  
+![Information Toast](assets/Screenshots/ToastNotification2.jpeg)  
+*General informational toast for various user actions.*
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+---
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### 🧑‍💼 User Profile
+- Editable user profile details (nickname & phone number).
+- Data updates reflected in both **Firebase Auth** and **Firestore**.
 
-## Congratulations! :tada:
+#### Edit Profile Details Screen  
+![EditProfileDetailsScreen](assets/Screenshots/editProfiledetailScreen.jpeg)  
+*Edit nickname and phone number.*
 
-You've successfully run and modified your React Native App. :partying_face:
+#### Profile Details Edited Screenshot  
+![ProfileDetailsEdited](assets/Screenshots/profileEdited.jpeg)  
+*Updated profile details saved and displayed.*
 
-### Now what?
+---
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### 🧭 Advanced Navigation
+- 🧾 **Drawer Navigation** – for global app access.
+- 📌 **Bottom Tab Navigation** – for switching between main screens.
+- 🧭 **Material Top Tab Navigation** – used for filtering tasks (All, Completed, Pending).
 
-# Troubleshooting
+---
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### 🔄 State Management
+- Initially built with **Redux**, later replaced by **Firestore listeners** for real-time UI updates and simplified state logic.
 
-# Learn More
+---
 
-To learn more about React Native, take a look at the following resources:
+## ⚙️ Setup & Run
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+1. Clone the repo  
+2. Run `yarn install` or `npm install`  
+3. Setup your Firebase config and `.env` file  
+4. Run on your device/emulator: `yarn android` or `yarn ios`  
+
+---
+
+## 🛠 Technologies Used
+
+- React Native  
+- Firebase Authentication  
+- Firestore Database  
+- Notifee for notifications  
+- React Navigation (Drawer, Bottom Tabs, Material Top Tabs)  
+- Redux (initially for state management)  
+
+---
