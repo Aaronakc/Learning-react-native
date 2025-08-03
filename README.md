@@ -1,6 +1,6 @@
 #  React Native Firebase Todo App Suite
 
-Welcome to my **React Native learning repository** — a journey through building mobile apps with real functionality!  
+Welcome to my **React Native learning repository** , a journey through building mobile apps with real functionality!  
 This repo contains multiple sub-projects covering **UI design**, **Firebase integration**, **authentication**, **Firestore-based todo management**, **local notifications**, and more.
 
 ---
@@ -30,7 +30,7 @@ This repo contains multiple sub-projects covering **UI design**, **Firebase inte
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - React Native (CLI)
 - Firebase Authentication
@@ -45,7 +45,7 @@ This repo contains multiple sub-projects covering **UI design**, **Firebase inte
 
 ---
 
-## ▶️ How to Run a Project
+##  How to Run a Project
 
 1. **Clone the repository**
 ```bash
