@@ -1,12 +1,12 @@
-# 📱 React Native Firebase Todo App
+# React Native Firebase Todo App
 
 This is a complete **React Native Todo App** along with **Firebase**. It includes user authentication, Firestore-based task management, scheduled notifications using Notifee, editable user profile details, and an advanced navigation setup using Drawer, Bottom Tab, and Material Top Tabs.
 
 ---
 
-## 🚀 Features
+## Features
 
-### 🔐 Authentication
+###  Authentication
 - **Email & Password Login/Signup** using **Firebase Authentication**.
 - Includes **validation** handled from frontend and helpful error messages.
 
@@ -32,14 +32,14 @@ This is a complete **React Native Todo App** along with **Firebase**. It include
 
 ---
 
-### ✅ Todo Functionality
+### Todo Functionality
 - Add, update, complete, and delete todos.
 - Todos are stored in **Firebase Firestore** and are user-specific.
 - Uses Firestore’s **real-time updates** with `onSnapshot`.
 
 #### Home Screen  
 ![HomeScreen](assets/Screenshots/homescreen.jpeg)  
-*Main todo list with filtering and real-time updates.*
+*Main HomeScreen.*
 
 #### History Screen  
 ![HistoryScreen](assets/Screenshots/historyScreen.jpeg)  
@@ -60,7 +60,7 @@ This is a complete **React Native Todo App** along with **Firebase**. It include
 
 ---
 
-### 🔔 Notifications
+###  Notifications
 - Integrated **Notifee** to schedule **local notifications** if time has not passed.
 - Cancels notification in case of task deletion or completion.
 - Each todo notification includes:
@@ -83,7 +83,7 @@ This is a complete **React Native Todo App** along with **Firebase**. It include
 
 ---
 
-### 🔔 Toast Notifications
+### Toast Notifications
 - Toast notifications provide quick feedback on user actions.
 
 #### Task Completion Toast  
@@ -96,7 +96,7 @@ This is a complete **React Native Todo App** along with **Firebase**. It include
 
 ---
 
-### 🧑‍💼 User Profile
+### User Profile
 - Editable user profile details (nickname & phone number).
 - Data updates reflected in both **Firebase Auth** and **Firestore**.
 
@@ -110,19 +110,19 @@ This is a complete **React Native Todo App** along with **Firebase**. It include
 
 ---
 
-### 🧭 Advanced Navigation
-- 🧾 **Drawer Navigation** – for global app access.
-- 📌 **Bottom Tab Navigation** – for switching between main screens.
-- 🧭 **Material Top Tab Navigation** – used for filtering tasks (All, Completed, Pending).
+###  Advanced Navigation
+- **Drawer Navigation** – for global app access.
+-  **Bottom Tab Navigation** – for switching between main screens.
+- **Material Top Tab Navigation** – used for filtering tasks (All, Completed, Pending).
 
 ---
 
-### 🔄 State Management
+### State Management
 - Initially built with **Redux**, later replaced by **Firestore listeners** for real-time UI updates and simplified state logic.
 
 ---
 
-## ⚙️ Setup & Run
+## ⚙ Setup & Run
 
 1. Clone the repo  
 2. Run `yarn install` or `npm install`  
@@ -131,7 +131,7 @@ This is a complete **React Native Todo App** along with **Firebase**. It include
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 
 - React Native  
 - Firebase Authentication  
